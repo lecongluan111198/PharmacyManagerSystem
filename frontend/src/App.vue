@@ -1,56 +1,51 @@
 <template>
-    <div v-if="loading">
+    <div v-if="loading" class="app app-loading">
         <mu-circular-progress :size='64' :stroke-width="5"></mu-circular-progress>
     </div>
-    <div v-else id="app">
-        <router-view/>
+    <div v-else id="app" class="app">
+        <Sidebar v-if="hasSidebar"></Sidebar>
+        <router-view class="app-body"/>
     </div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+    @import "assets/app.layout";
 </style>
 
 <script lang="ts">
 import Vue from 'vue';
-import axios from '@/axios';
+import Sidebar from '@/components/Sidebar.vue';
 
 export default Vue.extend({
+    components: {
+        Sidebar,
+    },
     data() {
         return {
             loading: true,
         }
     },
 
+    computed: {
+        hasSidebar(): boolean {
+            return this.$route.path !== "/login";
+        },
+    },
+
     mounted() {
         if (this.$route.path === '/login') {
             this.loading = false;
+            return;
         }
-
-        axios.get('/api/user')
-        .then(res=>{
-            console.log(res);
-            this.loading = false;
-        }).catch(err=>{
-            console.error(err);
-            this.$router.push('/login');
-        })
-    }
+        this.$store.dispatch("fetchMe")
+            .then(()=>{
+                this.loading = false;
+            })
+            .catch((error: Error)=>{
+                this.loading = false;
+                console.log(error.message);
+                this.$router.push('/login');
+            });
+    },
 })
 </script>
