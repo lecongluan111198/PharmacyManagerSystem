@@ -5,6 +5,11 @@
     <div v-else id="app" class="app">
         <Sidebar v-if="hasSidebar"></Sidebar>
         <router-view class="app-body"/>
+        <mu-dialog width="800"
+                   transition="slide-top"
+                   scrollable :open="!!$route.meta.isModal" v-on:close="onModalClose">
+            <router-view name="modal_content"></router-view>
+        </mu-dialog>
     </div>
 </template>
 
@@ -14,7 +19,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Sidebar from '@/components/Sidebar.vue';
+import Sidebar from '@/components/Sidebar/Sidebar.vue';
 
 export default Vue.extend({
     components: {
@@ -32,19 +37,25 @@ export default Vue.extend({
         },
     },
 
+    methods: {
+        onModalClose() {
+            const lastPath = this.$store.state.parentModalPath || '/';
+            this.$router.push(lastPath);
+        }
+    },
+
     mounted() {
         if (this.$route.path === '/login') {
             this.loading = false;
+            console.log("LOGIN");
             return;
         }
         this.$store.dispatch("fetchMe")
-            .then(()=>{
-                this.loading = false;
-            })
             .catch((error: Error)=>{
-                this.loading = false;
                 console.log(error.message);
                 this.$router.push('/login');
+            }).finally(()=>{
+                this.loading = false;
             });
     },
 })

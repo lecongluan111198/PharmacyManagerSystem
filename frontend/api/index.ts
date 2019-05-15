@@ -1,4 +1,4 @@
-import {User} from "../types";
+import {User} from "../src/types";
 import Axios from '../src/axios';
 
 export default class API {

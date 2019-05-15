@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import {User} from "../../types";
+import {User} from "../types";
 import API from "../../api";
 
 
@@ -8,11 +8,13 @@ Vue.use(Vuex);
 
 export interface RootState {
     me: User | null;
+    parentModalPath: string;
 }
 
 export default new Vuex.Store<RootState>({
     state: {
         me: null,
+        parentModalPath: '/',
     },
 
     getters: {
