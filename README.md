@@ -1,34 +1,14 @@
-# pharmacy-manager-system
+# SimplePharma
 
-## Project setup
-```
-yarn install
-```
+## Install
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
+```bash
+composer install
 ```
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+then
 
-### Run your tests
+```bash
+cd frontend
+npm install
 ```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Run your unit tests
-```
-yarn run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
