@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,25 +11,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/login', function (Request $request) {
-    $credentials = [
-        'email' => $request->email,
-        'password' => $request->password
-    ];
+Route::post('/login', "UserController@login");
+Route::post('/reset-password', "UserController@resetPassword");
 
-    if (auth()->attempt($credentials)) {
-        $token = auth()->user()->createToken('asdasdasd')->accessToken;
-        return response()->json(['token' => $token], 200);
-    } else {
-        return response()->json(['error' => 'UnAuthorised'], 401);
-    }
-});
 
-Route::get('/token', 'UserController@getToken');
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 Route::middleware('auth:api')->group(function () {
-
+    Route::get("/me", "UserController@showMe");
 });
