@@ -8,7 +8,7 @@
             <mu-form :model="form" @submit="submit">
                 <div>
                     <mu-text-field label="Email"
-                        name="email"
+                        name="email" auto-focus
                         type="email" v-model="form.email" required></mu-text-field>
                 </div>
                 <div>

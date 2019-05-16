@@ -32,6 +32,10 @@
                 color: inherit;
             }
         }
+
+        .mu-popover .mu-item-wrapper:not(.active) .mu-item {
+            color: black;
+        }
     }
 
     &-body {
