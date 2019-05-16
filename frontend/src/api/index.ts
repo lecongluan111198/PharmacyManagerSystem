@@ -1,5 +1,15 @@
-import {User} from "../types";
-import Axios from '../src/axios';
+import {User} from "../../types";
+import Axios from '../axios';
+
+export interface ILoginData {
+    email: string;
+    password: string;
+}
+export interface IBasicResponse {
+    error: boolean,
+    message?: string,
+    data?: any,
+}
 
 export default class API {
     static GET(action: string, params: any = {}): string {
@@ -16,7 +26,16 @@ export default class API {
     }
 
     static async fetchMe(): Promise<User> {
-        const res = await Axios.get("/api/user");
+        const res = await Axios.get("/api/me");
+        if (this.isOk(res.status)) {
+            return res.data;
+        } else {
+            throw new Error(res.statusText);
+        }
+    }
+
+    static async login(loginData: ILoginData): Promise<IBasicResponse> {
+        const res = await Axios.post("/api/login", loginData);
         if (this.isOk(res.status)) {
             return res.data;
         } else {

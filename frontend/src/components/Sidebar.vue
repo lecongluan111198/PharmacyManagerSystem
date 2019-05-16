@@ -2,7 +2,7 @@
     <div class="app-sidebar" :class="{'close': !open}">
         <mu-flex class="user-info" align-items="center" :direction="open ? 'row' : 'column'">
             <div>
-                <mu-button icon @click="open = !open">
+                <mu-button icon @click="open = !open">o
                     <mu-icon :size="32" :value="open ? 'chevron_left' : 'chevron_right'"></mu-icon>
                 </mu-button>
             </div>
@@ -14,7 +14,11 @@
                 <SidebarSettings></SidebarSettings>
             </div>
         </mu-flex>
-        <mu-flex fill>
+        <mu-flex fill direction="column">
+            <mu-flex justify-content="center">
+                <mu-icon value="search"></mu-icon>
+                <mu-text-field type="search" label-float label="Tìm hóa đơn"></mu-text-field>
+            </mu-flex>
             <mu-list id="menu">
                 <mu-tooltip v-for="(item, idx) in menu" :key="idx" :content="item.title" placement="right">
                     <mu-list-item avatar button :to="item.to">
