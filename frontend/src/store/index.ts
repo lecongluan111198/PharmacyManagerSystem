@@ -8,11 +8,13 @@ Vue.use(Vuex);
 
 export interface RootState {
     me: User | null;
+    parentModalPath: string;
 }
 
 export default new Vuex.Store<RootState>({
     state: {
         me: null,
+        parentModalPath: '/',
     },
 
     getters: {
@@ -22,7 +24,7 @@ export default new Vuex.Store<RootState>({
     },
 
     mutations: {
-        setMe(state, me: User): void {
+        setMe(state, me: User | null = null): void {
             state.me = me;
         }
     },
@@ -32,5 +34,9 @@ export default new Vuex.Store<RootState>({
             const user = await API.fetchMe();
             commit("setMe", user);
         },
+
+        async resetPass({commit}) {
+
+        }
     },
 });

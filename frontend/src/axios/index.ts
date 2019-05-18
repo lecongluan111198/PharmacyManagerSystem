@@ -1,13 +1,14 @@
 import axios from 'axios';
 
 const accessToken = localStorage.getItem("accessToken");
-if (accessToken) {
-    axios.defaults.headers = {
-        'Authorization': `Bearer ${accessToken}`,
-    };
-}
+const axiosInstance = axios.create({
+    headers: {
+        "Authorization": `Bearer ${accessToken}`,
+    },
+    baseURL: '/api',
+});
 
 // @ts-ignore
-window.axios = axios;
+window.axios = axiosInstance;
 
-export default axios;
+export default axiosInstance;
