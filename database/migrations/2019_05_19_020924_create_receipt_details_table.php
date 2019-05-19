@@ -14,7 +14,16 @@ class CreateReceiptDetailsTable extends Migration
     public function up()
     {
         Schema::create('receipt_details', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->integer('idMedicine')->unsigned();
+            $table->integer('idReceipt')->unsigned();
+
+            $table->foreign('idMedicine')
+            ->references('id')->on('medicines')
+            ->onDelete('cascade');
+            $table->foreign('idReceipt')
+            ->references('id')->on('receipts')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ class CreatePrescriptionDetailsTable extends Migration
     public function up()
     {
         Schema::create('prescription_details', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('idMedicine')->unsigned();
             $table->integer('idPrescription')->unsigned();
             $table->integer('amount');

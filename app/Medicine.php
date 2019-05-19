@@ -17,4 +17,8 @@ class Medicine extends Model
     {
         return $this->belongsToMany('App\Prescription')->using('App\PrescriptionDetail');
     }
+    public function receipts()
+    {
+        return $this->belongsToMany('App\Receipt')->using('App\ReceiptDetail');
+    }
 }

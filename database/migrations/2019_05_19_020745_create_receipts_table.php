@@ -14,7 +14,11 @@ class CreateReceiptsTable extends Migration
     public function up()
     {
         Schema::create('receipts', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->date('receiptDate');
+            $table->double('cost', 15, 8);
+            $table->string('note');
+            $table->integer('type');
             $table->timestamps();
         });
     }

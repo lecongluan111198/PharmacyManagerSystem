@@ -2,9 +2,15 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class ReceiptDetail extends Model
+class ReceiptDetail extends Pivot
 {
     //
+    public function medicine(){
+        return $this->belongsTo('App\Medicine');
+    }
+    public function receipt(){
+        return $this->belongsTo('App\Receipt');
+    }
 }
