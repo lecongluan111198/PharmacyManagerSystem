@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
+    "lodash": "^4.17.11",
     "muse-ui": "^3.0.2",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "@types/jest": "^23.1.4",
+    "@types/lodash": "^4.14.129",
     "@vue/cli-plugin-babel": "^3.7.0",
     "@vue/cli-plugin-typescript": "^3.7.0",
     "@vue/cli-plugin-unit-jest": "^3.7.0",
