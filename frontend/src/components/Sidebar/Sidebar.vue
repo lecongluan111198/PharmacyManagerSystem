@@ -15,11 +15,11 @@
             </div>
         </mu-flex>
         <mu-flex fill>
-            <mu-list id="menu" toggle-nested="false" :toggle-nested-type="open ? 'expand' : 'popover'">
+            <mu-list id="menu" :toggle-nested="true" :toggle-nested-type="open ? 'expand' : 'popover'">
                 <mu-tooltip v-for="(item, idx) in menu"
                             :tooltip-class="open ? 'hide' : ''"
                             :key="idx" :content="item.title" placement="right">
-                    <mu-list-item avatar button :to="item.to" :nested="item.nested">
+                    <mu-list-item avatar button :to="item.to" :nested="!!item.nested">
                         <mu-list-item-action>
                             <mu-icon :value="item.icon"></mu-icon>
                         </mu-list-item-action>
@@ -65,6 +65,9 @@
 <style lang="scss">
     #menu .active {
         background-color: #000;
+    }
+    .hide {
+        display: none;
     }
 </style>
 
