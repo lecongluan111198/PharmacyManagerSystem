@@ -5,9 +5,11 @@ import store from './store/'
 
 import Muse from 'muse-ui';
 import 'muse-ui/dist/muse-ui.css';
+import 'axios';
+
 Vue.use(Muse);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
   router,

@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import {User} from "../types";
-import API from "../../api";
+import API from "../api";
 
 
 Vue.use(Vuex);
@@ -24,7 +24,7 @@ export default new Vuex.Store<RootState>({
     },
 
     mutations: {
-        setMe(state, me: User): void {
+        setMe(state, me: User | null = null): void {
             state.me = me;
         }
     },
@@ -34,5 +34,9 @@ export default new Vuex.Store<RootState>({
             const user = await API.fetchMe();
             commit("setMe", user);
         },
+
+        async resetPass({commit}) {
+
+        }
     },
 });

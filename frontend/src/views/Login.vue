@@ -25,11 +25,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import {Component} from 'vue-property-decorator';
-import axios from '@/axios';
+    import Vue from 'vue'
+    import {Component} from 'vue-property-decorator';
+    import API from "@/api";
 
-@Component
+    @Component
 export default class Login extends Vue {
     // DATA
     form = {
@@ -43,16 +43,14 @@ export default class Login extends Vue {
         ev.preventDefault();
         this.error = '';
         try {
-            const res = await axios.post('/api/login', {
+            const res = await API.login({
                 email: this.form.email,
                 password: this.form.password,
             });
 
-            if (res.status >= 200 && res.status < 300) {
-                const accessToken = res.data.token;
-                localStorage.setItem('accessToken', accessToken);
-                window.location.href = '/';
-            }
+            const accessToken = res.data;
+            localStorage.setItem('accessToken', accessToken);
+            window.location.href = '/';
         } catch (e) {
             const error = e as Error;
             this.error = error.message;
