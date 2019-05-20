@@ -14,16 +14,21 @@ class CreateReceiptDetailsTable extends Migration
     public function up()
     {
         Schema::create('receipt_details', function (Blueprint $table) {
-            $table->increments('id');
+//            $table->increments('id');
             $table->integer('idMedicine')->unsigned();
             $table->integer('idReceipt')->unsigned();
 
+            $table->primary([
+                'idMedicine',
+                'idReceipt',
+            ]);
+
             $table->foreign('idMedicine')
-            ->references('id')->on('medicines')
-            ->onDelete('cascade');
+                    ->references('id')->on('medicines')
+                    ->onDelete('cascade');
             $table->foreign('idReceipt')
-            ->references('id')->on('receipts')
-            ->onDelete('cascade');
+                    ->references('id')->on('receipts')
+                    ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,7 +36,7 @@ class CreateReceiptDetailsTable extends Migration
     /**
      * Reverse the migrations.
      *
-     * @return void
+     * @return voidigrate
      */
     public function down()
     {
