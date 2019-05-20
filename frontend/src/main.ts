@@ -6,13 +6,16 @@ import store from './store/'
 import Muse from 'muse-ui';
 import 'muse-ui/dist/muse-ui.css';
 import 'axios';
+import langConfig from '@/lang/';
 
 Vue.use(Muse);
 
 Vue.config.productionTip = false;
+Vue.config.devtools = true;
+Vue.prototype.$lang = langConfig.vi;
 
 new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');

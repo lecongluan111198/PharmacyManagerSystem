@@ -1,4 +1,4 @@
-import {User} from "../types";
+import {User} from "@/types/User";
 import Axios from '../axios';
 
 export interface ILoginData {

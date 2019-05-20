@@ -17,7 +17,7 @@
 <script lang="ts">
     import Vue from 'vue';
     import {mapGetters} from 'vuex';
-    import {UserRole} from "@/types";
+    import {UserRole} from "@/types/User";
 
     export default Vue.extend({
         data() {

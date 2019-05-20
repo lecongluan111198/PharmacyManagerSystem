@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import {User} from "../types";
+import {User} from "../types/User";
 import API from "../api";
 
 
