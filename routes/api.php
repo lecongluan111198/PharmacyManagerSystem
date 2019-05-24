@@ -14,6 +14,7 @@
 Route::post('/login', "UserController@login");
 Route::post('/reset-password', "UserController@resetPassword");
 Route::get("/medicine", "MedicineController@index");
+Route::post("/medicine/update/{id}", "MedicineController@update");
 
 Route::middleware('auth:api')->group(function () {
     Route::get("/me", "UserController@showMe");

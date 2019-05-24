@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Medicine;
+use App\Category;
+use App\Provider;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class MedicineController extends Controller
 {
@@ -15,12 +18,13 @@ class MedicineController extends Controller
      */
     public function index(Request $request)
     {
-        //
-        $items = Medicine::paginate(2);
+        //default 10 element per page
+        $items = Medicine::paginate(10);
         return response()->json($items);
     }
 
-    public function findID($id){
+    public function findID($id)
+    {
         $medicine = Medicine::find($id);
         return response()->json($medicine);
     }
@@ -31,8 +35,7 @@ class MedicineController extends Controller
      */
     public function create()
     {
-        //
-        //return redirect('/api/medicine/create');
+        return view('create');
     }
 
     /**
@@ -43,16 +46,16 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Medicine();
+        $medicine = new Medicine();
         //tao id
         $medicine->name = $request->name;
         $medicine->cost = $request->cost;
         $medicine->idCate = $request->idCate;
-        $medicine->idProvier = $request->idProvier;
+        $medicine->idProvider = $request->idProvider;
         $medicine->save();
         $ret = [
             'success' => true,
-            'message'=> 200,
+            'message' => 200,
             'object' => $medicine
         ];
         return response()->json($ret);
@@ -75,9 +78,11 @@ class MedicineController extends Controller
      * @param  \App\Medicine  $medicine
      * @return \Illuminate\Http\Response
      */
-    public function edit(Medicine $medicine)
+    public function edit($id)
     {
-        //
+        return view('update', ['medicine' => Medicine::findOrFail($id), 
+                                'categories' => Category::all(),
+                                'providers' => Provider::all()]);
     }
 
     /**
@@ -89,17 +94,25 @@ class MedicineController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $medicine = Medicine::find($id);
-        $medicine->name = $request->name;
-        $medicine->cost = $request->cost;
-        $medicine->idCate = $request->idCate;
-        $medicine->idProvier = $request->idProvier;
-        $medicine->save();
-        $ret = [
-            'success' => true,
-            'message'=> 200,
-            'object' => $medicine
-        ];
+        try {
+            $medicine = Medicine::findOrFail($id);
+            $medicine->name = $request->name;
+            $medicine->cost = $request->cost;
+            $medicine->idCate = $request->idCate;
+            $medicine->idProvider = $request->idProvider;
+            $medicine->save();
+            $ret = [
+                'success' => true,
+                'message' => 200,
+                'object' => $medicine,
+            ];
+        } catch (ModelNotFoundException $ex) {
+            $ret = [
+                'success' => true,
+                'message' => $ex->getMessage(),
+                'object' => null
+            ];
+        }
         return response()->json($ret);
     }
 
@@ -111,12 +124,19 @@ class MedicineController extends Controller
      */
     public function destroy($id)
     {
-        $data = Medicine::find($id);
-        $data->delete();
-        $ret = [
-            'success' => true,
-            'message'=> 200
-        ];
+        try {
+            $data = Medicine::find($id);
+            $data->delete();
+            $ret = [
+                'success' => true,
+                'message' => 200
+            ];
+        } catch (\Exception $ex) {
+            $ret = [
+                'success' => false,
+                'message' => $ex->getMessage(),
+            ];
+        }
         return response()->json($ret);
     }
 }
