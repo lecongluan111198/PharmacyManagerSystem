@@ -2,32 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Prescription;
 use App\Medicine;
-use App\Category;
-use App\Provider;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class MedicineController extends Controller
+class PrescriptionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        //default 20 element per page
-        $items = Medicine::paginate(20);
+        $items = Prescription::paginate(20);
         return response()->json($items);
     }
 
-    public function findID($id)
-    {
-        $medicine = Medicine::find($id);
-        return response()->json($medicine);
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -46,23 +37,26 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
-        $medicine = new Medicine();
+        $prescription = new Prescription();
         //tao id
-        $medicine->name = $request->name;
-        $medicine->cost = $request->cost;
-        $medicine->idCate = $request->idCate;
-        $medicine->idProvider = $request->idProvider;
-        if ($medicine->save()) {
+        $prescription->name = $request->name;
+        $prescription->invoiceDate = $request->invoiceDate;
+        $prescription->cost = $request->cost;
+        $prescription->idPharma = $request->idPharma;
+
+        $medicines = Medicine::findMany($request->listIds);
+        $prescription->medicines()->attach($medicines);
+        if ($prescription->save()) {
             $ret = [
                 'success' => true,
                 'message' => 200,
-                'medicine' => $medicine
+                'prescription' => $prescription
             ];
         } else {
             $ret = [
                 'success' => false,
                 'message' => 404,
-                'medicine' => null
+                'prescription' => null
             ];
         }
         return response()->json($ret);
@@ -71,10 +65,10 @@ class MedicineController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Medicine  $medicine
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Medicine $medicine)
+    public function show($id)
     {
         //
     }
@@ -82,39 +76,42 @@ class MedicineController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Medicine  $medicine
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        return view('update', [
-            'medicine' => Medicine::findOrFail($id),
-            'categories' => Category::all(),
-            'providers' => Provider::all()
-        ]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param   $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
         try {
-            $medicine = Medicine::findOrFail($request->id);
-            $medicine->name = $request->name;
-            $medicine->cost = $request->cost;
-            $medicine->idCate = $request->idCate;
-            $medicine->idProvider = $request->idProvider;
-            $medicine->save();
-            $ret = [
-                'success' => true,
-                'message' => 200,
-                'medicine' => $medicine,
-            ];
+            $prescription = Prescription::findOrFail($request->id);
+            $prescription->name = $request->name;
+            $prescription->cost = $request->cost;
+            $prescription->idCate = $request->idCate;
+            $prescription->idProvider = $request->idProvider;
+            if ($prescription->save()) {
+                $ret = [
+                    'success' => true,
+                    'message' => 200,
+                    'medicine' => $prescription,
+                ];
+            } else {
+                $ret = [
+                    'success' => true,
+                    'message' => 404,
+                    'medicine' => $prescription,
+                ];
+            }
         } catch (ModelNotFoundException $ex) {
             $ret = [
                 'success' => true,
@@ -128,13 +125,13 @@ class MedicineController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Medicine  $medicine
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         try {
-            $data = Medicine::findOrFail($id);
+            $data = Prescription::findOrFail($id);
             $data->delete();
             $ret = [
                 'success' => true,

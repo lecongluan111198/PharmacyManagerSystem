@@ -14,7 +14,7 @@
 Route::post('/login', "UserController@login");
 Route::post('/reset-password', "UserController@resetPassword");
 Route::get("/medicine", "MedicineController@index");
-Route::post("/medicine/update/{id}", "MedicineController@update");
+Route::post("/medicine/update", "MedicineController@update");
 Route::post("/medicine/delete/{id}", "MedicineController@destroy");
 Route::post("/medicine/create", "MedicineController@store");
 
