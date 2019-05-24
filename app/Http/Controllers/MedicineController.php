@@ -52,12 +52,19 @@ class MedicineController extends Controller
         $medicine->cost = $request->cost;
         $medicine->idCate = $request->idCate;
         $medicine->idProvider = $request->idProvider;
-        $medicine->save();
-        $ret = [
-            'success' => true,
-            'message' => 200,
-            'object' => $medicine
-        ];
+        if ($medicine->save()) {
+            $ret = [
+                'success' => true,
+                'message' => 200,
+                'object' => $medicine
+            ];
+        } else {
+            $ret = [
+                'success' => false,
+                'message' => 404,
+                'object' => null
+            ];
+        }
         return response()->json($ret);
     }
 
@@ -80,9 +87,11 @@ class MedicineController extends Controller
      */
     public function edit($id)
     {
-        return view('update', ['medicine' => Medicine::findOrFail($id), 
-                                'categories' => Category::all(),
-                                'providers' => Provider::all()]);
+        return view('update', [
+            'medicine' => Medicine::findOrFail($id),
+            'categories' => Category::all(),
+            'providers' => Provider::all()
+        ]);
     }
 
     /**
@@ -125,13 +134,13 @@ class MedicineController extends Controller
     public function destroy($id)
     {
         try {
-            $data = Medicine::find($id);
+            $data = Medicine::findOrFail($id);
             $data->delete();
             $ret = [
                 'success' => true,
                 'message' => 200
             ];
-        } catch (\Exception $ex) {
+        } catch (ModelNotFoundException $ex) {
             $ret = [
                 'success' => false,
                 'message' => $ex->getMessage(),
