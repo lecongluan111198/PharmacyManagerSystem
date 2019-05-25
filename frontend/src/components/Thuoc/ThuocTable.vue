@@ -18,14 +18,11 @@
 <script lang="ts">
     import Vue from 'vue';
     import _ from 'lodash';
-    import {AgGridVue} from 'ag-grid-vue';
     import {Thuoc as ThuocType} from "@/types/Thuoc";
 
     export default Vue.extend({
         name: "thuoc-table",
-        components: {
-            AgGridVue,
-        },
+        components: {},
         data () {
             return {
                 loaded: true,
