@@ -3,8 +3,9 @@ import Vuex from "vuex";
 import {User} from "../types/User";
 import API from "../api";
 
-
 Vue.use(Vuex);
+
+import ThuocModule from './Thuoc/';
 
 export interface RootState {
     me: User | null;
@@ -12,6 +13,10 @@ export interface RootState {
 }
 
 export default new Vuex.Store<RootState>({
+    modules: {
+        thuoc: ThuocModule,
+    },
+
     state: {
         me: null,
         parentModalPath: '/',

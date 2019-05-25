@@ -1,0 +1,64 @@
+import Vuex, {Module} from 'vuex';
+import {Thuoc} from "@/types/Thuoc";
+import API from "@/api";
+
+export const LIMIT = 20;
+
+export interface IThuocState {
+    list: Array<Thuoc>;
+    map: Map<any, Thuoc>;
+    total: number;
+}
+
+const store: Module<IThuocState, any> = {
+    namespaced: true,
+    state: {
+        list: [],
+        map: new Map<any, Thuoc>(),
+        total: 0,
+    },
+    getters: {
+        total(state): number {
+            return state.total;
+        },
+    },
+    mutations: {
+        update: (state, thuoc: Thuoc) => {
+            if (state.map.has(thuoc.id)) {
+                Object.assign(state.map.get(thuoc.id), thuoc);
+            } else {
+                const last = state.list.push(thuoc) - 1;
+                state.map.set(thuoc.id, state.list[last]);
+            }
+        },
+
+        updateTotal(state, total: number) {
+            state.total = total;
+        },
+    },
+    actions: {
+        async fetchListThuoc({commit, state}, payload: any = {}): Promise<Thuoc[]> {
+            const {
+                page = 1,
+                search = undefined,
+                sort: {
+                    name = 'id',
+                    order = 'asc'
+                } = {},
+            } = payload;
+
+            const res = await API.getListThuoc(page, name, order, search);
+            const list = res.data as Thuoc[];
+            commit('updateTotal', res.total);
+
+            for (const thuoc of list) {
+                commit('update', thuoc);
+            }
+
+            return list;
+        },
+    },
+};
+
+
+export default store;

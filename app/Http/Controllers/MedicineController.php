@@ -19,7 +19,17 @@ class MedicineController extends Controller
     public function index(Request $request)
     {
         //default 20 element per page
-        $items = Medicine::paginate(20);
+        $sort_direction = $request->get("direction", "asc");
+        $sort_key = $request->get("sort", "id");
+        $search = $request->get("q", "");
+
+        $items = Medicine::query()
+            ->where("id", "LIKE", "%$search%")
+            ->orWhere("name", "LIKE", "%$search%")
+            ->orderBy($sort_key, $sort_direction)
+            ->with('Provider')
+            ->with('Category')
+            ->paginate(20);
         return response()->json($items);
     }
 

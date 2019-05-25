@@ -8,10 +8,10 @@ class Medicine extends Model
 {
     //
     public function category(){
-        return $this->belongsTo('App\Category');
+        return $this->belongsTo('App\Category', 'idCate', 'id', 'category');
     }
     public function provider(){
-        return $this->belongsTo('App\Provider');
+        return $this->belongsTo('App\Provider', 'idProvider', 'id', 'provider');
     }
     public function prescriptions()
     {

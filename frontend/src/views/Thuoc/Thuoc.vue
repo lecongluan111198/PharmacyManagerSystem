@@ -4,6 +4,7 @@
             <mu-flex justify-content="between" align-items="center">
                 <mu-flex fill align-items="center">
                     <mu-text-field action-icon="search"
+                                   @keydown.enter="searchInput_submit = searchInput"
                                    v-model="searchInput" typeof="search"
                                    :label="$lang.THUOC.SEARCH" label-float></mu-text-field>
                     <div class="select-controls-group">
@@ -16,7 +17,8 @@
                     <mu-icon right value="add"></mu-icon>
                 </mu-button>
             </mu-flex>
-            <ThuocTable :search="searchInput" style="flex-grow: 1; overflow: auto"></ThuocTable>
+            <thuoc-table :search="searchInput_submit"
+                         style="flex-grow: 1; overflow: auto"></thuoc-table>
         </mu-flex>
         <mu-dialog id="add-thuoc"
                    :overlay-close="false"
@@ -56,15 +58,19 @@
     import Vue from 'vue';
     import ThuocTable from "@/components/Thuoc/ThuocTable.vue";
     import {Provider} from "@/types/Provider";
+    import {Thuoc} from "@/types/Thuoc";
+    import {mapGetters} from 'vuex';
 
     export default Vue.extend({
-        name: "DanhSachThuoc",
+        name: "danh-sach-thuoc",
         components: {
             ThuocTable,
         },
         data() {
             return {
                 searchInput: '',
+                searchInput_submit: '',
+                currentPage: 1,
                 whereInput: [],
                 modalAdd: {
                     open: false,
