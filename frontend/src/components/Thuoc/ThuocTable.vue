@@ -17,6 +17,10 @@
 
 <script lang="ts">
     import Vue from 'vue';
+<<<<<<< HEAD
+=======
+    import _ from 'lodash';
+>>>>>>> master
     import {Thuoc as ThuocType} from "@/types/Thuoc";
 
     export default Vue.extend({
