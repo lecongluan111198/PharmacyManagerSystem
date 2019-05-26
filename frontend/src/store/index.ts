@@ -6,6 +6,7 @@ import API from "../api";
 Vue.use(Vuex);
 
 import ThuocModule from './Thuoc/';
+import HoaDonModule from './HoaDon/';
 
 export interface RootState {
     me: User | null;
@@ -15,6 +16,7 @@ export interface RootState {
 export default new Vuex.Store<RootState>({
     modules: {
         thuoc: ThuocModule,
+        hoa_don: HoaDonModule,
     },
 
     state: {

@@ -36,7 +36,10 @@ class MedicineController extends Controller
     public function findID($id)
     {
         $medicine = Medicine::find($id);
-        return response()->json($medicine);
+        return response()->json([
+            'error' => false,
+            'data' => $medicine,
+        ]);
     }
     /**
      * Show the form for creating a new resource.
@@ -169,6 +172,7 @@ class MedicineController extends Controller
         return response()->json($ret);
     }
 
+
     public function getPrescription(Request $request, $id)
     {
         try {
@@ -190,5 +194,16 @@ class MedicineController extends Controller
             ];
         }
         return response()->json($ret);
+    }
+    public function findName(Request $request)
+    {
+        $name = $request->query('name', '');
+        $limit = intval($request->query('limit', 10));
+
+        $res = Medicine::query()
+            ->where("name", "LIKE", "%$name%")
+            ->paginate($limit);
+
+        return response()->json($res);
     }
 }

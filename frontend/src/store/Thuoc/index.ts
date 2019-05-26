@@ -1,4 +1,4 @@
-import Vuex, {Module} from 'vuex';
+import Vuex, {ActionContext, Module} from 'vuex';
 import {Thuoc} from "@/types/Thuoc";
 import API from "@/api";
 
@@ -57,6 +57,25 @@ const store: Module<IThuocState, any> = {
 
             return list;
         },
+
+        async getThuocById({state, commit}, {id}): Promise<Thuoc> {
+            // debugger;
+            if (state.map.has(id)) {
+                return state.map.get(id) as Thuoc;
+            }
+            const res = await API.findThuocByID(id);
+            commit('update', res.data);
+            return res.data;
+        },
+
+        async findThuocByName({state, commit}, name: string, limit: number = 10, page: number = 1): Promise<Thuoc[]> {
+            const res = await API.findThuocByName(name, limit, page);
+            for (const thuoc of res.data) {
+                commit('update', res.data);
+            }
+
+            return res.data;
+        }
     },
 };
 
