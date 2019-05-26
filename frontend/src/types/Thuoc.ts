@@ -2,10 +2,11 @@ import {BaseInterface} from "@/types/base";
 import {Provider} from "@/types/Provider";
 
 export interface Thuoc extends BaseInterface{
-    id: string;
+    id: number;
     name: string;
-    price: number;
-    provider: Provider;
+    cost: number;
+    provider?: Provider;
+    category?: any
     in_store_count?: number;
     in_inventory_count?: number;
 }

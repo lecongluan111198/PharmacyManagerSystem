@@ -1,5 +1,6 @@
 import {User} from "@/types/User";
 import Axios from '../axios';
+import {Thuoc} from "@/types/Thuoc";
 
 export interface ILoginData {
     email: string;
@@ -80,6 +81,20 @@ export default class API {
             sort,
             direction: sortd,
             q: search,
+        }));
+        return res.data;
+    }
+
+    static async findThuocByID(id: number): Promise<IBasicResponse> {
+        const res = await Axios.get(this.GET(`medicine/${id}`));
+        return res.data;
+    }
+
+    static async findThuocByName(name: string, limit: number = 10, page: number = 1): Promise<IPaginateResponse> {
+        const res = await Axios.get(this.GET('medicine/findName', {
+            name,
+            limit,
+            page,
         }));
         return res.data;
     }
