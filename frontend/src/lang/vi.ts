@@ -1,6 +1,8 @@
 export default {
     EMPTY_DATA: "CHƯA CÓ DỮ LIỆU",
     THUOC: {
+        TITLE: 'Thuốc',
+
         SEARCH: "Tìm theo tên hoặc mã thuốc",
         ID: 'ID',
         NAME: 'Tên thuốc',
@@ -20,5 +22,31 @@ export default {
         CURRENT: 'Hóa đơn hiện tại',
         COSTS: 'Giá',
         TOTAL_COST: 'Tổng giá',
-    }
+    },
+
+    INVENTORY: {
+        IMPORT: 'Nhập kho',
+        EXPORT: 'Xuất kho',
+
+        HISTORY: 'Lịch sử nhập/xuất',
+
+        TYPE: 'Loại',
+    },
+
+    PROVIDER: {
+        TITLE: 'Nhà cung cấp',
+        NAME: 'Tên nhà cung cấp',
+    },
+    CATEGORY: {
+        TITLE: 'Phân loại',
+        NAME: 'Tên phân loại',
+    },
+
+    ADDRESS: 'Địa chỉ',
+
+    PHONE: 'Số điện thoại',
+
+    DATETIME: 'Thời gian',
+
+    NOTE: 'Ghi chú',
 }

@@ -104,6 +104,12 @@ const router = new Router({
             component: ()=>import('./views/Kho/Kho.vue'),
         },
         {
+            path: '/kho/history',
+            name: 'QuanLyKho_LichSu',
+            component: ()=>import('./views/Kho/LichSu.vue'),
+        },
+
+        {
             path: '/kho/nhap',
             name: 'QuanLyKho_Nhap',
             component: ()=>import('./views/Kho/Nhap.vue'),
