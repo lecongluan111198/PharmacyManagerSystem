@@ -47,13 +47,17 @@
                         }
                     },
                     {
+                        title: this.$lang.CATEGORY.TITLE, name: 'category', sortable: true,
+                        formatter(value: any) {
+                            return value ? value.name : '';
+                        },
+                    },
+                    {
                         title: this.$lang.THUOC.PRICE, name: 'cost', sortable: true,
                         formatter(value: string) {
                             return value.toLocaleString();
                         },
                     },
-                    {title: this.$lang.THUOC.IN_STORE, name: 'in_store_count', sortable: true},
-                    {title: this.$lang.THUOC.IN_INVENTORY, name: 'in_inventory_count', sortable: true},
                 ],
             };
         },

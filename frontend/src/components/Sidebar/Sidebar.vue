@@ -110,7 +110,16 @@
             {
                 icon: "archive",
                 title: "Quản lý kho",
-                to: '/kho'
+                nested: [
+                    {
+                        to: '/kho',
+                        title: this.$lang.THUOC.TITLE,
+                    },
+                    {
+                        to: '/kho/history',
+                        title: this.$lang.INVENTORY.HISTORY,
+                    },
+                ],
             },
             {
                 icon: "vertical_split",
@@ -128,7 +137,7 @@
             },
             {
                 icon: "insert_chart",
-                title: "Báo cáo",
+                title: "Thống kê",
                 to: '/report'
             },
         ];

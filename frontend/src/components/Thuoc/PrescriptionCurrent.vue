@@ -1,10 +1,25 @@
 <template>
     <div id="current-prescription">
-        <mu-flex style="margin-bottom: 1em">
-            <mu-button small :disabled="!selects.length" @click="removeMedicine">
-                <mu-icon value="delete"></mu-icon>
-                remove
-            </mu-button>
+        <mu-flex style="margin-bottom: 1em" justify-content="between" align-items="end">
+            <div class="prescription-control">
+                <mu-button small :disabled="!selects.length" @click="removeMedicine">
+                    <mu-icon value="delete"></mu-icon>
+                    remove
+                </mu-button>
+                <mu-button small color="success">
+                    <mu-icon left value="check"></mu-icon>
+                    {{$lang.ADD}}
+                </mu-button>
+            </div>
+
+            <mu-flex>
+                <mu-paper :z-depth="1">
+                    <div class="prescription-total">
+                        <strong>{{$lang.PRESCRIPTION.TOTAL_COST}}: </strong>
+                        {{totalCostPrescription}} đ
+                    </div>
+                </mu-paper>
+            </mu-flex>
         </mu-flex>
         <mu-paper :z-depth="1">
             <mu-data-table :columns="columns"
@@ -62,6 +77,12 @@
                     };
                 })
             },
+
+            totalCostPrescription(): string {
+                return this.list_medicine.reduce((total: number, row: any)=>{
+                    return total + (+row.total_cost);
+                }, 0).toLocaleString();
+            }
         },
 
         methods: {
@@ -81,3 +102,15 @@
     });
 
 </script>
+
+<style lang="scss">
+    .prescription-total {
+        padding: 1em;
+        font-size: 1.5em;
+    }
+    .prescription-control {
+        > * {
+            margin-right: 1em;
+        }
+    }
+</style>
