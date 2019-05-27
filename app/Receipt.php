@@ -9,6 +9,6 @@ class Receipt extends Model
     // 
     public function medicines()
     {
-        return $this->belongsToMany('App\Medicine')->using('App\ReceiptDetail');
+        return $this->belongsToMany('App\Medicine','receipt_details', 'idReceipt', 'idMedicine');
     }
 }

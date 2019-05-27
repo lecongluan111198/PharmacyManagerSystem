@@ -18,6 +18,11 @@ Route::get("/medicine/{id}", "MedicineController@findID")->where(["id"=>"\\d+"])
 Route::post("/medicine/update", "MedicineController@update");
 Route::post("/medicine/delete/{id}", "MedicineController@destroy");
 Route::post("/medicine/create", "MedicineController@store");
+Route::get("/medicine/edit/{id}", "MedicineController@edit");
+Route::get("/prescription/edit/{id}", "PrescriptionController@edit");
+Route::post("/prescription/{id}/add/{medi_id}", "PrescriptionController@addMedicine");
+Route::post("/prescription/{id}/remove/{medi_id}", "PrescriptionController@removeMedicine");
+Route::get("/medicine/{id}/prescription", "MedicineController@getPrescription");
 
 Route::get('/medicine/findName', "MedicineController@findName");
 

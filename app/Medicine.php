@@ -15,10 +15,10 @@ class Medicine extends Model
     }
     public function prescriptions()
     {
-        return $this->belongsToMany('App\Prescription')->using('App\PrescriptionDetail');
+        return $this->belongsToMany('App\Prescription', 'prescription_details','idMedicine','idPrescription');
     }
     public function receipts()
     {
-        return $this->belongsToMany('App\Receipt')->using('App\ReceiptDetail');
+        return $this->belongsToMany('App\Receipt',  'receipt_details','idMedicine','idReceipt');
     }
 }

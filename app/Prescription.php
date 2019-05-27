@@ -12,6 +12,7 @@ class Prescription extends Model
     }
     public function medicines()
     {
-        return $this->belongsToMany('App\Medicine')->using('App\PrescriptionDetail');
+        //return $this->belongsToMany('App\Medicine')->using('App\PrescriptionDetail');
+        return $this->belongsToMany('App\Medicine', 'prescription_details', 'idPrescription','idMedicine');
     }
 }

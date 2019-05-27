@@ -37,8 +37,8 @@ class MedicineController extends Controller
     {
         $medicine = Medicine::find($id);
         return response()->json([
-            'error'=>false,
-            'data'=>$medicine,
+            'error' => false,
+            'data' => $medicine,
         ]);
     }
     /**
@@ -48,7 +48,10 @@ class MedicineController extends Controller
      */
     public function create()
     {
-        return view('create');
+        return view('create', [
+            'categories' => Category::all(),
+            'providers' => Provider::all()
+        ]);
     }
 
     /**
@@ -100,6 +103,13 @@ class MedicineController extends Controller
      */
     public function edit($id)
     {
+        // $ret = [
+        //     'medicine' => Medicine::findOrFail($id),
+        //     'categories' => Category::all(),
+        //     'providers' => Provider::all()
+        // ];
+
+        // return response()->json($ret); 
         return view('update', [
             'medicine' => Medicine::findOrFail($id),
             'categories' => Category::all(),
@@ -130,7 +140,7 @@ class MedicineController extends Controller
             ];
         } catch (ModelNotFoundException $ex) {
             $ret = [
-                'success' => true,
+                'success' => false,
                 'message' => $ex->getMessage(),
                 'medicine' => null
             ];
@@ -162,7 +172,31 @@ class MedicineController extends Controller
         return response()->json($ret);
     }
 
-    public function findName(Request $request) {
+
+    public function getPrescription(Request $request, $id)
+    {
+        try {
+            $timeRange = $request->get("time_range");
+            $medicine = Medicine::findOrFail($id);
+            $prescriptions = $medicine->prescriptions()
+                // ->where("invoiceDate", ">=", $timeRange->start)
+                // ->where("invoiceDate", "<=", $timeRange->end)
+                ->paginate(20);
+            $ret = [
+                'success' => true,
+                'medicine' => $medicine,
+                'prescriptions' => $prescriptions
+            ];
+        } catch (ModelNotFoundException $ex) {
+            $ret = [
+                'success' => false,
+                'message' => $ex->getMessage(),
+            ];
+        }
+        return response()->json($ret);
+    }
+    public function findName(Request $request)
+    {
         $name = $request->query('name', '');
         $limit = intval($request->query('limit', 10));
 

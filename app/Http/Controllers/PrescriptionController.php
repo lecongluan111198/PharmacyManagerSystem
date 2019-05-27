@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Prescription;
 use App\Medicine;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PrescriptionController extends Controller
 {
@@ -13,10 +14,40 @@ class PrescriptionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $items = Prescription::paginate(20);
+        $sort_direction = $request->get("direction", "asc");
+        $sort_key = $request->get("sort", "id");
+        $search = $request->get("q", "");
+        $timeRange = $request->get("time_range");
+
+        $items = Medicine::query()
+            ->where("id", "LIKE", "%$search%")
+            ->orWhere("name", "LIKE", "%$search%")
+            ->where("invoiceDate", ">=", $timeRange->start)
+            ->where("invoiceDate", "<=", $timeRange->end)
+            ->orderBy($sort_key, $sort_direction)
+            ->paginate(20);
         return response()->json($items);
+    }
+
+    public function getId($id)
+    {
+        try {
+            $prescription = Prescription::findOrFaile($id);
+            $medicines = $prescription->medicines()->get();
+            $ret = [
+                'success' => true,
+                'prescription' => $prescription,
+                'medicines' => $medicines
+            ];
+        } catch (ModelNotFoundException $ex) {
+            $ret = [
+                'success' => false,
+                'message' => $ex->getMessage(),
+            ];
+        }
+        return response()->json($ret);
     }
 
     /**
@@ -62,6 +93,35 @@ class PrescriptionController extends Controller
         return response()->json($ret);
     }
 
+    public function addMedicine($id, $medi_id)
+    {
+        // try {
+        //     $prescription = Prescription::findOrFail($id);
+        //     $medicines = $prescription->medicines()->attach($medi_id);
+
+        //     if ($prescription->save()) {
+        //         $ret = [
+        //             'success' => true,
+        //             'message' => 200,
+        //             'prescription' => $prescription
+        //         ];
+        //     } else {
+        //         $ret = [
+        //             'success' => false,
+        //             'message' => 404,
+        //             'prescription' => null
+        //         ];
+        //     }
+        // } catch (ModelNotFoundException $ex) {
+        //     $ret = [
+        //         'success' => false,
+        //         'message' => $ex->getMessage(),
+        //         'medicine' => null
+        //     ];
+        // }
+        // return response()->json($ret);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -81,7 +141,14 @@ class PrescriptionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $prescription =  Prescription::findOrFail($id);
+        $medicines = $prescription->medicines()->get();
+        return view('update', [
+            'prescription' => $prescription,
+            'medicines' => $medicines,
+            'categories' => Category::all(),
+            'providers' => Provider::all()
+        ]);
     }
 
     /**
@@ -141,6 +208,35 @@ class PrescriptionController extends Controller
             $ret = [
                 'success' => false,
                 'message' => $ex->getMessage(),
+            ];
+        }
+        return response()->json($ret);
+    }
+
+    public function removeMedicine($id, $medi_id)
+    {
+        try {
+            $prescription = Prescription::findOrFail($id);
+            $medicines = $prescription->medicines()->detach($medi_id);
+            
+            if ($prescription->save()) {
+                $ret = [
+                    'success' => true,
+                    'message' => 200,
+                    'prescription' => $prescription
+                ];
+            } else {
+                $ret = [
+                    'success' => false,
+                    'message' => 404,
+                    'prescription' => null
+                ];
+            }
+        } catch (ModelNotFoundException $ex) {
+            $ret = [
+                'success' => false,
+                'message' => $ex->getMessage(),
+                'medicine' => null
             ];
         }
         return response()->json($ret);
