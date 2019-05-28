@@ -1,6 +1,7 @@
 import {BaseInterface} from "@/types/base";
 
-export interface Provider extends BaseInterface{
+export interface Provider {
+    id: number;
     name: string;
     address?: string;
     phone?: string;
