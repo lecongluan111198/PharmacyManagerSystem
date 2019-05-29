@@ -2,7 +2,58 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3cf77741-d5db-4e51-a48a-9fef8165ac1e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.circleci/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.circleci/config.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/backend/resources/views/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/css/app.01e2ca47.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/css/chunk-33c79671.6d771f62.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/css/chunk-582979c7.d8c73ad7.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/css/chunk-vendors.755a9159.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/img/login_background.5f0fec46.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/img/logo.65433642.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/app.ab6de8e3.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/app.ab6de8e3.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-24195ba0.ad0b3d18.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-24195ba0.ad0b3d18.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0aba0e.864b6c24.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0aba0e.864b6c24.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0b1f6d.35e362ad.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0b1f6d.35e362ad.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0b3421.485494cb.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0b3421.485494cb.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0b5d96.4b3f1690.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0b5d96.4b3f1690.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0ba1a7.15ee0627.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0ba1a7.15ee0627.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0bdf56.7d5a3554.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0bdf56.7d5a3554.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0cc5ae.8d3c9c13.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0cc5ae.8d3c9c13.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0cc5eb.7eae1dde.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0cc5eb.7eae1dde.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0cf525.e6a5e661.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0cf525.e6a5e661.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0d7286.ba6569a1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0d7286.ba6569a1.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0de1ec.d28d1c55.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0de1ec.d28d1c55.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d20f1a7.98a8270c.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d20f1a7.98a8270c.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d21a5c9.8aa0262d.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d21a5c9.8aa0262d.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d2254a4.ff3d9b10.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d2254a4.ff3d9b10.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d230283.8757f996.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d230283.8757f996.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-33c79671.6132e126.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-33c79671.6132e126.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-582979c7.22a9244f.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-582979c7.22a9244f.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-vendors.28b31f67.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-vendors.28b31f67.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/session.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config/session.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/backend/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/resources/views/index.blade.php" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/public/" />
     <ignored path="$PROJECT_DIR$/frontend/node_modules/" />
@@ -116,29 +167,21 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.circleci/config.yml">
+        <entry file="file://$PROJECT_DIR$/frontend/vue.config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-957">
-              <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
+            <state relative-caret-position="314">
+              <caret line="17" column="51" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="51" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/frontend/src/views/Thuoc/Thuoc.vue">
+        <entry file="file://$PROJECT_DIR$/backend/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="18" column="22" lean-forward="true" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
-              <folding>
-                <element signature="n#style#0;n#thuoc-table#0;n#mu-flex#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="93">
+              <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/.env">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -159,8 +202,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/frontend/src/lang.d.ts" />
-        <option value="$PROJECT_DIR$/frontend/src/main.ts" />
         <option value="$PROJECT_DIR$/database/migrations/2019_05_19_033242_create_prescription_details_table.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_05_19_020924_create_receipt_details_table.php" />
         <option value="$PROJECT_DIR$/database/seeds/CategoriesSeeder.php" />
@@ -197,8 +238,6 @@
         <option value="$PROJECT_DIR$/frontend/src/store/Provider/index.ts" />
         <option value="$PROJECT_DIR$/frontend/public/index.html" />
         <option value="$PROJECT_DIR$/frontend/src/views/Kho/Kho.vue" />
-        <option value="$PROJECT_DIR$/frontend/src/components/PaginateTable/index.vue" />
-        <option value="$PROJECT_DIR$/frontend/vue.config.js" />
         <option value="$PROJECT_DIR$/docs/PROJECT_STRUCTURE.md" />
         <option value="$PROJECT_DIR$/docs/HOW_APP_WORK.md" />
         <option value="$PROJECT_DIR$/README.md" />
@@ -210,6 +249,10 @@
         <option value="$PROJECT_DIR$/run.sh" />
         <option value="$PROJECT_DIR$/.circleci/config.yml" />
         <option value="$PROJECT_DIR$/frontend/src/views/Thuoc/Thuoc.vue" />
+        <option value="$PROJECT_DIR$/frontend/src/components/PaginateTable/index.vue" />
+        <option value="$PROJECT_DIR$/backend/config/session.php" />
+        <option value="$PROJECT_DIR$/frontend/vue.config.js" />
+        <option value="$PROJECT_DIR$/backend/.gitignore" />
       </list>
     </option>
   </component>
@@ -334,35 +377,7 @@
             <path>
               <item name="pharmacy-manager-system" type="b2602c69:ProjectViewProjectNode" />
               <item name="pharmacy-manager-system" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pharmacy-manager-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pharmacy-manager-system" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pharmacy-manager-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pharmacy-manager-system" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pharmacy-manager-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pharmacy-manager-system" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pharmacy-manager-system" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pharmacy-manager-system" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="Thuoc" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -397,13 +412,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.Frontend">
+  <component name="RunManager" selected="Bash.Backend">
     <configuration name="Backend" type="BashConfigurationType" factoryName="Bash">
       <module name="pharmacy-manager-system" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="INTERPRETER_PATH" value="/usr/bin/php" />
       <option name="PROJECT_INTERPRETER" value="false" />
-      <option name="WORKING_DIRECTORY" value="./backend" />
+      <option name="WORKING_DIRECTORY" value="./backend/" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SCRIPT_NAME" value="artisan" />
       <option name="PARAMETERS" value="serve" />
@@ -447,12 +462,12 @@
       <workItem from="1559054890316" duration="2477000" />
       <workItem from="1559100746774" duration="5510000" />
       <workItem from="1559118602324" duration="3936000" />
-      <workItem from="1559139202053" duration="9091000" />
+      <workItem from="1559139202053" duration="11083000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89319000" />
+    <option name="totallyTimeSpent" value="91311000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -467,7 +482,7 @@
     <frame x="57" y="30" width="1863" height="1050" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24656026" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24656026" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -481,7 +496,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32930845" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5008255" side_tool="true" weight="0.33260155" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49917448" visible="true" weight="0.24368826" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49917448" visible="true" weight="0.24368826" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="TypeScript" order="12" weight="0.32930845" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -557,127 +572,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/frontend/src/assets/app.layout.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-744" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/database/factories/ProviderFactory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="7" column="49" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/Thuoc/PrescriptionCurrent.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="113" column="9" lean-forward="true" selection-start-line="113" selection-start-column="9" selection-end-line="113" selection-end-column="9" />
-          <folding>
-            <element signature="n#style#0;n#mu-flex#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/store/HoaDon/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="73" column="60" selection-start-line="73" selection-start-column="48" selection-end-line="73" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/lang/vi.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
-          <caret line="41" column="30" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/app/Console/Commands/dev_refresh.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1085">
-          <caret line="41" column="27" lean-forward="true" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
-          <folding>
-            <element signature="e#40#71#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/store/Thuoc/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-31">
-          <caret line="25" column="42" lean-forward="true" selection-start-line="25" selection-start-column="42" selection-end-line="25" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/Thuoc/SearchBox.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
-          <folding>
-            <element signature="n#style#0;n#mu-text-field#0;n#mu-button#0;n#mu-flex#1;n#mu-flex#0;n#mu-paper#0;n#template#0;n#mu-menu#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/views/Provider/Provider.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1209">
-          <caret line="39" column="34" selection-start-line="39" selection-start-column="34" selection-end-line="39" selection-end-column="34" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#mu-flex#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#mu-paper#0;n#mu-flex#0;n#mu-flex#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#mu-data-table#0;n#mu-paper#0;n#mu-flex#0;n#mu-flex#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/views/Kho/LichSu.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-704">
-          <caret line="12" column="55" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
-          <folding>
-            <element signature="n#style#0;n#mu-list#0;n#mu-flex#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#mu-flex#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#mu-paper#0;n#div#0;n#mu-flex#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#mu-data-table#0;n#mu-paper#0;n#div#0;n#mu-flex#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/router.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="108" column="53" selection-start-line="108" selection-start-column="53" selection-end-line="108" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/Sidebar/Sidebar.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="139" column="32" selection-start-line="139" selection-start-column="32" selection-end-line="139" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/Thuoc/ThuocTable.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-518">
-          <caret line="59" column="22" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
-          <folding>
-            <element signature="n#style#0;n#mu-data-table#0;n#mu-flex#0;n#mu-paper#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/views/PhanLoai/PhanLoai.vue">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/store/index.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="558">
@@ -755,13 +649,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31">
-          <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/store/Provider/index.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-31">
@@ -779,26 +666,9 @@
     <entry file="file://$PROJECT_DIR$/backend/composer.lock">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/PaginateTable/index.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="49" column="14" selection-start-line="49" selection-start-column="14" selection-end-line="49" selection-end-column="14" />
-          <folding>
-            <element signature="n#style#0;n#mu-flex#0;n#mu-paper#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-53" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/vue.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="19" column="23" lean-forward="true" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/HOW_APP_WORK.md">
@@ -846,9 +716,6 @@
           <second_editor />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/.env.example">
       <provider selected="true" editor-type-id="text-editor">
@@ -917,26 +784,125 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/storage/logs/laravel-2019-05-29.log">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/.env">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/.circleci/config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-957">
+        <state relative-caret-position="93">
           <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/views/Thuoc/Thuoc.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
+        <state relative-caret-position="-878">
           <caret line="18" column="22" lean-forward="true" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
           <folding>
             <element signature="n#style#0;n#thuoc-table#0;n#mu-flex#0;n#div#0;n#template#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/public/favicon.ico">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/public/img/logo.82b9c7a5.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/public/css/app.f595b69e.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/public/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7161">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/PaginateTable/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="71" column="40" selection-start-line="71" selection-start-column="40" selection-end-line="71" selection-end-column="40" />
+          <folding>
+            <element signature="n#style#0;n#mu-flex#0;n#mu-paper#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/resources/views/home.blade.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/storage/logs/laravel-2019-05-29.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4650" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/public/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1302" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/config/logging.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/config/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6832" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/server.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-58" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/.env">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/.styleci.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/artisan">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1205" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/config/filesystems.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-492" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/config/session.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="192" column="32" lean-forward="true" selection-start-line="192" selection-start-column="32" selection-end-line="192" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/resources/views/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="26" lean-forward="true" selection-start-column="26" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-151">
+          <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/vue.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="17" column="51" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
         </state>
       </provider>
     </entry>
