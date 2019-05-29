@@ -1,43 +1,60 @@
-import {Module} from "vuex";
+import {Module, MutationTree} from "vuex";
 import {Provider} from "@/types/Provider";
+import API from "@/api";
 
 export interface IProviderState {
-    list: Provider[],
-    map: Map<number, number>,
+    map: Map<number, Provider>;
+    pages: Map<number, Provider[]>;
 }
 
 
 const store: Module<IProviderState, any> = {
+    namespaced: true,
+
     state: {
-        list: [],
-        map: new Map<number, number>(),
+        map: new Map<number, Provider>(),
+        pages: new Map<number, Provider[]>(),
     },
 
     getters: {
-        list(state): Provider[] {
-            return [...state.list];
+        list(state: IProviderState): Provider[] {
+            const result = [];
+            for (const provider of state.map.values()) {
+                result.push(provider);
+            }
+            return result;
         },
+
+        pages(state: IProviderState): Map<number, Provider[]> {
+            return new Map(state.pages);
+        }
     },
 
     mutations: {
-        add(state: IProviderState, provider: Provider) {
-            if (state.map.has(provider.id)) {
-                const idx = state.map.get(provider.id);
-                if (idx) {
-                    Object.assign(state.list[idx], provider);
-                }
-            } else {
-                const newIdx = state.list.push(provider) - 1;
-                state.map.set(provider.id, newIdx);
-            }
+        add(state: IProviderState, payload) {
+            const {provider} = payload;
+
+            if (provider)
+                state.map.set(provider.id, provider);
         },
 
-        remove(state: IProviderState, id: number) {
-            if (state.map.has(id)) {
-                const idx = state.map.get(id);
-                if (idx) {
-                    state.list.splice(idx, 1);
-                }
+        updatePage(state: IProviderState, payload: any) {
+            const {
+                page = 1,
+                list = [] as Provider[],
+            } = payload;
+
+            for (const provider of list) {
+                state.map.set(provider.id, provider);
+            }
+            state.pages.set(page, list);
+        },
+
+        remove(state: IProviderState, payload: any) {
+            const {id} = payload;
+
+            if (id && state.map.has(id)) {
+                state.map.delete(id);
             } else {
                 console.warn(id + ' not found in vuex store');
             }
@@ -46,8 +63,30 @@ const store: Module<IProviderState, any> = {
 
     actions: {
         async getList({state, commit}, payload) {
+            const {
+                limit = 20,
+                page = 1,
+            } = payload;
 
-        }
+            if (state.pages.has(page)) {
+                const result = [] as any[];
+                const pageList = state.pages.get(page) || [];
+                for (const provider of pageList) {
+                    result.push(result);
+                }
+                return result;
+            }
+
+            const res = await API.getListProvider(limit, page);
+            commit('updatePage', {
+                page,
+                list: res.data
+            });
+
+            return res.data;
+        },
+
+
     },
 };
 

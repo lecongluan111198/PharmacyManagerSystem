@@ -98,4 +98,13 @@ export default class API {
         }));
         return res.data;
     }
+
+    static async getListProvider(limit: number = 20, page: number = 1) : Promise<IPaginateResponse>
+    {
+        const res = await Axios.get(this.GET('provider', {
+            limit,
+            page,
+        }));
+        return res.data;
+    }
 }

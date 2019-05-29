@@ -13,27 +13,26 @@
                 </mu-button>
             </mu-flex>
         </div>
-        <mu-flex fill direction="column" align-items="stretch">
-            <mu-paper :z-depth="2" style="height: 100%">
-                <mu-data-table :columns="tableColumns"
-                               style="height: 100%" border striped
-                               :no-data-text="$lang.EMPTY_DATA"
-                               :data="tableData">
-
-                </mu-data-table>
-            </mu-paper>
+        <mu-flex fill>
+            <paginate-table style="height: 100%;width: 100%"
+                            :loading="loading"
+                            :columns="tableColumns"></paginate-table>
         </mu-flex>
     </mu-flex>
 </template>
 
 <script lang="ts">
     import Vue from 'vue';
-
+    import PaginateTable from '@/components/PaginateTable/index.vue';
 
     export default Vue.extend({
         name: 'kho-view',
+        components: {
+            PaginateTable,
+        },
         data() {
             return {
+                loading: false,
                 tableColumns: [
                     {title: this.$lang.THUOC.ID, name: 'id'},
                     {title: this.$lang.THUOC.NAME, name: 'name'},
