@@ -69,11 +69,12 @@
 
             computed_page: {
                 get: function() {
-                    return this.page;
+                    return (this as any).page;
                 },
                 set: function (val: number) {
-                    this.$emit("update:page", val);
-                    this.$emit("page-change", val);
+                    const _this = this as any;
+                    _this.$emit("update:page", val);
+                    _this.$emit("page-change", val);
                 },
             },
         },

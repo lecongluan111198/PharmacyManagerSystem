@@ -3,7 +3,7 @@ module.exports = {
     devServer: {
         proxy: {
             '^/api': {
-                target: 'http://localhost:8000',
+                target: (process.env.APP_URL) + ':' + (process.env.PORT || 8000),
                 changeOrigin: false,
             },
         }
