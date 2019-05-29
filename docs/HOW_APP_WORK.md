@@ -53,8 +53,8 @@ Like `{name: "Anon", role: "admin"}`.
 - Authentication & Generate JWT by Laravel Passport.
 
 Backend has 2 part:
-1. Serve index.html by `App/Http/Controller/SpaController`, route at `routes/web.php`
-2. Others Controller handle api request at `routes/api.php`
+1. Serve index.html by `backend/app/Http/Controller/SpaController`, route at `backend/routes/web.php`
+2. Others Controller handle api request at `backend/routes/api.php`
 
 ## HOW TO RUN AT LOCALHOST
 

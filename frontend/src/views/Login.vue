@@ -1,6 +1,10 @@
 <template>
     <mu-flex justify-content='center' align-items="center" class="app-login">
         <mu-paper style="padding: 2em" :z-depth="10">
+            <div style="text-align: center; margin-bottom: 2em">
+                <img src="@/assets/logo.png" alt="" width="128">
+            </div>
+
             <mu-alert color="error" v-show="error">
                 <mu-icon left value="warning"></mu-icon>
                 {{error}}

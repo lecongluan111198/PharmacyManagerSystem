@@ -1,14 +1,21 @@
-# SimplePharma
+# Simple Pharma
 
 ## Install
 
+## BACKEND
+
 ```bash
+cd backend
 composer install
 ```
 
-then
+## FRONTEND
 
 ```bash
 cd frontend
 npm install
 ```
+
+## RUN
+
+

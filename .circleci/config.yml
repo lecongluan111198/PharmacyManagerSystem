@@ -1,0 +1,48 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: codycraven/php-node:latest
+    working_directory: ~/repos
+    steps:
+      - checkout
+      - run:
+          name: Install backend
+          command: |
+            cd ~/repos/backend/
+            composer install
+      - run:
+          name: Install frontend
+          command: |
+            cd ~/repos/frontend
+            npm install
+      - run:
+          name: Build
+          command: |
+            cd ~/repos/frontend/
+            npm run build
+
+  deploy:
+    machine:
+      enabled: true
+    working_directory: ~/repos
+    environment:
+      HEROKU_APP: "beohoang98-simple-pharma"
+    steps:
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: production

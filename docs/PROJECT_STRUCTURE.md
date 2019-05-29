@@ -19,23 +19,29 @@
 
 ## 1 - Backend
 
-All files except folder `frontend`
+Folder `backend`
 
 **Run backend**
 ```bash
+cd backend
+
+# then
 composer install
+
+# for install passport and create seed data
+php artisan dev:refresh 
 
 php artisan serve
 ```
 
 ### Structure
 #### 1.1 Controller
-- path: `app/Http/Controller`
+- path: `backend/app/Http/Controller`
     - `Controller.php`: Laravel Controller models
     - `SpaController.php`: Controller to serve frontend
     - `StoreController.php`: Controller to handle API for `Store` model
 #### 1.2 Models
-- path: `app/`
+- path: `backend/app/`
     - `User.php`: Laravel User model, include handle Auth & Token
     - `Store.php`: Store model
 
