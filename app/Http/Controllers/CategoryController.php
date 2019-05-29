@@ -12,9 +12,34 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $sort_direction = $request->get("direction", "asc");
+        $search = $request->get("q", "");
+        $items = Category::query()
+            ->where("id", "LIKE", "%$search%")
+            ->orWhere("name", "LIKE", "%$search%")
+            ->paginate(15);
+        return response()->json($items);
+    }
+
+    public function getId($id)
+    {
+        try {
+            $category = Category::findOrFaile($id);
+            $medicines = $category->medicines()->get();
+            $ret = [
+                'success' => true,
+                'prescription' => $category,
+                'medicines' => $medicines
+            ];
+        } catch (ModelNotFoundException $ex) {
+            $ret = [
+                'success' => false,
+                'message' => $ex->getMessage(),
+            ];
+        }
+        return response()->json($ret);
     }
 
     /**
@@ -24,7 +49,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('create');
     }
 
     /**
@@ -35,7 +60,26 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = new Category();
+        //tao id
+        $category->name = $request->name;
+
+        $medicines = Medicine::findMany($request->listIds);
+        $category->medicines()->attach($medicines);
+        if ($category->save()) {
+            $ret = [
+                'success' => true,
+                'message' => 200,
+                'prescription' => $category
+            ];
+        } else {
+            $ret = [
+                'success' => false,
+                'message' => 404,
+                'prescription' => null
+            ];
+        }
+        return response()->json($ret);
     }
 
     /**
@@ -55,9 +99,14 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        $category =  Category::findOrFail($id);
+        $medicines = $category->medicines()->get();
+        return view('update', [
+            'prescription' => $category,
+            'medicines' => $medicines
+        ]);
     }
 
     /**
@@ -67,9 +116,32 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request)
     {
-        //
+        try {
+            $category = Category::findOrFail($request->id);
+            $category->name = $request->name;
+            if ($category->save()) {
+                $ret = [
+                    'success' => true,
+                    'message' => 200,
+                    'medicine' => $category,
+                ];
+            } else {
+                $ret = [
+                    'success' => true,
+                    'message' => 404,
+                    'medicine' => $category,
+                ];
+            }
+        } catch (ModelNotFoundException $ex) {
+            $ret = [
+                'success' => true,
+                'message' => $ex->getMessage(),
+                'medicine' => null
+            ];
+        }
+        return response()->json($ret);
     }
 
     /**
@@ -78,8 +150,21 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        try {
+            $data = Category::findOrFail($id);
+            $data->delete();
+            $ret = [
+                'success' => true,
+                'message' => 200
+            ];
+        } catch (ModelNotFoundException $ex) {
+            $ret = [
+                'success' => false,
+                'message' => $ex->getMessage(),
+            ];
+        }
+        return response()->json($ret);
     }
 }
