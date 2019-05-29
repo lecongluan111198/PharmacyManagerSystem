@@ -33,7 +33,10 @@ jobs:
       - run:
           name: Deploy Master to Heroku
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+            cd ~/repos/
+            git add .
+            git commit -m deploy_${CIRCLE_BUILD_NUM}
+            git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
 
 workflows:
   version: 2

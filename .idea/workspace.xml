@@ -2,58 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3cf77741-d5db-4e51-a48a-9fef8165ac1e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/backend/resources/views/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/css/app.01e2ca47.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/css/chunk-33c79671.6d771f62.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/css/chunk-582979c7.d8c73ad7.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/css/chunk-vendors.755a9159.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/img/login_background.5f0fec46.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/img/logo.65433642.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/app.ab6de8e3.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/app.ab6de8e3.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-24195ba0.ad0b3d18.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-24195ba0.ad0b3d18.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0aba0e.864b6c24.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0aba0e.864b6c24.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0b1f6d.35e362ad.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0b1f6d.35e362ad.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0b3421.485494cb.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0b3421.485494cb.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0b5d96.4b3f1690.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0b5d96.4b3f1690.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0ba1a7.15ee0627.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0ba1a7.15ee0627.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0bdf56.7d5a3554.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0bdf56.7d5a3554.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0cc5ae.8d3c9c13.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0cc5ae.8d3c9c13.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0cc5eb.7eae1dde.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0cc5eb.7eae1dde.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0cf525.e6a5e661.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0cf525.e6a5e661.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0d7286.ba6569a1.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0d7286.ba6569a1.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0de1ec.d28d1c55.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d0de1ec.d28d1c55.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d20f1a7.98a8270c.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d20f1a7.98a8270c.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d21a5c9.8aa0262d.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d21a5c9.8aa0262d.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d2254a4.ff3d9b10.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d2254a4.ff3d9b10.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d230283.8757f996.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-2d230283.8757f996.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-33c79671.6132e126.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-33c79671.6132e126.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-582979c7.22a9244f.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-582979c7.22a9244f.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-vendors.28b31f67.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/js/chunk-vendors.28b31f67.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.circleci/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.circleci/config.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/config/session.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config/session.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/backend/public/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/resources/views/index.blade.php" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/public/" />
     <ignored path="$PROJECT_DIR$/frontend/node_modules/" />
@@ -175,11 +125,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="93">
               <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.circleci/config.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="248">
+              <caret line="38" column="29" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -247,12 +206,12 @@
         <option value="$PROJECT_DIR$/frontend/package.json" />
         <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/run.sh" />
-        <option value="$PROJECT_DIR$/.circleci/config.yml" />
         <option value="$PROJECT_DIR$/frontend/src/views/Thuoc/Thuoc.vue" />
         <option value="$PROJECT_DIR$/frontend/src/components/PaginateTable/index.vue" />
         <option value="$PROJECT_DIR$/backend/config/session.php" />
         <option value="$PROJECT_DIR$/frontend/vue.config.js" />
         <option value="$PROJECT_DIR$/backend/.gitignore" />
+        <option value="$PROJECT_DIR$/.circleci/config.yml" />
       </list>
     </option>
   </component>
@@ -377,7 +336,7 @@
             <path>
               <item name="pharmacy-manager-system" type="b2602c69:ProjectViewProjectNode" />
               <item name="pharmacy-manager-system" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name=".circleci" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -462,12 +421,12 @@
       <workItem from="1559054890316" duration="2477000" />
       <workItem from="1559100746774" duration="5510000" />
       <workItem from="1559118602324" duration="3936000" />
-      <workItem from="1559139202053" duration="11083000" />
+      <workItem from="1559139202053" duration="12162000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91311000" />
+    <option name="totallyTimeSpent" value="92390000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -572,17 +531,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/frontend/src/store/index.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-            <element signature="e#127#162#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/app/Pharmacy.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="143">
@@ -665,11 +613,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/composer.lock">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-53" />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/HOW_APP_WORK.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
@@ -784,13 +727,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.circleci/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/views/Thuoc/Thuoc.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-878">
@@ -899,10 +835,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="93">
           <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.circleci/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="38" column="29" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
         </state>
       </provider>
     </entry>
