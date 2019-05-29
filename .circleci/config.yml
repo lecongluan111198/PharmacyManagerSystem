@@ -2,8 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:latest
-      - image: circleci/php:latest
+      - image: circleci/php:7.1-node-browsers
     working_directory: ~/repos
     steps:
       - checkout

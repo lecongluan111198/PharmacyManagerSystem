@@ -89,20 +89,6 @@
                     return this.whereInput[0];
                 }
             },
-
-            // test data
-            providers(): Provider[] {
-                return [
-                    {
-                        id: 1, store_id: 1,
-                        name: 'Duoc Hau Giang',
-                    },
-                    {
-                        id: 2, store_id: 1,
-                        name: 'Duoc Can Tho',
-                    },
-                ];
-            },
         }
     });
 </script>
