@@ -2,7 +2,8 @@ version: 2
 jobs:
   build:
     docker:
-      - image: codycraven/php-node:latest
+      - image: circleci/node:latest
+      - image: circleci/php:latest
     working_directory: ~/repos
     steps:
       - checkout
