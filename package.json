@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "yarn install --cwd frontend && cd backend && composer install"
+    "postinstall": "yarn install --cwd frontend"
   },
   "repository": {
     "type": "git",
