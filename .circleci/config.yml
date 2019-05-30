@@ -35,6 +35,8 @@ jobs:
           command: |
             cd ~/repos/
             git add .
+            git config --local user.email "beohoang98@users.noreply.github.com"
+            git config --local user.name "Beo Hoang"
             git commit -m deploy_${CIRCLE_BUILD_NUM}
             git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
 
