@@ -3,7 +3,7 @@ module.exports = {
     devServer: {
         proxy: {
             '^/api': {
-                target: (process.env.APP_URL) + ':' + (process.env.PORT || 8000),
+                target: (process.env.APP_URL) + ':' + (process.env.PORT || 80),
                 changeOrigin: false,
             },
         }
@@ -16,6 +16,6 @@ module.exports = {
     // modify the location of the generated HTML file.
     // make sure to do this only in production.
     indexPath: process.env.NODE_ENV === 'production'
-        ? '../backend/resources/views/index.blade.php'
+        ? '../resources/views/index.blade.php'
         : 'index.html',
 };
