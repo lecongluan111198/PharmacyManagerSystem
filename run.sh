@@ -4,5 +4,5 @@ WORKING_DIR=`pwd`
 cd "$WORKING_DIR/frontend"
 npm run build
 
-cd "$WORKING_DIR/backend"
-vendor/bin/heroku-php-apache2 public/
+cd "$WORKING_DIR"
+vendor/bin/heroku-php-apache2 backend/public/

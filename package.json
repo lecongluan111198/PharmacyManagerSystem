@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "yarn install --cwd frontend"
+    "postinstall": "NODE_ENV=build yarn install --cwd frontend"
   },
   "repository": {
     "type": "git",
