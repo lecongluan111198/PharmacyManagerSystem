@@ -1,24 +1,27 @@
 {
-    "name": "pharmacy-manager-system",
-    "version": "1.0.0",
-    "description": "## Install",
-    "main": "index.js",
-    "directories": {
-        "doc": "docs"
-    },
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "postinstall": "npm install --prefix frontend && cd backend && composer install"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/lecongluan111198/PharmacyManagerSystem.git"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/lecongluan111198/PharmacyManagerSystem/issues"
-    },
-    "homepage": "https://github.com/lecongluan111198/PharmacyManagerSystem#readme"
+  "name": "pharmacy-manager-system",
+  "version": "1.0.0",
+  "description": "## Install",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "yarn install --cwd frontend && cd backend && composer install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lecongluan111198/PharmacyManagerSystem.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lecongluan111198/PharmacyManagerSystem/issues"
+  },
+  "homepage": "https://github.com/lecongluan111198/PharmacyManagerSystem#readme",
+  "dependencies": {
+    "yarn": "^1.16.0"
+  }
 }
