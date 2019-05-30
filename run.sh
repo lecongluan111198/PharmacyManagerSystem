@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-cd ./backend/
-php artisan migrate
-php artisan passport:install
-php artisan config:cache
-php artisan serve
+WORKING_DIR=`pwd`
+
+cd "$WORKING_DIR/frontend"
+npm run build
+
+cd "$WORKING_DIR"
+vendor/bin/heroku-php-apache2 backend/public/
