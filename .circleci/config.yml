@@ -6,16 +6,32 @@ jobs:
     working_directory: ~/repos
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - composer-v1-{{ checksum "~/repos/backend/composer.json" }}
+            - composer-v1
       - run:
           name: Install backend
           command: |
             cd ~/repos/backend/
             composer install
+      - save_cache:
+          key: composer-v1-{{ checksum "~/repos/backend/composer.json" }}
+          path: ~/repos/backend/vendor/
+
+      - restore_cache:
+          keys:
+            - node-v1-{{ checksum "~/repos/frontend/package.json" }}
+            - node-v1
       - run:
           name: Install frontend
           command: |
             cd ~/repos/frontend
             npm install
+      - save_cache:
+          key: node-v1-{{ checksum "~/repos/frontend/package.json" }}
+          path: ~/repos/frontend/node_modules/
+
       - run:
           name: Build
           command: |
