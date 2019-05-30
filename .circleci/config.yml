@@ -17,7 +17,8 @@ jobs:
             composer install
       - save_cache:
           key: composer-v1-{{ checksum "~/repos/backend/composer.json" }}
-          path: ~/repos/backend/vendor/
+          paths:
+            - ~/repos/backend/vendor/
 
       - restore_cache:
           keys:
@@ -30,7 +31,8 @@ jobs:
             npm install
       - save_cache:
           key: node-v1-{{ checksum "~/repos/frontend/package.json" }}
-          path: ~/repos/frontend/node_modules/
+          paths:
+            - ~/repos/frontend/node_modules/
 
       - run:
           name: Build
