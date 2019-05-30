@@ -7,7 +7,7 @@
         }
     ],
     "require": {
-        "php": "^7.2.0"
+        "heroku-php-apache2": "^7.2.0"
     },
     "scripts": {
         "post-install-cmd": ["cd backend && composer install && composer update"]
