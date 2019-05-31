@@ -40,3 +40,6 @@ npm run serve
 
 **Web app được serve trên http://localhost:8003**
 
+Đăng nhập:
+- Email: `anaizhu98@gmail.com`
+- Password: `123456`
