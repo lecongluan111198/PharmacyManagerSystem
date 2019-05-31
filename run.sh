@@ -6,7 +6,8 @@ npm run build
 
 cd "$WORKING_DIR/backend"
 php artisan key:generate --show
-export APP_KEY=${$(php artisan key:generate --show)#base64:}
+APP_KEY_WITH_PREFIX=$(php artisan key:generate --show)
+export APP_KEY=${APP_KEY_WITH_PREFIX#'base64:'}
 echo $APP_KEY
 
 cd "$WORKING_DIR"
