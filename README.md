@@ -25,7 +25,7 @@ npm install
 ```bash
 # for backend
 cd backend/
-php artisan dev:refesh
+php artisan dev:refresh
 php artisan serve
 # backend lắng nghe trên port mặc định 8000
 ```
