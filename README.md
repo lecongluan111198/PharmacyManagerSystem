@@ -16,6 +16,25 @@ cd frontend
 npm install
 ```
 
-## RUN
+## RUN LOCALHOST
 
+Mở 2 terminal/cmd:
+
+```bash
+# for backend
+cd backend/
+php artisan dev:refesh
+php artisan serve
+# backend lắng nghe trên port mặc định 8000
+```
+
+```bash
+# for front end
+cd frontend/
+npm run serve
+# frontend lắng nghe trên port mặc định 8003
+```
+
+
+**Web app được serve trên http://localhost:8003**
 
