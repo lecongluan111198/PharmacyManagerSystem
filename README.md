@@ -1,3 +1,4 @@
+**Link web:** http://beohoang98-simple-pharma.herokuapp.com/
 # Simple Pharma
 
 ## Install
@@ -25,7 +26,7 @@ npm install
 ```bash
 # for backend
 cd backend/
-php artisan dev:refesh
+php artisan dev:refresh
 php artisan serve
 # backend lắng nghe trên port mặc định 8000
 ```
@@ -40,3 +41,6 @@ npm run serve
 
 **Web app được serve trên http://localhost:8003**
 
+Đăng nhập:
+- Email: `anaizhu98@gmail.com`
+- Password: `123456`
