@@ -22,6 +22,7 @@ export default {
         CURRENT: 'Hóa đơn hiện tại',
         COSTS: 'Giá',
         TOTAL_COST: 'Tổng giá',
+        HISTORY: 'Lịch sử hóa đơn',
     },
 
     INVENTORY: {
@@ -49,4 +50,5 @@ export default {
     DATETIME: 'Thời gian',
 
     NOTE: 'Ghi chú',
+    EDIT: 'Sửa',
 }

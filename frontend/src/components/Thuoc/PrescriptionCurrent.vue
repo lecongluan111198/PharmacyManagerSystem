@@ -6,7 +6,7 @@
                     <mu-icon value="delete"></mu-icon>
                     remove
                 </mu-button>
-                <mu-button small color="success">
+                <mu-button small color="success" @click="submitHoaDon" :disabled="submitting || list_medicine.length === 0">
                     <mu-icon left value="check"></mu-icon>
                     {{$lang.ADD}}
                 </mu-button>
@@ -24,6 +24,7 @@
         <mu-paper :z-depth="1">
             <mu-data-table :columns="columns"
                            border striped
+                           :loading="submitting"
                            checkbox selectable select-all
                            :selects.sync="selects"
                            :no-data-text="$lang.EMPTY_DATA"
@@ -36,12 +37,13 @@
 <script lang="ts">
     import Vue from 'vue';
     import {mapGetters} from 'vuex';
-    import {ICTHoaDon} from "@/store/HoaDon";
+    import {ICTHoaDon} from "@/types/ICTHoaDon";
 
     export default Vue.extend({
         name: 'prescription-current',
         data() {
             return {
+                submitting: false,
                 selects: [] as any[],
                 columns: [
                     {title: "ID", name: 'id'},
@@ -98,6 +100,15 @@
                     });
                 });
             },
+
+            async submitHoaDon() {
+                this.submitting = true;
+                await this.$store.dispatch("hoa_don/addHoaDon");
+                setTimeout(() => {
+                    // test async
+                    this.submitting = false;
+                }, 1000);
+            }
         },
     });
 

@@ -7,6 +7,8 @@ import Muse from 'muse-ui';
 import 'muse-ui/dist/muse-ui.css';
 import 'axios';
 import langConfig from '@/lang/';
+import * as moment from 'moment';
+moment.locale('vi');
 
 Vue.use(Muse);
 

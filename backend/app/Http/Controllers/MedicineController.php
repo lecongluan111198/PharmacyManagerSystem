@@ -92,7 +92,10 @@ class MedicineController extends Controller
      */
     public function show(Medicine $medicine)
     {
-        //
+	return response()->json([
+	    "error" => false,
+	    "data" => $medicine,    
+	]);
     }
 
     /**

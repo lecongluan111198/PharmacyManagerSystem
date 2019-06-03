@@ -3,8 +3,10 @@
         <mu-flex direction="column" align-items="stretch" style="height: 100%">
             <mu-data-table class="paginate-table"
                            stripe border :selectable="selectable"
+                           :no-data-text="$lang.EMPTY_DATA"
                            :selects.sync="computed_selects" select-all
                            :columns="columns"
+                           @row-click="onRowClick"
                            :data="data"></mu-data-table>
             <div class="paginate-table-paginate">
                 <mu-pagination :current.sync="computed_page" :total="total"></mu-pagination>
@@ -76,6 +78,11 @@
                     _this.$emit("update:page", val);
                     _this.$emit("page-change", val);
                 },
+            },
+        },
+        methods: {
+            onRowClick(index: number, item: any) {
+                this.$emit("row-click", item, index);
             },
         },
     });

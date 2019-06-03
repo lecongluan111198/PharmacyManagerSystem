@@ -40,6 +40,7 @@ export default new Vuex.Store<RootState>({
         async fetchMe({commit}) {
             const user = await API.fetchMe();
             commit("setMe", user);
+            return user;
         },
 
         async resetPass({commit}) {

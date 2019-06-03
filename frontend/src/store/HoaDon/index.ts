@@ -1,26 +1,31 @@
 import {Module} from 'vuex';
+import Vue from 'vue';
 import {Thuoc} from "@/types/Thuoc";
-
-export interface ICTHoaDon {
-    medicine: Thuoc;
-    quantity: number;
-}
+import {HoaDon} from "@/types/HoaDon";
+import {ICTHoaDon} from "@/types/ICTHoaDon";
+import {RootState} from "@/store";
 
 export interface IHoaDonState {
     list: ICTHoaDon[],
     current: Map<number, number>;
+    history: any;
 }
 
-const store: Module<IHoaDonState, any> = {
+const store: Module<IHoaDonState, RootState> = {
     namespaced: true,
     state: {
         list: [],
         current: new Map<number, number>(),
+        history: {},
     },
 
     getters: {
         current(state: IHoaDonState) {
             return [...state.list];
+        },
+
+        history(state: IHoaDonState): HoaDon[] {
+            return Object.values(state.history);
         },
     },
 
@@ -67,6 +72,11 @@ const store: Module<IHoaDonState, any> = {
                 }
             }
         },
+
+        addHoaDon(state, hoadon: HoaDon) {
+            Vue.set(state.history, hoadon.id, hoadon);
+            // state.history.set(hoadon.id, hoadon);
+        },
     },
 
     actions: {
@@ -84,6 +94,48 @@ const store: Module<IHoaDonState, any> = {
         async remove({commit}, payload) {
             commit('remove', payload);
         },
+
+        async addHoaDon({state, commit, rootState}) {
+            if (state.list.length === 0) {
+                throw new Error("no medicine in prescription");
+            }
+            if (!rootState.me) {
+                throw new Error("User undefined");
+            }
+
+            const now = Date.now();
+            const hoadon: HoaDon = {
+                id: now,
+                cthd: state.list,
+                created_at: now,
+                updated_at: now,
+                created_by: rootState.me,
+                total: state.list.reduce((sum: number, val: ICTHoaDon)=>{
+                    return sum + (val.medicine.cost * val.quantity);
+                }, 0),
+            };
+
+            commit('addHoaDon', hoadon);
+
+            state.list = [];
+            state.current.clear();
+
+            console.debug(state.history);
+        },
+
+        getHoaDon({state}, payload): HoaDon | null {
+            const {id} = payload;
+            if (!id) {
+                throw new Error('id not found');
+            }
+
+            if (state.history.hasOwnProperty(id)) {
+                return state.history[id];
+            } else {
+                // server handle
+                return null;
+            }
+        }
     },
 };
 
