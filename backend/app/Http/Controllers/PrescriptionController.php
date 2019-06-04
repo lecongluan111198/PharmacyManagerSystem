@@ -17,15 +17,14 @@ class PrescriptionController extends Controller
     public function index(Request $request)
     {
         $sort_direction = $request->get("direction", "asc");    
-        $sort_key = $request->get("sort", "id");
-        $search = $request->get("q", "");
-        $start = $request->get("start", $date = date('m/d/Y',strtodate('01/01/2019')));
+        $sort_key = $request->get("sort", "invoiceDate");
+        $start = $request->get("start", $date = date('m/d/Y', strtotime('01/01/1900')));
         $end = $request->get("end", $date = date('m/d/Y', time()));
-        $items = Medicine::query()
-            ->where("id", "LIKE", "%$search%")
-            ->orWhere("name", "LIKE", "%$search%")
-            ->where("invoiceDate", ">=", $start)
-            ->where("invoiceDate", "<=", $end)
+        $items = Prescription::query()
+            ->with('created_by')
+            ->with('medicines')
+//            ->where("invoiceDate", ">=", $start)
+//            ->where("invoiceDate", "<=", $end)
             ->orderBy($sort_key, $sort_direction)
             ->paginate(15);
         return response()->json($items);

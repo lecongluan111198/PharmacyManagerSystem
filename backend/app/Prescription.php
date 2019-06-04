@@ -15,4 +15,8 @@ class Prescription extends Model
         //return $this->belongsToMany('App\Medicine')->using('App\PrescriptionDetail');
         return $this->belongsToMany('App\Medicine', 'prescription_details', 'idPrescription','idMedicine');
     }
+
+    public function created_by() {
+        return $this->belongsTo('App\User');
+    }
 }

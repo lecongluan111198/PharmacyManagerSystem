@@ -17,9 +17,7 @@ class CreatePrescriptionDetailsTable extends Migration
 //            $table->increments('id');
             $table->integer('idMedicine')->unsigned();
             $table->integer('idPrescription')->unsigned();
-
-            $table->integer('amount');
-
+            $table->integer('amount')->default(1);
             $table->primary([
                 'idMedicine',
                 'idPrescription',

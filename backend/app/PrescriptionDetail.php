@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class PrescriptionDetail extends Pivot
 {
+    public $table = "prescription_details";
     //
     public function medicine(){
         return $this->belongsTo('App\Medicine');
     }
-    public function precription(){
-        return $this->belongsTo('App\Precription');
+    public function prescription(){
+        return $this->belongsTo('App\Prescription');
     }
 }

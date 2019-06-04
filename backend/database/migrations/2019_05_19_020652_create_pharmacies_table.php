@@ -29,6 +29,8 @@ class CreatePharmaciesTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('pharmacies');
+        Schema::enableForeignKeyConstraints();
     }
 }
