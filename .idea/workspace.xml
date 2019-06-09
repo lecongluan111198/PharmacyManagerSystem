@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3cf77741-d5db-4e51-a48a-9fef8165ac1e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/pharmacy-manager-system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pharmacy-manager-system.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/MedicineController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/MedicineController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/ProviderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/ProviderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/ReceiptController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/ReceiptController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Medicine.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Medicine.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Prescription.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Prescription.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Receipt.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Receipt.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/ReceiptDetail.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/ReceiptDetail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/factories/PrescriptionFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/factories/PrescriptionFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2019_05_19_020616_create_providers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/2019_05_19_020616_create_providers_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2019_05_19_020652_create_pharmacies_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/2019_05_19_020652_create_pharmacies_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2019_05_19_020728_create_prescriptions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/2019_05_19_020728_create_prescriptions_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2019_05_19_020745_create_receipts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/2019_05_19_020745_create_receipts_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2019_05_19_020924_create_receipt_details_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/2019_05_19_020924_create_receipt_details_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/api.php" afterDir="false" />
-    </list>
+    <list default="true" id="3cf77741-d5db-4e51-a48a-9fef8165ac1e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/public/" />
     <ignored path="$PROJECT_DIR$/frontend/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -144,13 +125,26 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/src/api/base.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="35" column="33" lean-forward="true" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
+            <state relative-caret-position="422">
+              <caret line="39" column="40" lean-forward="true" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/frontend/src/components/PaginateTable/index.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="372">
+              <caret line="23" column="31" lean-forward="true" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+              <folding>
+                <element signature="n#style#0;n#mu-flex#0;n#mu-paper#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#mu-data-table#0;n#mu-flex#0;n#mu-paper#0;n#template#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -237,7 +231,6 @@
         <option value="$PROJECT_DIR$/backend/app/Medicine.php" />
         <option value="$PROJECT_DIR$/backend/app/Http/Controllers/MedicineController.php" />
         <option value="$PROJECT_DIR$/frontend/src/types/Receipt.ts" />
-        <option value="$PROJECT_DIR$/frontend/src/components/PaginateTable/index.vue" />
         <option value="$PROJECT_DIR$/backend/app/Http/Controllers/ReceiptController.php" />
         <option value="$PROJECT_DIR$/frontend/src/views/Kho/LichSu.vue" />
         <option value="$PROJECT_DIR$/frontend/src/api/Receipt.ts" />
@@ -250,6 +243,7 @@
         <option value="$PROJECT_DIR$/frontend/src/store/index.ts" />
         <option value="$PROJECT_DIR$/frontend/src/views/Provider/Provider.vue" />
         <option value="$PROJECT_DIR$/frontend/src/api/base.ts" />
+        <option value="$PROJECT_DIR$/frontend/src/components/PaginateTable/index.vue" />
       </list>
     </option>
   </component>
@@ -528,6 +522,14 @@
               <item name="pharmacy-manager-system" type="462c0819:PsiDirectoryNode" />
               <item name="frontend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="PaginateTable" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pharmacy-manager-system" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pharmacy-manager-system" type="462c0819:PsiDirectoryNode" />
+              <item name="frontend" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="store" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -606,7 +608,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Bash.Backend">
+  <component name="RunManager" selected="npm.Frontend">
     <configuration name="Backend" type="BashConfigurationType" factoryName="Bash">
       <module name="pharmacy-manager-system" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -667,12 +669,12 @@
       <workItem from="1559663171074" duration="7881000" />
       <workItem from="1559698974749" duration="3745000" />
       <workItem from="1559723281785" duration="17318000" />
-      <workItem from="1560044747604" duration="9059000" />
+      <workItem from="1560044747604" duration="12094000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="159826000" />
+    <option name="totallyTimeSpent" value="162861000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -685,14 +687,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="57" y="30" width="1863" height="1050" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27958173" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27958173" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32930845" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32930845" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32930845" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -700,7 +703,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32930845" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5008255" side_tool="true" weight="0.33260155" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49917448" visible="true" weight="0.24149287" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49917448" weight="0.24149287" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="TypeScript" order="12" weight="0.32930845" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -1088,17 +1091,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/PaginateTable/index.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="781">
-          <caret line="107" column="8" lean-forward="true" selection-start-line="107" selection-start-column="8" selection-end-line="107" selection-end-column="8" />
-          <folding>
-            <element signature="n#style#0;n#mu-flex#0;n#mu-paper#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#mu-data-table#0;n#mu-flex#0;n#mu-paper#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/app/Http/Controllers/ProviderController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="496">
@@ -1176,10 +1168,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/api/base.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="35" column="33" lean-forward="true" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
+        <state relative-caret-position="422">
+          <caret line="39" column="40" lean-forward="true" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/PaginateTable/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="23" column="31" lean-forward="true" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+          <folding>
+            <element signature="n#style#0;n#mu-flex#0;n#mu-paper#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#mu-data-table#0;n#mu-flex#0;n#mu-paper#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
