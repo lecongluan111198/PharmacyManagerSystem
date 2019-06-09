@@ -87,7 +87,7 @@
                 return {
                     ...this.hoadon,
                     created_at: moment(this.hoadon.created_at).format("DD/MM/YYYY"),
-                    cthd: this.hoadon.cthd.map(val=>{
+                    cthd: this.hoadon.medicines.map(val=>{
                        return {
                            ...val.medicine,
                            quantity: val.quantity,

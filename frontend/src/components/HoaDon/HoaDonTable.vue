@@ -16,8 +16,10 @@
         </mu-flex>
         <div style="flex: 1 1 auto">
             <paginate-table style="height: 100%"
+                            :selects="selects"
                             @row-click="handleClick"
                             :data="tableItems"
+                            :total="total" :page.sync="page"
                             :columns="columns"></paginate-table>
         </div>
     </mu-flex>
@@ -37,17 +39,18 @@
         },
         data() {
             return {
+                selects: [],
                 columns: [
-                    {title: 'ID', name: 'id', width: 200},
+                    {title: 'ID', name: 'id', width: 100},
                     {title: 'Created At', name: 'created_at', sort: true,
                         formatter(val: number): string {
                             return moment(val).fromNow();
                         },
                     },
-                    {title: 'Costs', name: 'total', sort: true},
+                    {title: 'Costs', name: 'cost', sort: true},
                     {title: 'By', name: 'created_by',
                         formatter(val: User): string {
-                            return val.name;
+                            return val ? val.name : '---';
                         }
                     },
                 ],
@@ -57,7 +60,23 @@
         computed: {
             ...mapGetters([
                 'hoa_don/history',
+                'hoa_don/history_page_cur',
+                'hoa_don/history_page_total',
             ]),
+
+            page: {
+                get(): number {
+                    const _this = this as any;
+                    return _this['hoa_don/history_page_cur'];
+                },
+                async set(page: number) {
+                    await this.$store.dispatch("hoa_don/getHistory", {page});
+                }
+            },
+            total(): number {
+                const _this = this as any;
+                return _this['hoa_don/history_page_total'];
+            },
 
             tableItems(): any[] {
                 const _this = this as any;
@@ -75,6 +94,11 @@
                 });
             },
         },
+
+        async mounted() {
+            await this.$store.dispatch("hoa_don/getHistory");
+            console.debug("loaded");
+        }
     });
 </script>
 

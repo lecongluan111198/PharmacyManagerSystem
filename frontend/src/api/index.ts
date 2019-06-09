@@ -1,46 +1,10 @@
 import {User} from "@/types/User";
 import Axios from '../axios';
-import {Thuoc} from "@/types/Thuoc";
+import ReceiptAPI from './Receipt';
+import APIBase, {IBasicResponse, ILoginData, IPaginateResponse} from "@/api/base";
+import ProviderApi from "@/api/ProviderApi";
 
-export interface ILoginData {
-    email: string;
-    password: string;
-}
-export interface IBasicResponse {
-    error: boolean,
-    message?: string,
-    data?: any,
-}
-export interface IPaginateResponse {
-    current_page: number;
-    data: any[];
-    first_page_url: string;
-    from: number;
-    last_page: number;
-    last_page_url: string;
-    next_page_url: string;
-    path: string;
-    per_page: number;
-    prev_page_url: string;
-    to: number;
-    total: number;
-}
-
-export default class API {
-    static GET(action: string, params: any = {}): string {
-        let paramsStr: string = Object.keys(params)
-            .filter(key=>!!params[key])
-            .map((key: string)=>{
-                return key + "=" + params[key];
-            }).join("&");
-        if (paramsStr)
-            paramsStr = "?" + paramsStr;
-        return `/${action}${paramsStr}`;
-    }
-
-    static isOk(status: number): boolean {
-        return (status < 300) && (status >= 200);
-    }
+export default class API extends APIBase {
 
     static async fetchMe(): Promise<User> {
         const res = await Axios.get("/me");
@@ -107,4 +71,16 @@ export default class API {
         }));
         return res.data;
     }
+
+    static async getListPrescription(limit: number = 15, page: number = 1) : Promise<IPaginateResponse>
+    {
+        const res = await Axios.get(this.GET('prescription', {
+            limit,
+            page,
+        }));
+        return res.data;
+    }
+
+    static Receipt = ReceiptAPI;
+    static Provider = ProviderApi;
 }

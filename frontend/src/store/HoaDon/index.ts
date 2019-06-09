@@ -4,11 +4,22 @@ import {Thuoc} from "@/types/Thuoc";
 import {HoaDon} from "@/types/HoaDon";
 import {ICTHoaDon} from "@/types/ICTHoaDon";
 import {RootState} from "@/store";
+import API from "@/api";
+
+export interface IListPage<T> {
+    [page: number]: T[];
+}
 
 export interface IHoaDonState {
     list: ICTHoaDon[],
     current: Map<number, number>;
-    history: any;
+    map: {
+        [id: number]: HoaDon;
+    };
+    history: IListPage<HoaDon>;
+    page: number;
+    limit: number;
+    total: number;
 }
 
 const store: Module<IHoaDonState, RootState> = {
@@ -16,7 +27,11 @@ const store: Module<IHoaDonState, RootState> = {
     state: {
         list: [],
         current: new Map<number, number>(),
+        map: {},
         history: {},
+        page: 1,
+        limit: 15,
+        total: 1,
     },
 
     getters: {
@@ -25,8 +40,18 @@ const store: Module<IHoaDonState, RootState> = {
         },
 
         history(state: IHoaDonState): HoaDon[] {
-            return Object.values(state.history);
+            if (!state.history.hasOwnProperty(state.page))
+                return [];
+            return [...state.history[state.page]];
         },
+
+        history_page_cur(state): number {
+            return state.page;
+        },
+
+        history_page_total(state): number {
+            return state.total;
+        }
     },
 
     mutations: {
@@ -73,9 +98,27 @@ const store: Module<IHoaDonState, RootState> = {
             }
         },
 
-        addHoaDon(state, hoadon: HoaDon) {
-            Vue.set(state.history, hoadon.id, hoadon);
-            // state.history.set(hoadon.id, hoadon);
+        addHoaDon(state, payload: any = {}) {
+            const {
+                hoadon = {},
+                page = 1,
+            } = payload;
+            Vue.set(state.map, hoadon.id, hoadon);
+
+            if (!state.history.hasOwnProperty(page))
+                state.history[page] = [hoadon];
+            else
+                state.history[page].push(hoadon);
+        },
+
+        setPage(state, page: number = 1) {
+            state.page = page;
+        },
+
+        setTotal(state, total: number = 1) {
+            if (total > state.page) {
+                state.total = total;
+            }
         },
     },
 
@@ -106,16 +149,18 @@ const store: Module<IHoaDonState, RootState> = {
             const now = Date.now();
             const hoadon: HoaDon = {
                 id: now,
-                cthd: state.list,
+                medicines: state.list as any,
+
+                invoiceDate: new Date(now),
                 created_at: now,
                 updated_at: now,
                 created_by: rootState.me,
-                total: state.list.reduce((sum: number, val: ICTHoaDon)=>{
+                cost: state.list.reduce((sum: number, val: ICTHoaDon)=>{
                     return sum + (val.medicine.cost * val.quantity);
                 }, 0),
             };
 
-            commit('addHoaDon', hoadon);
+            commit('addHoaDon', {hoadon});
 
             state.list = [];
             state.current.clear();
@@ -129,13 +174,36 @@ const store: Module<IHoaDonState, RootState> = {
                 throw new Error('id not found');
             }
 
-            if (state.history.hasOwnProperty(id)) {
-                return state.history[id];
+            if (state.map.hasOwnProperty(id)) {
+                return state.map[id];
             } else {
                 // server handle
                 return null;
             }
-        }
+        },
+
+        async getHistory({state, commit}, payload: any = {}) {
+            const {
+                limit = 15,
+                page = 1,
+            } = payload;
+
+            if (page in state.history) {
+                commit('setPage', page);
+                return;
+            }
+
+            const res = await API.getListPrescription(limit, page);
+            const listHoaDon = res.data as HoaDon[];
+            commit('setTotal', res.total);
+            commit('setPage', res.current_page);
+            for (const hoadon of listHoaDon) {
+                commit('addHoaDon', {
+                    hoadon,
+                    page: res.current_page,
+                });
+            }
+        },
     },
 };
 
