@@ -16,8 +16,8 @@ class CreatePharmaciesTable extends Migration
         Schema::create('pharmacies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('address');
-            $table->string('phoneContact');
+            $table->string('address')->default('');
+            $table->string('phoneContact')->default('');
             $table->timestamps();
         });
     }

@@ -13,10 +13,13 @@ class Prescription extends Model
     public function medicines()
     {
         //return $this->belongsToMany('App\Medicine')->using('App\PrescriptionDetail');
-        return $this->belongsToMany('App\Medicine', 'prescription_details', 'idPrescription','idMedicine');
+        return $this->belongsToMany('App\Medicine', 'prescription_details', 'idPrescription','idMedicine')
+            ->withPivot([
+                'amount',
+            ]);
     }
 
     public function created_by() {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'created_by_id');
     }
 }

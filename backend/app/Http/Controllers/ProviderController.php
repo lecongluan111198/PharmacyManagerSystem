@@ -15,11 +15,14 @@ class ProviderController extends Controller
     public function index(Request $request)
     {
         $sort_direction = $request->get("direction", "asc");
+        $limit = intval($request->get("limit", 15), 10);
+
         $search = $request->get("q", "");
-        $items = Medicine::query()
+        $items = Provider::query()
             ->where("id", "LIKE", "%$search%")
             ->orWhere("name", "LIKE", "%$search%")
-            ->paginate(15);
+            ->paginate($limit);
+
         return response()->json($items);
     }
 

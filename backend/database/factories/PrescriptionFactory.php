@@ -6,7 +6,7 @@ use App\Prescription;
 use Faker\Generator as Faker;
 
 $factory->define(Prescription::class, function (Faker $faker) {
-    $createdAt = $faker->dateTime;
+    $createdAt = $faker->dateTimeThisMonth;
     return [
         "cost"=>0,
         "invoiceDate"=>$createdAt,

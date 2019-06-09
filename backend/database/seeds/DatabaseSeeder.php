@@ -1,5 +1,6 @@
 <?php
 
+use App\PrescriptionDetail;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use \Illuminate\Support\Facades\Hash;
@@ -16,12 +17,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $an = App\User::create([
+        $an = App\User::firstOrCreate([
+            "email"=>"anaizhu98@gmail.com",
+        ], [
             "name"=>"Beo Hoang",
             "email"=>"anaizhu98@gmail.com",
             "password"=>Hash::make("123456"),
         ]);
-        $luan = App\User::create([
+        $luan = App\User::firstOrCreate([
+            "email"=>"lecongluan111198@gmail.com",
+        ], [
             "name"=>"Luan Le",
             "email"=>"lecongluan111198@gmail.com",
             "password"=>Hash::make("123456"),
@@ -33,13 +38,47 @@ class DatabaseSeeder extends Seeder
 
         factory(App\Prescription::class, 50)
             ->create([
-                'created_by'=>random_int(0, 1) === 0 ? $an->id : $luan->id,
+                'created_by_id'=>random_int(0, 1) === 0 ? $an->id : $luan->id,
             ])
-            ->each(function ($pre) use ($listMedicine) {
-                App\PrescriptionDetail::create([
-                    'idPrescription'=>$pre->id,
-                    'idMedicine'=>$listMedicine[array_rand($listMedicine)]->id,
+            ->each(function (App\Prescription $pre) use ($listMedicine) {
+                $n = random_int(1, 5);
+                $total = 0;
+                while ($n-- > 0) {
+                    $medicine = $listMedicine[array_rand($listMedicine)];
+                    $amount = random_int(1, 3);
+                    DB::table("prescription_details")->updateOrInsert([
+                        'idPrescription'=>$pre->id,
+                    ], [
+                        'idPrescription'=>$pre->id,
+                        'idMedicine'=> $medicine->id,
+                        'amount' => $amount,
+                    ]);
+                    $total += $amount * $medicine->cost;
+                }
+                $pre->update([
+                    'cost' => $total,
+                ]);
+            });
 
+        factory(App\Receipt::class, 50)
+            ->create()
+            ->each(function (App\Receipt $receipt) use ($listMedicine) {
+                $n = random_int(1, 5);
+                $total = 0;
+                while ($n-- > 0) {
+                    $medicine = $listMedicine[array_rand($listMedicine)];
+                    $amount = random_int(1, 3);
+                    DB::table("receipt_details")->updateOrInsert([
+                        'idReceipt'=>$receipt->id,
+                    ], [
+                        'idReceipt'=>$receipt->id,
+                        'idMedicine'=> $medicine->id,
+                        'amount' => $amount,
+                    ]);
+                    $total += $amount * $medicine->cost;
+                }
+                $receipt->update([
+                    'cost' => $total,
                 ]);
             });
     }

@@ -26,10 +26,10 @@ class CreatePrescriptionsTable extends Migration
                 ->references('id')->on('pharmacies')
                 ->onDelete('cascade');
 
-            $table->bigInteger('created_by')
+            $table->bigInteger('created_by_id')
                 ->unsigned()
                 ->nullable();
-            $table->foreign('created_by')
+            $table->foreign('created_by_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
 

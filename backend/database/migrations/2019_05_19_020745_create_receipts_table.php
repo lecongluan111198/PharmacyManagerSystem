@@ -15,10 +15,18 @@ class CreateReceiptsTable extends Migration
     {
         Schema::create('receipts', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('receiptDate');
             $table->double('cost', 15, 8);
-            $table->string('note');
-            $table->integer('type');
+            $table->string('note')->nullable();
+            $table->integer('provider_id')
+                ->unsigned()
+                ->nullable();
+
+            $table->foreign('provider_id')
+                ->references("id")
+                ->on("providers")
+                ->onDelete('SET NULL');
+
+            $table->integer('type')->default(0);
             $table->timestamps();
         });
     }

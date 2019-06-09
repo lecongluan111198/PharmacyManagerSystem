@@ -29,7 +29,8 @@ class MedicineController extends Controller
             ->orderBy($sort_key, $sort_direction)
             ->with('Provider')
             ->with('Category')
-            ->paginate(20);
+            ->with('total')
+            ->paginate(15);
         return response()->json($items);
     }
 
