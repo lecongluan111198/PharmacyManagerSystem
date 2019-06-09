@@ -3,7 +3,7 @@
         <mu-flex direction="column" align-items="stretch" style="height: 100%">
             <mu-data-table class="paginate-table"
                            v-bind="$attrs"
-                           style="width: 100%" :fit="false"
+                           max-height="100%" :fit="false"
                            stripe border :selectable="selectable"
                            :no-data-text="$lang.EMPTY_DATA"
                            :selects.sync="computed_selects" select-all

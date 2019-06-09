@@ -84,17 +84,7 @@
             },
             computedHoaDon(): any {
                 if (!this.hoadon) return null;
-                return {
-                    ...this.hoadon,
-                    created_at: moment(this.hoadon.created_at).format("DD/MM/YYYY"),
-                    cthd: this.hoadon.medicines.map(val=>{
-                       return {
-                           ...val.medicine,
-                           quantity: val.quantity,
-                           total: (val.medicine.cost * val.quantity).toLocaleString() + 'đ',
-                       }
-                    }),
-                }
+                return [];
             }
         },
         mounted(): void {

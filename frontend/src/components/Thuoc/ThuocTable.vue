@@ -74,8 +74,6 @@
                 this.$store.dispatch("thuoc/fetchListThuoc", payload).then((list) => {
                     this.$set(this, 'list', list);
                     this.loaded = true;
-                }).catch((e: any) => {
-                    alert(e);
                 });
             },
         },
@@ -89,8 +87,6 @@
             this.$store.dispatch("thuoc/fetchListThuoc").then((list) => {
                 this.list = list;
                 this.loaded = true;
-            }).catch((e: any) => {
-                alert(e);
             });
         }
     });

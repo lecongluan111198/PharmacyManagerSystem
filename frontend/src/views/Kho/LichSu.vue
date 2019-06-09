@@ -80,11 +80,13 @@
             },
             page: {
                 get() {
-                    return this.$store.getters['receipt/page'];
+                    const _this = this as any;
+                    return _this.$store.getters['receipt/page'];
                 },
                 set(page: number) {
-                    this.$store.commit('receipt/setPage', page);
-                    this.reload();
+                    const _this = this as any;
+                    _this.$store.commit('receipt/setPage', page);
+                    _this.reload();
                 }
             },
         },
@@ -100,6 +102,7 @@
                     } else if (val.export) {
                         this.$store.commit('receipt/setType', 1)
                     }
+                    // @ts-ignore
                     this.reload()
                 },
                 deep: true,
@@ -112,13 +115,16 @@
             },
 
             async reload() {
-                this.loading = true;
-                await this.$store.dispatch("receipt/getList");
-                this.loading = false;
+                const _this = this as any;
+
+                _this.loading = true;
+                await _this.$store.dispatch("receipt/getList");
+                _this.loading = false;
             }
         },
 
         created(): void {
+            // @ts-ignore
             this.reload();
         }
     });

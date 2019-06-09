@@ -40,9 +40,11 @@
             },
             page: {
                 get(): number {
+                    // @ts-ignore
                     return this.$store.getters['provider/page'];
                 },
                 set(page: number) {
+                    // @ts-ignore
                     this.$store.dispatch('provider/load', {
                         page,
                     });
