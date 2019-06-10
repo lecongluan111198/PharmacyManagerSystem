@@ -21,6 +21,12 @@ const store: Module<IThuocState, any> = {
         total(state): number {
             return state.total;
         },
+
+        thuoc(state): any {
+            return (id: number) => {
+                return state.map.get(id);
+            };
+        },
     },
     mutations: {
         update: (state, thuoc: Thuoc) => {
@@ -47,7 +53,7 @@ const store: Module<IThuocState, any> = {
                 } = {},
             } = payload;
 
-            const res = await API.getListThuoc(page, name, order, search);
+            const res = await API.Medicine.getListThuoc(page, name, order, search);
             const list = res.data as Thuoc[];
             commit('updateTotal', res.total);
 
@@ -63,13 +69,13 @@ const store: Module<IThuocState, any> = {
             if (state.map.has(id)) {
                 return state.map.get(id) as Thuoc;
             }
-            const res = await API.findThuocByID(id);
+            const res = await API.Medicine.findThuocByID(id);
             commit('update', res.data);
             return res.data;
         },
 
         async findThuocByName({state, commit}, name: string, limit: number = 10, page: number = 1): Promise<Thuoc[]> {
-            const res = await API.findThuocByName(name, limit, page);
+            const res = await API.Medicine.findThuocByName(name, limit, page);
             for (const thuoc of res.data) {
                 commit('update', res.data);
             }

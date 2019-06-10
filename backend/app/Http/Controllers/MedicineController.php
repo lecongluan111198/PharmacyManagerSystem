@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Medicine;
 use App\Category;
 use App\Provider;
+use App\Receipt;
+use App\ReceiptDetail;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 
 class MedicineController extends Controller
 {
@@ -29,8 +32,29 @@ class MedicineController extends Controller
             ->orderBy($sort_key, $sort_direction)
             ->with('Provider')
             ->with('Category')
-            ->with('total')
             ->paginate(15);
+
+        foreach ($items->items() as $item)
+        {
+            $amounts = ReceiptDetail::query()
+                ->join("medicines", "medicines.id", "=", 'idMedicine')
+                ->join("receipts", "receipts.id", "=", "idReceipt")
+                ->where("idMedicine", "=", $item->id)
+                ->selectRaw("type, sum(amount) as sum_amount")
+                ->groupBy("type")
+                ->get();
+
+            $res = [
+                'import'=>0,
+                'export'=>0,
+            ];
+            foreach ($amounts as $sum) {
+                $typename = $sum->type == 0 ? "import" : "export";
+                $res[$typename] = intval($sum->sum_amount);
+            }
+            $item["amount"] = $res["import"] - $res["export"];
+        }
+
         return response()->json($items);
     }
 
@@ -42,6 +66,29 @@ class MedicineController extends Controller
             'data' => $medicine,
         ]);
     }
+
+    public function amount(int $medicine_id) {
+        $amounts = ReceiptDetail::query()
+            ->join("medicines", "medicines.id", "=", 'idMedicine')
+            ->join("receipts", "receipts.id", "=", "idReceipt")
+            ->where("idMedicine", "=", $medicine_id)
+            ->selectRaw("type, sum(amount) as sum_amount")
+            ->groupBy("type")
+            ->get();
+
+        $res = [
+            'import'=>0,
+            'export'=>0,
+        ];
+        foreach ($amounts as $sum) {
+            $typename = $sum->type == 0 ? "import" : "export";
+            $res[$typename] = intval($sum->sum_amount);
+        }
+        $res["total"] = $res["import"] - $res["export"];
+
+        return response()->json($res);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

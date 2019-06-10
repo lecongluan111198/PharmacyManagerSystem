@@ -15,6 +15,7 @@ export default {
         ADD: "Thêm thông tin thuốc",
     },
     ADD: "Thêm",
+    DELETE: "Xóa",
     QUANTITY: 'Số lượng',
     PRESCRIPTION: {
         SEARCH: 'Tìm hóa đơn',
@@ -42,6 +43,10 @@ export default {
         TITLE: 'Phân loại',
         NAME: 'Tên phân loại',
     },
+    REPORT: {
+        TITLE: 'Thống kê/ Báo cáo',
+        EXPORT: 'Xuất báo cáo',
+    },
 
     ADDRESS: 'Địa chỉ',
 
@@ -51,4 +56,13 @@ export default {
 
     NOTE: 'Ghi chú',
     EDIT: 'Sửa',
+
+    USER: {
+        NAME: 'Tên',
+        EMAIL: 'Email',
+        PHONE: 'Số điện thoại',
+
+        CUR_PASS: 'Mật khẩu hiện tại',
+        NEW_PASS: 'Mật khẩu mới',
+    },
 }

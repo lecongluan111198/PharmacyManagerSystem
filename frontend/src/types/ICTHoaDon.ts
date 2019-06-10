@@ -1,6 +1,9 @@
 import {Thuoc} from "@/types/Thuoc";
 
 export interface ICTHoaDon {
-    medicine: Thuoc;
-    quantity: number;
+    amount: {
+        idMedicine: number;
+        idPrescription: number;
+        amount: number;
+    }
 }

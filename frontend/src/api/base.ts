@@ -29,6 +29,12 @@ export interface IPaginateResponse {
     total: number;
 }
 
+export interface IInsertReturn<T> {
+    error: number;
+    message?: string;
+    data?: T;
+}
+
 class APIBase {
     static GET(action: string, params: any = {}): string {
         let paramsStr: string = Object.keys(params)

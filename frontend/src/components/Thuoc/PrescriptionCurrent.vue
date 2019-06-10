@@ -64,20 +64,14 @@
         },
         computed: {
             ...mapGetters([
-                'hoa_don/current',
+                'hoa_don/current_insert',
             ]),
 
             list_medicine(): any[] {
                 const that = this as any;
-                return that['hoa_don/current'].map((cthd: ICTHoaDon)=>{
-                    return {
-                        id: cthd.medicine.id,
-                        name: cthd.medicine.name,
-                        cost: cthd.medicine.cost,
-                        quantity: cthd.quantity,
-                        total_cost: cthd.quantity * cthd.medicine.cost,
-                    };
-                })
+                const map: Map<number, number> = that['hoa_don/current_insert'];
+
+
             },
 
             totalCostPrescription(): string {
@@ -94,20 +88,14 @@
                 });
 
                 selectedRows.forEach(async row=>{
-                    await this.$store.dispatch("hoa_don/remove", {
-                        thuoc_id: row.id,
-                        quantityRemove: -1,
-                    });
+                    await this.$store.dispatch("hoa_don/xoaKhoiHoaDon", row.id);
                 });
             },
 
             async submitHoaDon() {
                 this.submitting = true;
-                await this.$store.dispatch("hoa_don/addHoaDon");
-                setTimeout(() => {
-                    // test async
-                    this.submitting = false;
-                }, 1000);
+                await this.$store.dispatch("hoa_don/submit");
+                this.submitting = false;
             }
         },
     });

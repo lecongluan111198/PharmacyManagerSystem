@@ -59,28 +59,28 @@
         },
         computed: {
             ...mapGetters([
-                'hoa_don/history',
-                'hoa_don/history_page_cur',
-                'hoa_don/history_page_total',
+                'hoa_don/list',
+                'hoa_don/page',
+                'hoa_don/total',
             ]),
 
             page: {
                 get(): number {
                     const _this = this as any;
-                    return _this['hoa_don/history_page_cur'];
+                    return _this['hoa_don/page'];
                 },
                 async set(page: number) {
-                    await this.$store.dispatch("hoa_don/getHistory", {page});
-                }
+                    await this.$store.dispatch("hoa_don/fetchList", {page});
+                },
             },
             total(): number {
                 const _this = this as any;
-                return _this['hoa_don/history_page_total'];
+                return _this['hoa_don/total'];
             },
 
             tableItems(): any[] {
                 const _this = this as any;
-                return _this['hoa_don/history'];
+                return _this['hoa_don/list'];
             },
         },
 
@@ -96,7 +96,7 @@
         },
 
         async mounted() {
-            await this.$store.dispatch("hoa_don/getHistory");
+            await this.$store.dispatch("hoa_don/fetchList");
             console.debug("loaded");
         }
     });

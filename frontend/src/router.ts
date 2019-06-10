@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import Router, {Route} from 'vue-router';
+
 import Home from './views/Home.vue';
+import NotFound from './views/404.vue';
+
 import store from '@/store';
 
 Vue.use(Router);
@@ -148,6 +151,18 @@ const router = new Router({
             name: "QuanLyPhanLoai_ChiTiet",
             component: ()=>import('./views/PhanLoai/PhanLoaiChiTiet.vue'),
         },
+        {
+            path: '/profile',
+            name: "Profile",
+            component: ()=>import('./views/Profile.vue'),
+        },
+
+
+        {
+            path: '*',
+            name: "NotFound",
+            component: NotFound,
+        }
     ]
 });
 

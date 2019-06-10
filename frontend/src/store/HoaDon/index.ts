@@ -11,199 +11,101 @@ export interface IListPage<T> {
 }
 
 export interface IHoaDonState {
-    list: ICTHoaDon[],
-    current: Map<number, number>;
-    map: {
-        [id: number]: HoaDon;
-    };
-    history: IListPage<HoaDon>;
+    list: HoaDon[],
     page: number;
-    limit: number;
     total: number;
+    current_insert: Map<number, number>;
+    loading: boolean;
 }
 
 const store: Module<IHoaDonState, RootState> = {
     namespaced: true,
     state: {
         list: [],
-        current: new Map<number, number>(),
-        map: {},
-        history: {},
+        current_insert: new Map<number, number>(),
         page: 1,
-        limit: 15,
         total: 1,
+        loading: false,
     },
 
     getters: {
-        current(state: IHoaDonState) {
-            return [...state.list];
+        list(state) {
+            return state.list.map(val=>({...val}));
         },
-
-        history(state: IHoaDonState): HoaDon[] {
-            if (!state.history.hasOwnProperty(state.page))
-                return [];
-            return [...state.history[state.page]];
+        page: state => state.page,
+        total: state => state.total,
+        current_insert(state) {
+            return new Map(state.current_insert);
         },
-
-        history_page_cur(state): number {
-            return state.page;
-        },
-
-        history_page_total(state): number {
-            return state.total;
-        }
     },
 
     mutations: {
-        add(state: IHoaDonState, {thuoc, quantity = 1}) {
-            if (state.current.has(thuoc.id)) {
-                const thuocIdx = state.current.get(thuoc.id);
-                if (thuocIdx !== undefined) {
-                    const thuocInThere = state.list[thuocIdx];
-                    thuocInThere.quantity += +quantity;
-                } else {
-                    console.debug('map return null');
-                }
-            } else {
-                // debugger;
-                const newThuoc: ICTHoaDon = {
-                    medicine: thuoc,
-                    quantity,
-                };
-                const len = state.list.push(newThuoc);
-                state.current.set(thuoc.id, len - 1);
-            }
+        list(state, list: HoaDon[]) {
+            state.list = list;
         },
-
-        /**
-         *
-         * @param state
-         * @param thuoc_id
-         * @param quantityRemove so luong can remove, -1 la remove het
-         */
-        remove(state: IHoaDonState, {thuoc_id, quantityRemove = -1}) {
-            if (state.current.has(thuoc_id)) {
-                const thuocIdx = state.current.get(thuoc_id);
-                if (thuocIdx !== undefined) {
-                    const thuocInThere = state.list[thuocIdx];
-                    if (thuocInThere.quantity <= quantityRemove || quantityRemove < 0) {
-                        state.current.delete(thuoc_id);
-                        state.list.splice(thuocIdx, 1);
-                    } else {
-                        thuocInThere.quantity -= +quantityRemove;
-                    }
-                } else {
-                    console.debug('map return null');
-                }
-            }
-        },
-
-        addHoaDon(state, payload: any = {}) {
-            const {
-                hoadon = {},
-                page = 1,
-            } = payload;
-            Vue.set(state.map, hoadon.id, hoadon);
-
-            if (!state.history.hasOwnProperty(page))
-                state.history[page] = [hoadon];
-            else
-                state.history[page].push(hoadon);
-        },
-
-        setPage(state, page: number = 1) {
+        page(state, page: number) {
             state.page = page;
         },
+        total(state, total: number) {
+            state.total = total;
+        },
+        loading(state, bool: boolean) {
+            state.loading = bool;
+        },
+        themVaoHoaDon(state, payload: any = {}) {
+            const {
+                id = null,
+                amount = 1,
+            } = payload;
 
-        setTotal(state, total: number = 1) {
-            if (total > state.page) {
-                state.total = total;
+            if (!id && id !== 0) throw new Error('id is null');
+            state.current_insert.set(id, amount);
+        },
+        xoaKhoiHoaDon(state, id: number) {
+            if (!id && id !== 0) throw new Error('id is null');
+            if (!state.current_insert.has(id)) {
+                console.warn("No " + id + " in current_insert");
+            } else {
+                state.current_insert.delete(id);
             }
         },
     },
 
     actions: {
-        async add({commit, dispatch}, payload: any) {
-            const thuoc = await dispatch('thuoc/getThuocById', {
-                id: payload.thuoc_id
-            }, {root: true}) as Thuoc;
-            if (!thuoc) {
-                console.error("cannot get thuoc " + payload.thuoc_id);
-                return;
+        async submit({state, dispatch}) {
+            const cthd = [] as ICTHoaDon[];
+            state.current_insert.forEach((val, key) => {
+                cthd.push({
+                    amount: {
+                        idMedicine: key,
+                        idPrescription: -1,
+                        amount: val,
+                    }
+                })
+            });
+
+            const res = await API.Prescription.insert(cthd);
+            if (res.error) {
+                throw new Error(res.message);
             }
-            commit('add', {thuoc, quantity: payload.quantity});
+            dispatch('fetchList');
         },
 
-        async remove({commit}, payload) {
-            commit('remove', payload);
-        },
-
-        async addHoaDon({state, commit, rootState}) {
-            if (state.list.length === 0) {
-                throw new Error("no medicine in prescription");
-            }
-            if (!rootState.me) {
-                throw new Error("User undefined");
-            }
-
-            const now = Date.now();
-            const hoadon: HoaDon = {
-                id: now,
-                medicines: state.list as any,
-
-                invoiceDate: new Date(now),
-                created_at: now,
-                updated_at: now,
-                created_by: rootState.me,
-                cost: state.list.reduce((sum: number, val: ICTHoaDon)=>{
-                    return sum + (val.medicine.cost * val.quantity);
-                }, 0),
-            };
-
-            commit('addHoaDon', {hoadon});
-
-            state.list = [];
-            state.current.clear();
-
-            console.debug(state.history);
-        },
-
-        getHoaDon({state}, payload): HoaDon | null {
-            const {id} = payload;
-            if (!id) {
-                throw new Error('id not found');
-            }
-
-            if (state.map.hasOwnProperty(id)) {
-                return state.map[id];
-            } else {
-                // server handle
-                return null;
-            }
-        },
-
-        async getHistory({state, commit}, payload: any = {}) {
+        async fetchList({commit, state}, payload: any = {})
+        {
             const {
                 limit = 15,
-                page = 1,
+                page = state.page,
             } = payload;
 
-            if (page in state.history) {
-                commit('setPage', page);
-                return;
-            }
+            commit('loading', true);
+            const res = await API.Prescription.list(limit, page);
+            commit('loading', false);
 
-            const res = await API.getListPrescription(limit, page);
-            const listHoaDon = res.data as HoaDon[];
-            commit('setTotal', res.total);
-            commit('setPage', res.current_page);
-            for (const hoadon of listHoaDon) {
-                commit('addHoaDon', {
-                    hoadon,
-                    page: res.current_page,
-                });
-            }
-        },
+            commit('list', res.data);
+            commit('page', res.current_page);
+            commit('total', res.total);
+        }
     },
 };
 

@@ -6,7 +6,7 @@ export interface HoaDon {
     id: number;
     // store_id: number;
 
-    medicines: Thuoc[];
+    medicines: ICTHoaDon[];
     cost: number;
     created_by: User;
 

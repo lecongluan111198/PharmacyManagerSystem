@@ -3,6 +3,8 @@ import Axios from '../axios';
 import ReceiptAPI from './Receipt';
 import APIBase, {IBasicResponse, ILoginData, IPaginateResponse} from "@/api/base";
 import ProviderApi from "@/api/ProviderApi";
+import PrescriptionApi from "@/api/PrescriptionApi";
+import MedicineApi from "@/api/MedicineApi";
 
 export default class API extends APIBase {
 
@@ -33,54 +35,8 @@ export default class API extends APIBase {
         }
     }
 
-    /**
-     *
-     * @param page
-     * @param sort - sort field
-     * @param sortd - sort direction
-     */
-    static async getListThuoc(page: number = 1, sort: string = 'id', sortd: string = 'asc', search: string = ''): Promise<IPaginateResponse> {
-        const res = await Axios.get(this.GET('medicine', {
-            page,
-            sort,
-            direction: sortd,
-            q: search,
-        }));
-        return res.data;
-    }
-
-    static async findThuocByID(id: number): Promise<IBasicResponse> {
-        const res = await Axios.get(this.GET(`medicine/${id}`));
-        return res.data;
-    }
-
-    static async findThuocByName(name: string, limit: number = 10, page: number = 1): Promise<IPaginateResponse> {
-        const res = await Axios.get(this.GET('medicine/findName', {
-            name,
-            limit,
-            page,
-        }));
-        return res.data;
-    }
-
-    static async getListProvider(limit: number = 20, page: number = 1) : Promise<IPaginateResponse>
-    {
-        const res = await Axios.get(this.GET('provider', {
-            limit,
-            page,
-        }));
-        return res.data;
-    }
-
-    static async getListPrescription(limit: number = 15, page: number = 1) : Promise<IPaginateResponse>
-    {
-        const res = await Axios.get(this.GET('prescription', {
-            limit,
-            page,
-        }));
-        return res.data;
-    }
-
+    static Medicine = MedicineApi;
     static Receipt = ReceiptAPI;
     static Provider = ProviderApi;
+    static Prescription = PrescriptionApi;
 }

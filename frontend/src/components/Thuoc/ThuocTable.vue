@@ -58,6 +58,7 @@
                             return value.toLocaleString();
                         },
                     },
+                    {title: this.$lang.QUANTITY, name: 'amount'},
                 ],
             };
         },
