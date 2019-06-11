@@ -70,8 +70,7 @@
             list_medicine(): any[] {
                 const that = this as any;
                 const map: Map<number, number> = that['hoa_don/current_insert'];
-
-
+                return [];
             },
 
             totalCostPrescription(): string {
