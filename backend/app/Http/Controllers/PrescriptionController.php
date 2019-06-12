@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PrescriptionCreateRequest;
 use App\Prescription;
 use App\Medicine;
+use App\PrescriptionDetail;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class PrescriptionController extends Controller
 {
@@ -16,10 +19,10 @@ class PrescriptionController extends Controller
      */
     public function index(Request $request)
     {
-        $sort_direction = $request->get("direction", "asc");    
+        $sort_direction = $request->get("direction", "desc");
         $sort_key = $request->get("sort", "created_at");
-        $start = $request->get("start", $date = date('Y-M-D', strtotime('01/01/1900')));
-        $end = $request->get("end", $date = date('Y-M-D', time()));
+        $start = $request->get("start", $date = date('Y-m-d', strtotime('01/01/1900')));
+        $end = $request->get("end", $date = date('Y-m-d', time()));
         $items = Prescription::query()
             ->with('created_by')
             ->with('medicines')
@@ -29,25 +32,6 @@ class PrescriptionController extends Controller
             ->orderBy("created_by_id", "ASC")
             ->paginate(15);
         return response()->json($items);
-    }
-
-    public function getId($id)
-    {
-        try {
-            $prescription = Prescription::findOrFaile($id);
-            $medicines = $prescription->medicines()->get();
-            $ret = [
-                'success' => true,
-                'prescription' => $prescription,
-                'medicines' => $medicines
-            ];
-        } catch (ModelNotFoundException $ex) {
-            $ret = [
-                'success' => false,
-                'message' => $ex->getMessage(),
-            ];
-        }
-        return response()->json($ret);
     }
 
     /**
@@ -63,34 +47,35 @@ class PrescriptionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  PrescriptionCreateRequest  $request
+     * @return JsonResource
      */
-    public function store(Request $request)
+    public function store(PrescriptionCreateRequest $request)
     {
-        $prescription = new Prescription();
-        //tao id
-        $prescription->name = $request->name;
-        $prescription->invoiceDate = $request->invoiceDate;
-        $prescription->cost = $request->cost;
-        $prescription->idPharma = $request->idPharma;
+        $data = $request->validated();
+        $cthdList = $data['cthd'];
+        $total = array_reduce($cthdList, function ($sum, $item) {
+            $medicine = Medicine::findOrFail($item['id']);
+            return $sum + $medicine->cost * $item['amount'];
+        }, 0);
 
-        $medicines = Medicine::findMany($request->listIds);
-        $prescription->medicines()->attach($medicines);
-        if ($prescription->save()) {
-            $ret = [
-                'success' => true,
-                'message' => 200,
-                'prescription' => $prescription
-            ];
-        } else {
-            $ret = [
-                'success' => false,
-                'message' => 404,
-                'prescription' => null
-            ];
+        $user = auth()->user();
+        $prescription = Prescription::create([
+            "created_by_id"=>$user->getAuthIdentifier(),
+            "invoiceDate"=>date("Y-m-d", time()),
+            "cost"=>$total,
+        ]);
+
+        foreach ($cthdList as $item) {
+            PrescriptionDetail::create([
+                "idMedicine"=>$item['id'],
+                "idPrescription"=>$prescription->id,
+                "amount"=>$item['amount'],
+            ]);
         }
-        return response()->json($ret);
+        $prescription->load('medicines');
+
+        return new JsonResource($prescription);
     }
 
     public function addMedicine($id, $medi_id)
@@ -125,12 +110,16 @@ class PrescriptionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Prescription $prescription
+     * @return JsonResource
      */
-    public function show($id)
+    public function show(Prescription $prescription)
     {
-        //
+        $prescription->load([
+            'medicines',
+            'created_by',
+        ]);
+        return new JsonResource($prescription);
     }
 
     /**

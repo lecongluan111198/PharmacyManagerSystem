@@ -40,8 +40,8 @@ class MedicineApi extends APIBase
     }
 
     static async findThuocByName(name: string, limit: number = 10, page: number = 1): Promise<IPaginateResponse> {
-        const res = await Axios.get(APIBase.GET('medicine/findName', {
-            name,
+        const res = await Axios.get(APIBase.GET('medicine', {
+            q: name,
             limit,
             page,
         }));

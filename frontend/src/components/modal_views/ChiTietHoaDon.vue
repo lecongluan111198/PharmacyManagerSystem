@@ -12,21 +12,21 @@
                 <mu-flex fill>
                     <div>
                         <h2>{{$lang.THUOC.ID}}</h2>
-                        <p>{{computedHoaDon.id}}</p>
+                        <p>{{hoadon.id}}</p>
                     </div>
                 </mu-flex>
                 <mu-flex fill>
                     <div>
                         <h2>Created at</h2>
-                        <p>{{computedHoaDon.created_at}}</p>
+                        <p>{{hoadon.created_at}}</p>
                     </div>
                 </mu-flex>
                 <mu-flex fill>
                     <div>
                         <h2>By</h2>
                         <p>
-                            <a :to="'/profile/' + computedHoaDon.created_by.id">
-                                {{computedHoaDon.created_by.name}}
+                            <a :to="'/profile/' + hoadon.created_by.id">
+                                {{hoadon.created_by.name}}
                             </a>
                         </p>
                     </div>
@@ -34,14 +34,14 @@
                 <mu-flex fill>
                     <div>
                         <h2>{{$lang.PRESCRIPTION.TOTAL_COST}}</h2>
-                        <p>{{computedHoaDon.total}}</p>
+                        <p>{{hoadon.cost.toLocaleString('vi')}}</p>
                     </div>
                 </mu-flex>
             </mu-flex>
             <mu-data-table :columns="showColumns"
                            border
                            :height="300"
-                           :data="computedHoaDon.cthd"></mu-data-table>
+                           :data="hoadon.medicines"></mu-data-table>
             <mu-flex style="margin: 1em 0" justify-content="end">
                 <mu-button color="error" icon>
                     <mu-icon value="delete"></mu-icon>
@@ -54,7 +54,7 @@
             </mu-flex>
         </div>
         <div v-else>
-            <div>Loading...</div>
+            <loader></loader>
         </div>
     </div>
 </template>
@@ -62,19 +62,30 @@
 <script lang='ts'>
     import Vue from 'vue';
     import {HoaDon} from "@/types/HoaDon";
-    import moment from "moment";
+
+    // @ts-ignore
+    import Loader from 'vue-spinner/src/GridLoader.vue';
 
     export default Vue.extend({
         name: 'chi-tiet-hoa-don',
+        components: {
+            Loader,
+        },
         data() {
             return {
-                loaded: false,
-                hoadon: null as HoaDon | null,
                 showColumns: [
                     {title: 'id', name: 'id', width: 100},
                     {title: this.$lang.THUOC.NAME, name: 'name'},
-                    {title: this.$lang.QUANTITY, name: 'quantity'},
-                    {title: this.$lang.PRESCRIPTION.TOTAL_COST, name: 'total'},
+                    {title: this.$lang.QUANTITY, name: 'amount',
+                        formatter(val: any) {
+                            return val ? val.amount : '';
+                        }
+                    },
+                    {title: this.$lang.PRESCRIPTION.TOTAL_COST, name: 'cost',
+                        formatter(val: number) {
+                            return val.toLocaleString('vi') + ' đ';
+                        }
+                    },
                 ],
             };
         },
@@ -82,16 +93,15 @@
             hoaDonId(): number {
                 return +this.$route.params.id;
             },
-            computedHoaDon(): any {
-                if (!this.hoadon) return null;
-                return [];
+            loaded(): boolean {
+                return !this.$store.getters['hoa_don/detail/loading'];
+            },
+            hoadon(): HoaDon {
+                return this.$store.getters['hoa_don/detail/current'];
             }
         },
         mounted(): void {
-            this.$store.dispatch("hoa_don/getHoaDon", {id: this.hoaDonId}).then(hoadon=>{
-               this.loaded = true;
-               Vue.set(this, 'hoadon', hoadon);
-            });
+            this.$store.dispatch('hoa_don/detail/load', this.hoaDonId);
         }
     });
 </script>

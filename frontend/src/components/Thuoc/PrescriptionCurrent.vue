@@ -2,11 +2,11 @@
     <div id="current-prescription">
         <mu-flex style="margin-bottom: 1em" justify-content="between" align-items="end">
             <div class="prescription-control">
-                <mu-button small :disabled="!selects.length" @click="removeMedicine">
+                <mu-button :disabled="!selects.length" @click="removeMedicine">
                     <mu-icon value="delete"></mu-icon>
                     remove
                 </mu-button>
-                <mu-button small color="success" @click="submitHoaDon" :disabled="submitting || list_medicine.length === 0">
+                <mu-button color="success" @click="submitHoaDon" :disabled="submitting || list_medicine.length === 0">
                     <mu-icon left value="check"></mu-icon>
                     {{$lang.ADD}}
                 </mu-button>
@@ -43,34 +43,37 @@
         name: 'prescription-current',
         data() {
             return {
-                submitting: false,
                 selects: [] as any[],
                 columns: [
                     {title: "ID", name: 'id'},
                     {title: this.$lang.THUOC.NAME, name: 'name'},
                     {title: this.$lang.THUOC.PRICE, name: 'cost',
                         formatter(value: any) {
-                            return value.toLocaleString() + "đ";
+                            return value ? value.toLocaleString() + "đ" : "";
                         },
                     },
                     {title: this.$lang.QUANTITY, name: 'quantity'},
                     {title: this.$lang.PRESCRIPTION.TOTAL_COST, name: 'total_cost',
                         formatter(value: any) {
-                            return value.toLocaleString() + "đ";
+                            return value ? value.toLocaleString() + "đ" : "";
                         },
                     },
                 ],
             }
         },
         computed: {
-            ...mapGetters([
-                'hoa_don/current_insert',
+            ...mapGetters('hoa_don/add', [
+                'list',
+                'submitting',
             ]),
 
             list_medicine(): any[] {
-                const that = this as any;
-                const map: Map<number, number> = that['hoa_don/current_insert'];
-                return [];
+                return (this as any).list.map((val: ICTHoaDon)=>{
+                    return {...val.medicine,
+                        quantity: val.amount,
+                        total_cost: (+val.amount) * val.medicine.cost,
+                    };
+                })
             },
 
             totalCostPrescription(): string {
@@ -82,20 +85,17 @@
 
         methods: {
             removeMedicine() {
-                const selectedRows = this.list_medicine.filter((val, idx)=>{
-                    return this.selects.indexOf(idx) >= 0;
-                });
-
-                selectedRows.forEach(async row=>{
-                    await this.$store.dispatch("hoa_don/xoaKhoiHoaDon", row.id);
-                });
+                const selected = [...this.selects];
+                this.selects.length = 0;
+                for (const index of selected) {
+                    const id = this.list_medicine[index].id;
+                    this.$store.commit("hoa_don/add/remove", id);
+                }
             },
 
-            async submitHoaDon() {
-                this.submitting = true;
-                await this.$store.dispatch("hoa_don/submit");
-                this.submitting = false;
-            }
+            submitHoaDon() {
+                this.$store.dispatch("hoa_don/add/submit");
+            },
         },
     });
 

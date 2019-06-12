@@ -5,7 +5,7 @@
  */
 
 
-import APIBase, {IInsertReturn, IPaginateResponse} from "@/api/base";
+import APIBase, {IBasicResponse, IInsertReturn, IPaginateResponse} from "@/api/base";
 import Axios from "@/axios";
 import {HoaDon} from "@/types/HoaDon";
 import {ICTHoaDon} from "@/types/ICTHoaDon";
@@ -21,11 +21,21 @@ class PrescriptionApi extends APIBase
         return res.data;
     }
 
-    static async insert(cthd: ICTHoaDon[]): Promise<IInsertReturn<HoaDon>>
+    static async insert(cthd: {id: number, amount: number}[]): Promise<IInsertReturn<HoaDon>>
     {
         const res = await Axios.post('/prescription', {
-            list: cthd,
+            cthd,
+        }, {
+            headers: {
+                "Content-Type": "application/json",
+            },
         });
+        return res.data;
+    }
+
+    static async getById(id: number) : Promise<IBasicResponse<HoaDon>>
+    {
+        const res = await Axios.get(APIBase.GET('prescription/' + id));
         return res.data;
     }
 }

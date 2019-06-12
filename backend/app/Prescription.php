@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Prescription extends Model
 {
+    protected $fillable = [
+        'created_by_id',
+        'invoiceDate',
+        'cost',
+    ];
     //
     public function pharmacy(){
         return $this->belongsTo('App\Pharmacy');

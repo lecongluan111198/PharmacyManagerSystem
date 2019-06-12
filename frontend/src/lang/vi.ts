@@ -65,4 +65,8 @@ export default {
         CUR_PASS: 'Mật khẩu hiện tại',
         NEW_PASS: 'Mật khẩu mới',
     },
+
+    SEARCH: {
+        ENTER_TO_SEARCH: 'Nhấn Enter để tìm kiếm',
+    }
 }
