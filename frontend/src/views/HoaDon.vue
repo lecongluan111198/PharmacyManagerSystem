@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="height: 100%">
         <hoa-don-table></hoa-don-table>
     </div>
 </template>

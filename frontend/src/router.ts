@@ -5,6 +5,7 @@ import Home from './views/Home.vue';
 import NotFound from './views/404.vue';
 
 import store from '@/store';
+import NProgress from "nprogress";
 
 Vue.use(Router);
 
@@ -167,6 +168,9 @@ const router = new Router({
 });
 
 router.beforeEach((to: Route, from: Route, next: Function)=>{
+    if (to.name) {
+        NProgress.start()
+    }
     const isRouteHasModal = to.matched.some((route)=>{
         return route.meta.isModal;
     });
@@ -180,6 +184,10 @@ router.beforeEach((to: Route, from: Route, next: Function)=>{
     }
 
     next();
+});
+
+router.afterEach((to, from) => {
+    NProgress.done()
 });
 
 export default router;

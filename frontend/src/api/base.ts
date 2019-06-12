@@ -9,10 +9,10 @@ export interface ILoginData {
     email: string;
     password: string;
 }
-export interface IBasicResponse {
-    error: boolean,
+export interface IBasicResponse<T = any> {
+    error?: boolean,
     message?: string,
-    data?: any,
+    data?: T,
 }
 export interface IPaginateResponse {
     current_page: number;
@@ -30,7 +30,7 @@ export interface IPaginateResponse {
 }
 
 export interface IInsertReturn<T> {
-    error: number;
+    error?: number;
     message?: string;
     data?: T;
 }

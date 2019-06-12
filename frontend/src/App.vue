@@ -5,9 +5,9 @@
     <div v-else id="app" class="app">
         <Sidebar v-if="hasSidebar"></Sidebar>
         <router-view class="app-body"/>
-        <mu-dialog width="800"
-                   transition="slide-top"
-                   scrollable :open="!!$route.meta.isModal" v-on:close="onModalClose">
+        <mu-dialog transition="slide-top"  scrollable
+                   :open="!!$route.meta.isModal"
+                   @close="onModalClose">
             <router-view name="modal_content"></router-view>
         </mu-dialog>
 

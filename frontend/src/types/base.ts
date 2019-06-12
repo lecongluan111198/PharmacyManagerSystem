@@ -4,8 +4,8 @@ export interface Store {
 }
 
 export interface BaseInterface {
-    id: number | string;
-    store_id: number;
+    id: number;
+    store_id?: number;
     created_at?: string;
     updated_at?: string;
 }

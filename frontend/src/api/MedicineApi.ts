@@ -5,8 +5,16 @@
  */
 
 
-import APIBase, {IBasicResponse, IPaginateResponse} from "@/api/base";
+import APIBase, {IBasicResponse, IInsertReturn, IPaginateResponse} from "@/api/base";
 import Axios from "@/axios";
+import {Thuoc} from "@/types/Thuoc";
+
+export interface IThuocInsert {
+    name: string,
+    cost: number,
+    category_id?: number,
+    provider_id?: number,
+}
 
 class MedicineApi extends APIBase
 {
@@ -43,6 +51,28 @@ class MedicineApi extends APIBase
     static async getAmount(id: number): Promise<{total: number; import: number; export: number}>
     {
         const res = await Axios.get(APIBase.GET(`medicine/${id}/amount`));
+        return res.data;
+    }
+
+    static async insert(data: IThuocInsert) : Promise<IInsertReturn<Thuoc>>
+    {
+        const res = await Axios.post('/medicine', {
+            name: data.name,
+            cost: data.cost,
+            idCate: data.category_id,
+            idProvider: data.provider_id,
+        });
+        return res.data;
+    }
+
+    static async update(id: number, data: IThuocInsert): Promise<IInsertReturn<any>>
+    {
+        const res = await Axios.put('/medicine/' + id, {
+            name: data.name,
+            cost: data.cost,
+            idCate: data.category_id,
+            idProvider: data.provider_id,
+        });
         return res.data;
     }
 }

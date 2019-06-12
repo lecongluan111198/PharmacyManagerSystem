@@ -5,6 +5,8 @@ import store from './store/'
 
 import Muse from 'muse-ui';
 import 'muse-ui/dist/muse-ui.css';
+import 'nprogress/nprogress.css';
+
 import 'axios';
 import langConfig from '@/lang/';
 import * as moment from 'moment';

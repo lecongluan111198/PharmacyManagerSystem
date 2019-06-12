@@ -10,7 +10,7 @@
                            :columns="columns"
                            @row-click="onRowClick"
                            :data="data"></mu-data-table>
-            <div class="paginate-table-paginate">
+            <div class="paginate-table-paginate" v-show="total > 1">
                 <mu-pagination :current.sync="computed_page" :total="total"></mu-pagination>
             </div>
         </mu-flex>
@@ -33,7 +33,7 @@
             },
             selectable: {
                 type: Boolean,
-                default: ()=>false,
+                default: ()=>true,
             },
             selects: {
                 type: Array,
@@ -47,10 +47,6 @@
             total: {
                 type: Number,
                 default: ()=>1,
-            },
-            loading: {
-                type: Boolean,
-                default: ()=>false,
             },
         },
         computed: {

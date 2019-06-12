@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MedicineCreateRequest;
+use App\Http\Resources\MedicineResource;
 use App\Medicine;
 use App\Category;
 use App\Provider;
@@ -105,45 +107,35 @@ class MedicineController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  MedicineCreateRequest $request
+     * @return MedicineResource
      */
-    public function store(Request $request)
+    public function store(MedicineCreateRequest $request)
     {
-        $medicine = new Medicine();
-        //tao id
-        $medicine->name = $request->name;
-        $medicine->cost = $request->cost;
-        $medicine->idCate = $request->idCate;
-        $medicine->idProvider = $request->idProvider;
-        if ($medicine->save()) {
-            $ret = [
-                'success' => true,
-                'message' => 200,
-                'medicine' => $medicine
-            ];
-        } else {
-            $ret = [
-                'success' => false,
-                'message' => 404,
-                'medicine' => null
-            ];
-        }
-        return response()->json($ret);
+        $validated = $request->validated();
+        $medicine = Medicine::create($validated);
+        $medicine = $medicine->load([
+            "provider",
+            "category",
+        ]);
+
+        return new MedicineResource($medicine);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Medicine  $medicine
-     * @return \Illuminate\Http\Response
+     * @param  Medicine  $medicine
+     * @return MedicineResource
      */
     public function show(Medicine $medicine)
     {
-	return response()->json([
-	    "error" => false,
-	    "data" => $medicine,    
-	]);
+	    $medicine = $medicine->load([
+	        'category',
+            'provider',
+        ]);
+
+	    return new MedicineResource($medicine);
     }
 
     /**
@@ -172,38 +164,26 @@ class MedicineController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param   $id
-     * @return \Illuminate\Http\Response
+     * @param  Medicine $medicine
+     * @return MedicineResource
      */
-    public function update(Request $request)
+    public function update(Request $request, Medicine $medicine)
     {
-        try {
-            $medicine = Medicine::findOrFail($request->id);
-            $medicine->name = $request->name;
-            $medicine->cost = $request->cost;
-            $medicine->idCate = $request->idCate;
-            $medicine->idProvider = $request->idProvider;
-            $medicine->save();
-            $ret = [
-                'success' => true,
-                'message' => 200,
-                'medicine' => $medicine,
-            ];
-        } catch (ModelNotFoundException $ex) {
-            $ret = [
-                'success' => false,
-                'message' => $ex->getMessage(),
-                'medicine' => null
-            ];
-        }
-        return response()->json($ret);
+        $medicine->update($request->all([
+            'name',
+            'cost',
+            'idCate',
+            'idProvider'
+        ]));
+
+        return new MedicineResource($medicine);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Medicine  $medicine
-     * @return \Illuminate\Http\Response
+     * @param  Medicine  $medicine
+     * @return MedicineResource
      */
     public function destroy($id)
     {

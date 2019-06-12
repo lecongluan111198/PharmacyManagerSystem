@@ -5,6 +5,7 @@ import APIBase, {IBasicResponse, ILoginData, IPaginateResponse} from "@/api/base
 import ProviderApi from "@/api/ProviderApi";
 import PrescriptionApi from "@/api/PrescriptionApi";
 import MedicineApi from "@/api/MedicineApi";
+import CategoryApi from "@/api/CategoryApi";
 
 export default class API extends APIBase {
 
@@ -39,4 +40,5 @@ export default class API extends APIBase {
     static Receipt = ReceiptAPI;
     static Provider = ProviderApi;
     static Prescription = PrescriptionApi;
+    static Category = CategoryApi;
 }

@@ -14,9 +14,10 @@
                     icon="search" :label="$lang.PRESCRIPTION.SEARCH" label-float=""></mu-text-field>
             </div>
         </mu-flex>
-        <div style="flex: 1 1 auto">
+        <div style="flex: 1 1 auto; overflow: auto">
             <paginate-table style="height: 100%"
                             :selects="selects"
+                            :loading="loading"
                             @row-click="handleClick"
                             :data="tableItems"
                             :total="total" :page.sync="page"
@@ -76,6 +77,10 @@
             total(): number {
                 const _this = this as any;
                 return _this['hoa_don/total'];
+            },
+
+            loading(): boolean {
+                return this.$store.getters['hoa_don/loading'];
             },
 
             tableItems(): any[] {

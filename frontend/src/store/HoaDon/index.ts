@@ -37,6 +37,7 @@ const store: Module<IHoaDonState, RootState> = {
         current_insert(state) {
             return new Map(state.current_insert);
         },
+        loading: state => state.loading,
     },
 
     mutations: {

@@ -12,7 +12,6 @@
             </mu-data-table>
             <mu-flex justify-content="center" style="padding: 1em">
                 <mu-pagination raised
-                               @change="onSortChange"
                                :current.sync="page" :total="$store.getters['thuoc/total']" :page-size="20"></mu-pagination>
             </mu-flex>
         </mu-flex>
@@ -30,9 +29,7 @@
         },
         data() {
             return {
-                loaded: false,
                 list: [] as ThuocType[],
-                page: 1 as number,
                 sort: {
                     name: '',
                     order: 'asc',
@@ -62,32 +59,46 @@
                 ],
             };
         },
+        computed: {
+            page: {
+                get(): number {
+                    return (this as any).$store.getters['thuoc/page'];
+                },
+                set(page: number) {
+                    const _this = this as any;
+                    _this.$store.dispatch("thuoc/fetchListThuoc", {page}).then((list: any) => {
+                        Vue.set(_this, 'list', list);
+                    });
+                },
+            },
+            loaded() {
+                return !this.$store.getters['thuoc/loading'];
+            },
+        },
         methods: {
             select(index: number, row: ThuocType): void {
                 this.$router.push("/thuoc/" + row.id);
             },
             onSortChange() {
+                const _this = this as any;
                 const payload = {
-                    page: this.page,
-                    sort: this.sort,
-                    search: this.search,
+                    sort: _this.sort,
+                    search: _this.search,
                 };
-                this.$store.dispatch("thuoc/fetchListThuoc", payload).then((list) => {
-                    this.$set(this, 'list', list);
-                    this.loaded = true;
+                _this.$store.dispatch("thuoc/fetchListThuoc", payload).then((list: any) => {
+                        _this.$set(this, 'list', list);
                 });
             },
         },
         watch: {
             search() {
-                this.onSortChange();
+                (this as any).onSortChange();
             },
         },
 
         created(): void {
             this.$store.dispatch("thuoc/fetchListThuoc").then((list) => {
-                this.list = list;
-                this.loaded = true;
+                this.$set(this, 'list', list);
             });
         }
     });

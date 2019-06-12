@@ -7,13 +7,18 @@ use Illuminate\Support\Facades\DB;
 
 class Medicine extends Model
 {
-//    protected $attributes = ['total'];
+    protected $fillable = [
+        "name",
+        "cost",
+        "idCate",
+        "idProvider",
+    ];
     //
-    public function category(){
-        return $this->belongsTo('App\Category', 'idCate', 'id', 'category');
+    public function category() {
+        return $this->belongsTo('App\Category', 'idCate', 'id');
     }
-    public function provider(){
-        return $this->belongsTo('App\Provider', 'idProvider', 'id', 'provider');
+    public function provider() {
+        return $this->belongsTo('App\Provider', 'idProvider', 'id');
     }
     public function prescriptions()
     {

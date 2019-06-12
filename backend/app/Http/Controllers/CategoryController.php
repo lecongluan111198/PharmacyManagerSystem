@@ -4,23 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResource
      */
     public function index(Request $request)
     {
-        $sort_direction = $request->get("direction", "asc");
-        $search = $request->get("q", "");
-        $items = Category::query()
-            ->where("id", "LIKE", "%$search%")
-            ->orWhere("name", "LIKE", "%$search%")
-            ->paginate(15);
-        return response()->json($items);
+        $query = Category::query();
+
+        if ($request->has("count")) {
+            $query = $query->withCount("medicines");
+        }
+        $categories = $query->get();
+
+        return new JsonResource($categories);
     }
 
     public function getId($id)
