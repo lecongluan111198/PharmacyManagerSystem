@@ -7,6 +7,5 @@ export interface Thuoc extends BaseInterface{
     cost: number;
     provider?: Provider;
     category?: any
-    in_store_count?: number;
-    in_inventory_count?: number;
+    amount?: number;
 }

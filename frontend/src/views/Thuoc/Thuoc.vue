@@ -12,7 +12,7 @@
                         <mu-checkbox :label="$lang.THUOC.IN_INVENTORY" v-model="whereInput" value="inventory"></mu-checkbox>
                     </div>
                 </mu-flex>
-                <mu-button color="success" @click="modalAdd.open = true">
+                <mu-button color="success" @click="openAddModal">
                     {{$lang.ADD}}
                     <mu-icon right value="add"></mu-icon>
                 </mu-button>
@@ -20,22 +20,7 @@
             <thuoc-table :search="searchInput_submit"
                          style="flex-grow: 1; overflow: auto"></thuoc-table>
         </mu-flex>
-        <mu-dialog id="add-thuoc"
-                   :overlay-close="false"
-                   :title="$lang.THUOC.ADD" :open.sync="modalAdd.open">
-            <mu-form class="add-form">
-                <mu-text-field :label="$lang.THUOC.NAME" v-model="modalAdd.form.name"></mu-text-field>
-                <mu-select filterable
-                           :label="$lang.THUOC.PROVIDER"
-                           v-model="modalAdd.form.provider">
-                    <mu-option v-for="provider in providers" :key="provider.id"
-                               :value="provider"
-                               :label="provider.name"></mu-option>
-                </mu-select>
-            </mu-form>
-            <mu-button slot="actions" color="primary">{{$lang.ADD}}</mu-button>
-            <mu-button slot="actions" color="grey" @click="modalAdd.open = false">Cancel</mu-button>
-        </mu-dialog>
+        <thuoc-add-dialog></thuoc-add-dialog>
     </div>
 </template>
 
@@ -60,11 +45,13 @@
     import {Provider} from "@/types/Provider";
     import {Thuoc} from "@/types/Thuoc";
     import {mapGetters} from 'vuex';
+    import ThuocAddDialog from "@/components/modal_views/ThuocAdd.vue";
 
     export default Vue.extend({
         name: "danh-sach-thuoc",
         components: {
             ThuocTable,
+            ThuocAddDialog,
         },
         data() {
             return {
@@ -88,6 +75,12 @@
                 } else {
                     return this.whereInput[0];
                 }
+            },
+        },
+
+        methods: {
+            openAddModal() {
+                this.$store.commit('thuoc/add/open');
             },
         }
     });

@@ -2,11 +2,15 @@
     <mu-paper :z-depth="1">
         <mu-flex direction="column" align-items="stretch" style="height: 100%">
             <mu-data-table class="paginate-table"
+                           v-bind="$attrs"
+                           max-height="100%" :fit="false"
                            stripe border :selectable="selectable"
+                           :no-data-text="$lang.EMPTY_DATA"
                            :selects.sync="computed_selects" select-all
                            :columns="columns"
+                           @row-click="onRowClick"
                            :data="data"></mu-data-table>
-            <div class="paginate-table-paginate">
+            <div class="paginate-table-paginate" v-show="total > 1">
                 <mu-pagination :current.sync="computed_page" :total="total"></mu-pagination>
             </div>
         </mu-flex>
@@ -21,32 +25,28 @@
         props: {
             data: {
                 type: Array,
-                default: [],
+                default: ()=>([]),
             },
             columns: {
                 type: Array,
-                default: [],
+                default: ()=>([]),
             },
             selectable: {
                 type: Boolean,
-                default: false,
+                default: ()=>true,
             },
             selects: {
                 type: Array,
-                default: [],
+                default: ()=>[],
             },
             page: {
                type: Number,
-               default: 1,
+               default: ()=>1,
                min: 1,
             },
             total: {
                 type: Number,
-                default: 1,
-            },
-            loading: {
-                type: Boolean,
-                default: false,
+                default: ()=>1,
             },
         },
         computed: {
@@ -78,6 +78,11 @@
                 },
             },
         },
+        methods: {
+            onRowClick(index: number, item: any) {
+                this.$emit("row-click", item, index);
+            },
+        },
     });
 </script>
 
@@ -90,6 +95,10 @@
             display: flex;
             justify-content: center;
             padding: 1em;
+        }
+
+        table {
+            width: 100% !important;
         }
     }
 </style>

@@ -14,21 +14,19 @@
             </mu-flex>
         </div>
         <mu-flex fill>
-            <paginate-table style="height: 100%;width: 100%"
-                            :loading="loading"
-                            :columns="tableColumns"></paginate-table>
+            <thuoc-table style="width: 100%"></thuoc-table>
         </mu-flex>
     </mu-flex>
 </template>
 
 <script lang="ts">
     import Vue from 'vue';
-    import PaginateTable from '@/components/PaginateTable/index.vue';
+    const ThuocTable = ()=>import("@/components/Thuoc/ThuocTable.vue");
 
     export default Vue.extend({
         name: 'kho-view',
         components: {
-            PaginateTable,
+            ThuocTable,
         },
         data() {
             return {

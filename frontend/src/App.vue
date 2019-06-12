@@ -5,10 +5,20 @@
     <div v-else id="app" class="app">
         <Sidebar v-if="hasSidebar"></Sidebar>
         <router-view class="app-body"/>
-        <mu-dialog width="800"
-                   transition="slide-top"
-                   scrollable :open="!!$route.meta.isModal" v-on:close="onModalClose">
+        <mu-dialog transition="slide-top"  scrollable
+                   :open="!!$route.meta.isModal"
+                   @close="onModalClose">
             <router-view name="modal_content"></router-view>
+        </mu-dialog>
+
+        <mu-dialog width="600"
+                   :open.sync="error.open">
+            <template slot="title">
+                <h2 style="color: brown; margin: auto">
+                    ERROR
+                </h2>
+            </template>
+            {{error.content}}
         </mu-dialog>
     </div>
 </template>
@@ -28,6 +38,10 @@ export default Vue.extend({
     data() {
         return {
             loading: true,
+            error: {
+                open: false,
+                content: '',
+            },
         }
     },
 
@@ -41,6 +55,13 @@ export default Vue.extend({
         onModalClose() {
             const lastPath = this.$store.state.parentModalPath || '/';
             this.$router.push(lastPath);
+        },
+
+        handleError(e: ErrorEvent | PromiseRejectionEvent | any) {
+            this.error = {
+                open: true,
+                content: e.message || e.reason,
+            };
         }
     },
 
@@ -57,6 +78,14 @@ export default Vue.extend({
             }).finally(()=>{
                 this.loading = false;
             });
+    },
+
+    created(): void {
+        window.addEventListener("unhandledrejection", this.handleError.bind(this));
+        window.addEventListener('error', this.handleError.bind(this));
+    },
+    destroyed(): void {
+        window.removeEventListener('error', this.handleError);
     },
 })
 </script>

@@ -17,6 +17,7 @@ class CreateReceiptDetailsTable extends Migration
 //            $table->increments('id');
             $table->integer('idMedicine')->unsigned();
             $table->integer('idReceipt')->unsigned();
+            $table->integer('amount')->unsigned()->default(1);
 
             $table->primary([
                 'idMedicine',

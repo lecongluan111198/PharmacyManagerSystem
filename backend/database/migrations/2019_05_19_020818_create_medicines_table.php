@@ -17,14 +17,14 @@ class CreateMedicinesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->double('cost', 15, 8);
-            $table->integer('idCate')->unsigned();
-            $table->integer('idProvider')->unsigned();
+            $table->integer('idCate')->unsigned()->nullable();
+            $table->integer('idProvider')->unsigned()->nullable();
             $table->foreign('idCate')
                 ->references('id')->on('categories')
-                ->onDelete('cascade');
+                ->onDelete('set null');
             $table->foreign('idProvider')
                 ->references('id')->on('providers')
-                ->onDelete('cascade');
+                ->onDelete('set null');
             $table->timestamps();
         });
     }

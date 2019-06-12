@@ -15,6 +15,7 @@ export default {
         ADD: "Thêm thông tin thuốc",
     },
     ADD: "Thêm",
+    DELETE: "Xóa",
     QUANTITY: 'Số lượng',
     PRESCRIPTION: {
         SEARCH: 'Tìm hóa đơn',
@@ -22,6 +23,7 @@ export default {
         CURRENT: 'Hóa đơn hiện tại',
         COSTS: 'Giá',
         TOTAL_COST: 'Tổng giá',
+        HISTORY: 'Lịch sử hóa đơn',
     },
 
     INVENTORY: {
@@ -41,6 +43,10 @@ export default {
         TITLE: 'Phân loại',
         NAME: 'Tên phân loại',
     },
+    REPORT: {
+        TITLE: 'Thống kê/ Báo cáo',
+        EXPORT: 'Xuất báo cáo',
+    },
 
     ADDRESS: 'Địa chỉ',
 
@@ -49,4 +55,18 @@ export default {
     DATETIME: 'Thời gian',
 
     NOTE: 'Ghi chú',
+    EDIT: 'Sửa',
+
+    USER: {
+        NAME: 'Tên',
+        EMAIL: 'Email',
+        PHONE: 'Số điện thoại',
+
+        CUR_PASS: 'Mật khẩu hiện tại',
+        NEW_PASS: 'Mật khẩu mới',
+    },
+
+    SEARCH: {
+        ENTER_TO_SEARCH: 'Nhấn Enter để tìm kiếm',
+    }
 }

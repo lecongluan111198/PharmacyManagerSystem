@@ -1,7 +1,11 @@
 import Vue from 'vue';
 import Router, {Route} from 'vue-router';
+
 import Home from './views/Home.vue';
+import NotFound from './views/404.vue';
+
 import store from '@/store';
+import NProgress from "nprogress";
 
 Vue.use(Router);
 
@@ -148,10 +152,25 @@ const router = new Router({
             name: "QuanLyPhanLoai_ChiTiet",
             component: ()=>import('./views/PhanLoai/PhanLoaiChiTiet.vue'),
         },
+        {
+            path: '/profile',
+            name: "Profile",
+            component: ()=>import('./views/Profile.vue'),
+        },
+
+
+        {
+            path: '*',
+            name: "NotFound",
+            component: NotFound,
+        }
     ]
 });
 
 router.beforeEach((to: Route, from: Route, next: Function)=>{
+    if (to.name) {
+        NProgress.start()
+    }
     const isRouteHasModal = to.matched.some((route)=>{
         return route.meta.isModal;
     });
@@ -165,6 +184,10 @@ router.beforeEach((to: Route, from: Route, next: Function)=>{
     }
 
     next();
+});
+
+router.afterEach((to, from) => {
+    NProgress.done()
 });
 
 export default router;

@@ -13,19 +13,24 @@
 
 Route::post('/login', "UserController@login");
 Route::post('/reset-password', "UserController@resetPassword");
-Route::get("/medicine", "MedicineController@index");
-Route::get("/medicine/{id}", "MedicineController@findID")->where(["id"=>"\\d+"]);
-Route::post("/medicine/update", "MedicineController@update");
-Route::post("/medicine/delete/{id}", "MedicineController@destroy");
-Route::post("/medicine/create", "MedicineController@store");
-Route::get("/medicine/edit/{id}", "MedicineController@edit");
-Route::get("/prescription/edit/{id}", "PrescriptionController@edit");
-Route::post("/prescription/{id}/add/{medi_id}", "PrescriptionController@addMedicine");
-Route::post("/prescription/{id}/remove/{medi_id}", "PrescriptionController@removeMedicine");
-Route::get("/medicine/{id}/prescription", "MedicineController@getPrescription");
-
-Route::get('/medicine/findName', "MedicineController@findName");
 
 Route::middleware('auth:api')->group(function () {
     Route::get("/me", "UserController@showMe");
+
+    Route::apiResource("medicine", "MedicineController");
+    Route::get("/medicine/{medicine_id}/amount", "MedicineController@amount");
+    Route::get('/medicine/findName', "MedicineController@findName");
+
+    Route::apiResource("/prescription", "PrescriptionController");
+    Route::apiResource("/receipt", "ReceiptController");
+    Route::apiResource("/provider", "ProviderController");
+    Route::apiResource("/category", "CategoryController");
+});
+
+Route::fallback(function () {
+    return response()->setStatusCode(404)
+        ->json([
+            "error"=>404,
+            "message"=>"not found this api",
+        ]);
 });

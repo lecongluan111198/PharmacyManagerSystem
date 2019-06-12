@@ -1,89 +1,77 @@
 import {Module} from 'vuex';
-import {Thuoc} from "@/types/Thuoc";
+import {HoaDon} from "@/types/HoaDon";
+import {RootState} from "@/store";
+import API from "@/api";
+import HoaDonAddModule from "@/store/HoaDon/add";
+import HoaDonDetailModule from "@/store/HoaDon/details";
 
-export interface ICTHoaDon {
-    medicine: Thuoc;
-    quantity: number;
+export interface IListPage<T> {
+    [page: number]: T[];
 }
+
 
 export interface IHoaDonState {
-    list: ICTHoaDon[],
-    current: Map<number, number>;
+    list: HoaDon[],
+    page: number;
+    total: number;
+    loading: boolean;
 }
 
-const store: Module<IHoaDonState, any> = {
+const store: Module<IHoaDonState, RootState> = {
     namespaced: true,
+
+    modules: {
+        add: HoaDonAddModule,
+        detail: HoaDonDetailModule,
+    },
+
     state: {
         list: [],
-        current: new Map<number, number>(),
+        page: 1,
+        total: 1,
+        loading: false,
     },
 
     getters: {
-        current(state: IHoaDonState) {
-            return [...state.list];
+        list(state) {
+            return state.list.map(val=>({...val}));
         },
+        page: state => state.page,
+        total: state => state.total,
+        loading: state => state.loading,
     },
 
     mutations: {
-        add(state: IHoaDonState, {thuoc, quantity = 1}) {
-            if (state.current.has(thuoc.id)) {
-                const thuocIdx = state.current.get(thuoc.id);
-                if (thuocIdx !== undefined) {
-                    const thuocInThere = state.list[thuocIdx];
-                    thuocInThere.quantity += +quantity;
-                } else {
-                    console.debug('map return null');
-                }
-            } else {
-                // debugger;
-                const newThuoc: ICTHoaDon = {
-                    medicine: thuoc,
-                    quantity,
-                };
-                const len = state.list.push(newThuoc);
-                state.current.set(thuoc.id, len - 1);
-            }
+        list(state, list: HoaDon[]) {
+            state.list = list;
         },
-
-        /**
-         *
-         * @param state
-         * @param thuoc_id
-         * @param quantityRemove so luong can remove, -1 la remove het
-         */
-        remove(state: IHoaDonState, {thuoc_id, quantityRemove = -1}) {
-            if (state.current.has(thuoc_id)) {
-                const thuocIdx = state.current.get(thuoc_id);
-                if (thuocIdx !== undefined) {
-                    const thuocInThere = state.list[thuocIdx];
-                    if (thuocInThere.quantity <= quantityRemove || quantityRemove < 0) {
-                        state.current.delete(thuoc_id);
-                        state.list.splice(thuocIdx, 1);
-                    } else {
-                        thuocInThere.quantity -= +quantityRemove;
-                    }
-                } else {
-                    console.debug('map return null');
-                }
-            }
+        page(state, page: number) {
+            state.page = page;
+        },
+        total(state, total: number) {
+            state.total = total;
+        },
+        loading(state, bool: boolean) {
+            state.loading = bool;
         },
     },
 
     actions: {
-        async add({commit, dispatch}, payload: any) {
-            const thuoc = await dispatch('thuoc/getThuocById', {
-                id: payload.thuoc_id
-            }, {root: true}) as Thuoc;
-            if (!thuoc) {
-                console.error("cannot get thuoc " + payload.thuoc_id);
-                return;
-            }
-            commit('add', {thuoc, quantity: payload.quantity});
-        },
+        async fetchList({commit, state}, payload: any = {})
+        {
+            const {
+                limit = 15,
+                page = state.page,
+            } = payload;
 
-        async remove({commit}, payload) {
-            commit('remove', payload);
-        },
+            commit('loading', true);
+            const res = await API.Prescription.list(limit, page);
+            commit('loading', false);
+
+            commit('list', res.data);
+            commit('page', res.current_page);
+            commit('total', res.total);
+        }
     },
 };
 

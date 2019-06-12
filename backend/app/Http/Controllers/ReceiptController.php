@@ -14,12 +14,21 @@ class ReceiptController extends Controller
      */
     public function index(Request $request)
     {
-        $start = $request->get("start", $date = date('m/d/Y', strtodate('01/01/2019')));
-        $end = $request->get("end", $date = date('m/d/Y', time()));
+        $start = $request->get("start", $date = date('Y-M-D', strtotime('01/01/1900')));
+        $end = $request->get("end", $date = date('Y-M-D', time()));
+        $type = $request->get("type", null);
+
+
         $items = Receipt::query()
-            ->where("receiptDate", ">=", $start)
-            ->where("receiptDate", "<=", $end)
-            ->paginate(15);
+            ->with(["provider", "medicines"])
+            ->whereDate("created_at", ">=", $start)
+            ->whereDate("created_at", "<=", $end);
+
+        if ($type != null)
+            $items = $items->where('type', '=', $type);
+
+        $items = $items->orderBy("created_at")->paginate(15);
+
         return response()->json($items);
     }
 

@@ -2,11 +2,11 @@
     <div id="current-prescription">
         <mu-flex style="margin-bottom: 1em" justify-content="between" align-items="end">
             <div class="prescription-control">
-                <mu-button small :disabled="!selects.length" @click="removeMedicine">
+                <mu-button :disabled="!selects.length" @click="removeMedicine">
                     <mu-icon value="delete"></mu-icon>
                     remove
                 </mu-button>
-                <mu-button small color="success">
+                <mu-button color="success" @click="submitHoaDon" :disabled="submitting || list_medicine.length === 0">
                     <mu-icon left value="check"></mu-icon>
                     {{$lang.ADD}}
                 </mu-button>
@@ -24,6 +24,7 @@
         <mu-paper :z-depth="1">
             <mu-data-table :columns="columns"
                            border striped
+                           :loading="submitting"
                            checkbox selectable select-all
                            :selects.sync="selects"
                            :no-data-text="$lang.EMPTY_DATA"
@@ -36,7 +37,7 @@
 <script lang="ts">
     import Vue from 'vue';
     import {mapGetters} from 'vuex';
-    import {ICTHoaDon} from "@/store/HoaDon";
+    import {ICTHoaDon} from "@/types/ICTHoaDon";
 
     export default Vue.extend({
         name: 'prescription-current',
@@ -48,32 +49,29 @@
                     {title: this.$lang.THUOC.NAME, name: 'name'},
                     {title: this.$lang.THUOC.PRICE, name: 'cost',
                         formatter(value: any) {
-                            return value.toLocaleString() + "đ";
+                            return value ? value.toLocaleString() + "đ" : "";
                         },
                     },
                     {title: this.$lang.QUANTITY, name: 'quantity'},
                     {title: this.$lang.PRESCRIPTION.TOTAL_COST, name: 'total_cost',
                         formatter(value: any) {
-                            return value.toLocaleString() + "đ";
+                            return value ? value.toLocaleString() + "đ" : "";
                         },
                     },
                 ],
             }
         },
         computed: {
-            ...mapGetters([
-                'hoa_don/current',
+            ...mapGetters('hoa_don/add', [
+                'list',
+                'submitting',
             ]),
 
             list_medicine(): any[] {
-                const that = this as any;
-                return that['hoa_don/current'].map((cthd: ICTHoaDon)=>{
-                    return {
-                        id: cthd.medicine.id,
-                        name: cthd.medicine.name,
-                        cost: cthd.medicine.cost,
-                        quantity: cthd.quantity,
-                        total_cost: cthd.quantity * cthd.medicine.cost,
+                return (this as any).list.map((val: ICTHoaDon)=>{
+                    return {...val.medicine,
+                        quantity: val.amount,
+                        total_cost: (+val.amount) * val.medicine.cost,
                     };
                 })
             },
@@ -87,16 +85,16 @@
 
         methods: {
             removeMedicine() {
-                const selectedRows = this.list_medicine.filter((val, idx)=>{
-                    return this.selects.indexOf(idx) >= 0;
-                });
+                const selected = [...this.selects];
+                this.selects.length = 0;
+                for (const index of selected) {
+                    const id = this.list_medicine[index].id;
+                    this.$store.commit("hoa_don/add/remove", id);
+                }
+            },
 
-                selectedRows.forEach(async row=>{
-                    await this.$store.dispatch("hoa_don/remove", {
-                        thuoc_id: row.id,
-                        quantityRemove: -1,
-                    });
-                });
+            submitHoaDon() {
+                this.$store.dispatch("hoa_don/add/submit");
             },
         },
     });
