@@ -3,6 +3,8 @@ import Router, {Route} from 'vue-router';
 
 import Home from './views/Home.vue';
 import NotFound from './views/404.vue';
+import Page403 from './views/403.vue';
+import {ability} from "@/permission/ability";
 
 import store from '@/store';
 import NProgress from "nprogress";
@@ -29,12 +31,16 @@ const router = new Router({
             path: '/hoadon',
             name: 'LichSuHoaDon',
             component: () => import('./views/HoaDon.vue'),
+            meta: {
+                containObject: 'HoaDon',
+            },
         },
         {
             path: '/hoadon/:id',
             name: "ChiTietHoaDon",
             meta: {
                 isModal: true,
+                containObject: 'HoaDon',
             },
             components: {
                 default: Home,
@@ -49,6 +55,9 @@ const router = new Router({
         {
             path: '/admin',
             name: "Admin",
+            meta: {
+                containObject: 'all',
+            },
             component: () => import("./views/Admin/Admin.vue"),
             children: [
                 {
@@ -157,8 +166,11 @@ const router = new Router({
             name: "Profile",
             component: ()=>import('./views/Profile.vue'),
         },
-
-
+        {
+            path: '/403',
+            name: "PermissionDenied",
+            component: Page403,
+        },
         {
             path: '*',
             name: "NotFound",
@@ -171,6 +183,17 @@ router.beforeEach((to: Route, from: Route, next: Function)=>{
     if (to.name) {
         NProgress.start()
     }
+    if (to.matched.some(route=>route.meta.containObject)) {
+        let flagReturn = false;
+        to.matched.forEach(route=>{
+            if (ability.cannot('read', route.meta.containObject)) {
+                flagReturn = true;
+                return next('/403');
+            }
+        });
+        if (flagReturn) return;
+    }
+
     const isRouteHasModal = to.matched.some((route)=>{
         return route.meta.isModal;
     });

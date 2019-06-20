@@ -8,6 +8,8 @@
         "test:unit": "vue-cli-service test:unit"
     },
     "dependencies": {
+        "@casl/ability": "^3.0.2",
+        "@casl/vue": "^0.5.1",
         "@types/nprogress": "^0.2.0",
         "axios": "^0.18.0",
         "core-js": "^2.6.5",
@@ -15,6 +17,7 @@
         "moment": "^2.24.0",
         "muse-ui": "^3.0.2",
         "nprogress": "^0.2.0",
+        "v-tooltip": "^2.0.2",
         "vue": "^2.6.10",
         "vue-class-component": "^7.0.2",
         "vue-google-charts": "^0.3.2",

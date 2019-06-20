@@ -32,4 +32,10 @@ class UserController extends Controller
             "data" => $user,
         ]);
     }
+
+    public function update(Request $request) {
+        $user = auth()->user();
+
+
+    }
 }

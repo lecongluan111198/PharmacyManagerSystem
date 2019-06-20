@@ -62,6 +62,34 @@ export default Vue.extend({
                 open: true,
                 content: e.message || e.reason,
             };
+        },
+
+        handleKeyDown(e: KeyboardEvent) {
+            if (e.altKey) {
+                let matchKey = true;
+                this.$store.commit("showAllHotkey");
+
+                switch (e.key) {
+                    case "1":
+                        this.$router.push('/');
+                        break;
+                    case "2":
+                        this.$router.push('/hoadon');
+                        break;
+                    case "3":
+                        this.$router.push('/thuoc');
+                        break;
+
+                    default:
+                        matchKey = false;
+                }
+                if (matchKey) {
+                    e.preventDefault();
+                }
+            }
+        },
+        handleKeyUp(e: KeyboardEvent) {
+            this.$store.commit("showAllHotkey", false);
         }
     },
 
@@ -83,9 +111,13 @@ export default Vue.extend({
     created(): void {
         window.addEventListener("unhandledrejection", this.handleError.bind(this));
         window.addEventListener('error', this.handleError.bind(this));
+        window.addEventListener('keydown', this.handleKeyDown.bind(this));
+        window.addEventListener('keyup', this.handleKeyUp.bind(this));
     },
     destroyed(): void {
         window.removeEventListener('error', this.handleError);
+        window.removeEventListener('keydown', this.handleKeyDown.bind(this));
+        window.removeEventListener('keyup', this.handleKeyUp.bind(this));
     },
 })
 </script>
