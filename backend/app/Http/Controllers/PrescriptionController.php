@@ -147,14 +147,19 @@ class PrescriptionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request) 
     {
         try {
             $prescription = Prescription::findOrFail($request->id);
             $prescription->name = $request->name;
             $prescription->cost = $request->cost;
-            $prescription->idCate = $request->idCate;
-            $prescription->idProvider = $request->idProvider;
+            $prescription->invoiceDate = $request->invoiceDate;
+            //request nhận đối tượng là [idMedicine, amount]
+            // foreach($prescription->medicines as $item){
+            //     // if($item->idMedicine )
+            // } 
+            $prescription->medicines()->detach();
+            $prescription->medicines()->attach($request->medicines);
             if ($prescription->save()) {
                 $ret = [
                     'success' => true,
@@ -188,6 +193,7 @@ class PrescriptionController extends Controller
     {
         try {
             $data = Prescription::findOrFail($id);
+            $data->medicines()->detach();
             $data->delete();
             $ret = [
                 'success' => true,
