@@ -22,6 +22,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/medicine/findName', "MedicineController@findName");
 
     Route::apiResource("/prescription", "PrescriptionController");
+    Route::get('/prescription/update', "MedicineController@update");
     Route::apiResource("/receipt", "ReceiptController");
     Route::apiResource("/provider", "ProviderController");
     Route::apiResource("/category", "CategoryController");

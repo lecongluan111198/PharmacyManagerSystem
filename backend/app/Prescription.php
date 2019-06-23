@@ -12,19 +12,21 @@ class Prescription extends Model
         'cost',
     ];
     //
-    public function pharmacy(){
+    public function pharmacy()
+    {
         return $this->belongsTo('App\Pharmacy');
     }
     public function medicines()
     {
         //return $this->belongsToMany('App\Medicine')->using('App\PrescriptionDetail');
-        return $this->belongsToMany('App\Medicine', 'prescription_details', 'idPrescription','idMedicine')
+        return $this->belongsToMany('App\Medicine', 'prescription_details', 'idPrescription', 'idMedicine')
             ->withPivot([
                 'amount',
-            ])->as('amount');
+            ])->as('medicines');
     }
 
-    public function created_by() {
+    public function created_by()
+    {
         return $this->belongsTo('App\User', 'created_by_id');
     }
 }
