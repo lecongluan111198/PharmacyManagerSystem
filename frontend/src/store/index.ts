@@ -11,6 +11,7 @@ import ReceiptModule from './Receipt';
 import ProviderModule from './Provider';
 import CategoryModule from './Category';
 import {abilityPlugin} from "@/permission/ability";
+import NhanvienModule from "@/store/Nhanvien";
 
 export interface RootState {
     me: User | null;
@@ -29,6 +30,7 @@ export default new Vuex.Store<RootState>({
         receipt: ReceiptModule,
         provider: ProviderModule,
         category: CategoryModule,
+        nhan_vien: NhanvienModule,
     },
 
     state: {

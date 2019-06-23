@@ -54,7 +54,7 @@
                     {title: this.$lang.DATETIME, name: 'created_at',
                         formatter(val: any): string {
                             const m = moment(val);
-                            return m.format('DD/MM/YY') + ", " + m.fromNow();
+                            return m.utc(true).format('DD/MM/YY') + ", " + m.fromNow();
                         }
                     },
                     {title: this.$lang.INVENTORY.TYPE, name: 'type',

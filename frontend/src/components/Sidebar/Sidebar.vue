@@ -35,6 +35,7 @@
                                 <mu-icon value="keyboard_arrow_down"></mu-icon>
                             </mu-list-item-action>
                             <mu-list-item button :to="nested.to" slot="nested"
+                                          v-if="$can(item.can[0], item.can[1])"
                                           v-for="(nested, nidx) in item.nested"
                                           :key="nidx">
                                 <mu-list-item-title>{{nested.title}}</mu-list-item-title>
@@ -81,6 +82,8 @@
     import {Component} from 'vue-property-decorator';
     import {mapGetters} from 'vuex';
     import SidebarSettings from "./SidebarSettings.vue";
+    import {Category} from "@/types/Category";
+    import {Provider} from "@/types/Provider";
 
     @Component({
         components: {
@@ -138,16 +141,18 @@
             {
                 icon: "vertical_split",
                 title: "Danh mục",
-                can: [['manage'], ['Category', 'Provider']],
+                can: ['read', ['Category', 'Provider']],
                 shortKey: ['alt', '5'],
                 nested: [
                     {
                         to: '/provider',
                         title: 'Nhà cung cấp',
+                        can: [['manage'], 'Provider'],
                     },
                     {
                         to: '/category',
                         title: 'Phân loại thuốc',
+                        can: [['manage'], 'Category'],
                     }
                 ]
             },

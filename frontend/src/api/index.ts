@@ -6,6 +6,7 @@ import ProviderApi from "@/api/ProviderApi";
 import PrescriptionApi from "@/api/PrescriptionApi";
 import MedicineApi from "@/api/MedicineApi";
 import CategoryApi from "@/api/CategoryApi";
+import NhanvienApi from "@/api/Nhanvien";
 
 export default class API extends APIBase {
 
@@ -41,4 +42,5 @@ export default class API extends APIBase {
     static Provider = ProviderApi;
     static Prescription = PrescriptionApi;
     static Category = CategoryApi;
+    static Nhanvien = NhanvienApi;
 }

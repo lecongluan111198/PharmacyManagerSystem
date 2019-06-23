@@ -77,11 +77,10 @@ class PrescriptionController extends Controller
                     "amount"=>$item['amount'],
                 ]);
             }
+
+            $prescription->load('medicines');
+            return new JsonResource($prescription);
         });
-
-        $prescription->load('medicines');
-
-        return new JsonResource($prescription);
     }
 
     public function updateDetail(PrescriptionUpdateRequest $request, $id)

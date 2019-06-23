@@ -11,6 +11,8 @@ import 'nprogress/nprogress.css';
 
 import 'axios';
 import VueTooltip from 'v-tooltip';
+// @ts-ignore
+import Shortkey from 'vue-shortkey';
 import '@/assets/v-tooltip.scss';
 import langConfig from '@/lang/';
 import * as moment from 'moment';
@@ -22,6 +24,7 @@ Vue.config.productionTip = false;
 Vue.config.devtools = true;
 Vue.prototype.$lang = langConfig.vi;
 Vue.use(abilitiesPlugin, ability);
+Vue.use(Shortkey);
 Vue.use(VueTooltip, {
     defaultBoundariesElement: 'body',
 });

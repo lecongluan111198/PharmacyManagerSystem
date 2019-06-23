@@ -10,6 +10,9 @@
                              justify-content="center">
                         <mu-flex>
                             <mu-text-field :label="$lang.THUOC.SEARCH"
+                                           v-tooltip.top="{content:'Alt+F', show: showAllHotkey}"
+                                           v-shortkey="['alt', 'f']"
+                                           @shortkey="focusSearch"
                                            type="text"
                                            ref="search_input"
                                            :help-text="$lang.SEARCH.ENTER_TO_SEARCH"
@@ -67,6 +70,7 @@
 <script lang="ts">
     import Vue from 'vue';
     import {Thuoc} from "@/types/Thuoc";
+    import {mapGetters} from "vuex";
 
     export default Vue.extend({
         name: 'search-box',
@@ -85,6 +89,10 @@
                 selected: null,
                 quantity: 1,
             };
+        },
+
+        computed: {
+            ...mapGetters(['showAllHotkey']),
         },
 
         methods: {
@@ -112,11 +120,19 @@
             },
             chooseInTable(idx: number, row: any){
                 this.selected = row;
+                this.focusSearch();
+            },
+            focusSearch() {
+                console.debug("focus");
                 this.$nextTick(()=>{
-                    (<any>this.$refs.amount_input).$refs.input.focus();
-                });
+                    (<any>this.$refs.search_input).$refs.input.focus();
+                })
             }
         },
+
+        mounted(): void {
+            this.focusSearch();
+        }
     });
 </script>
 

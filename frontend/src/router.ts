@@ -66,19 +66,9 @@ const router = new Router({
                     component: ()=>import('./views/Admin/Admin.vue'),
                 },
                 {
-                    path: '/nhanvien',
-                    name: 'NhanVien',
-                    component: ()=>import('./views/Admin/Nhanvien.vue'),
-                },
-                {
-                    path: '/nhanvien',
-                    name: 'NhanVien',
-                    component: ()=>import('./views/Admin/Nhanvien.vue'),
-                },
-                {
-                    path: '/nhanvien/:id',
+                    path: 'nhanvien/:id',
                     name: 'NhanVienDetail',
-                    redirect: '/nhanvien/:id/chitiet',
+                    redirect: 'nhanvien/:id/chitiet',
                     children: [
                         {
                             path: 'chitiet',
@@ -93,6 +83,11 @@ const router = new Router({
                     ],
                 },
             ],
+        },
+        {
+            path: '/admin/nhanvien',
+            name: 'NhanVien',
+            component: () => import('./views/Admin/Nhanvien.vue'),
         },
         {
             path: '/thuoc',

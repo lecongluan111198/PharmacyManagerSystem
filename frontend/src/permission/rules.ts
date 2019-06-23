@@ -10,7 +10,7 @@ import {Thuoc} from "@/types/Thuoc";
 import {HoaDon} from "@/types/HoaDon";
 
 export const rulesOf = (user: User): RawRule[] => {
-    switch (user.role) {
+    switch (+user.role) {
         case UserRole.ADMIN:
             return [
                 {
@@ -33,7 +33,23 @@ export const rulesOf = (user: User): RawRule[] => {
                 }
             ];
         case UserRole.STORAGE_MANAGER:
-            return [];
+            return [
+                {
+                    subject: ['Thuoc', 'Kho'],
+                    actions: ['manage', 'read', 'write'],
+                },
+                {
+                    subject: "Receipt",
+                    actions: ['manage', 'read', 'write'],
+                },
+            ];
+        case UserRole.TAG_MANAGER:
+            return [
+                {
+                    subject: ["Provider", "Category"],
+                    actions: ['manage', 'read', 'write'],
+                },
+            ];
         default:
             return [];
     }
