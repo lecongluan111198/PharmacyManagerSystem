@@ -12,7 +12,6 @@ import API from "@/api";
 
 export interface IHoaDonDetail {
     loadedData: Map<number, HoaDon>;
-
     current: HoaDon | null;
     loading: boolean;
 }

@@ -7,36 +7,34 @@
 
 <template>
     <div>
+        <h1 class="is-center">Chi tiết đơn thuốc</h1>
         <div v-if="loaded && hoadon">
             <mu-flex>
-                <mu-flex fill>
+                <mu-flex fill direction="column">
                     <div>
-                        <h2>{{$lang.THUOC.ID}}</h2>
-                        <p>{{hoadon.id}}</p>
+                        <strong>{{'Mã đơn thuốc'}}</strong>: {{hoadon.id}}
+                    </div>
+                    <div>
+                        <strong>{{'Mã nhà thuốc'}}</strong>: {{hoadon.store_id}}
                     </div>
                 </mu-flex>
-                <mu-flex fill>
+                <mu-flex fill direction="column">
                     <div>
-                        <h2>Created at</h2>
-                        <p>{{hoadon.created_at}}</p>
+                        <strong>{{'Mã nhân viên'}}</strong>: {{hoadon.created_by.id}}
+                    </div>
+                    <div>
+                        <strong>{{'Tên nhân viên'}}</strong>: {{hoadon.created_by.name}}
+                    </div>
+                    <div>
+                        <strong>{{'Ngày nhập'}}</strong>: {{invoiceDate}}
                     </div>
                 </mu-flex>
-                <mu-flex fill>
-                    <div>
-                        <h2>By</h2>
-                        <p>
-                            <a :to="'/profile/' + hoadon.created_by.id">
-                                {{hoadon.created_by.name}}
-                            </a>
-                        </p>
-                    </div>
-                </mu-flex>
-                <mu-flex fill>
-                    <div>
-                        <h2>{{$lang.PRESCRIPTION.TOTAL_COST}}</h2>
-                        <p>{{hoadon.cost.toLocaleString('vi')}}</p>
-                    </div>
-                </mu-flex>
+            </mu-flex>
+            <mu-flex>
+                <h3>
+                    <strong>{{$lang.PRESCRIPTION.TOTAL_COST}}</strong>: {{hoadon.cost.toLocaleString('vi')}}
+                    <span>đ</span>
+                </h3>
             </mu-flex>
             <mu-data-table :columns="showColumns"
                            border
@@ -65,6 +63,7 @@
 
     // @ts-ignore
     import Loader from 'vue-spinner/src/GridLoader.vue';
+    import moment from "moment";
 
     export default Vue.extend({
         name: 'chi-tiet-hoa-don',
@@ -78,7 +77,7 @@
                     {title: this.$lang.THUOC.NAME, name: 'name'},
                     {title: this.$lang.QUANTITY, name: 'amount',
                         formatter(val: any) {
-                            return val ? val.amount : '';
+                            return val && val.amount ? val.amount.amount : '';
                         }
                     },
                     {title: this.$lang.PRESCRIPTION.TOTAL_COST, name: 'cost',
@@ -98,6 +97,9 @@
             },
             hoadon(): HoaDon {
                 return this.$store.getters['hoa_don/detail/current'];
+            },
+            invoiceDate(): string {
+                return moment(this.hoadon.created_at).format("dd - DD/MM/YY");
             }
         },
         mounted(): void {
