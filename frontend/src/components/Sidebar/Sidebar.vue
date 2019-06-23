@@ -19,7 +19,11 @@
                 <mu-tooltip v-for="(item, idx) in menu"
                             :tooltip-class="open ? 'hide' : ''"
                             :key="idx" :content="item.title" placement="right">
-                    <mu-list-item avatar button :to="item.to" :nested="!!item.nested">
+                    <mu-list-item avatar button
+                                  v-if="$can(item.can[0], item.can[1])"
+                                  v-tooltip.left="{content: item.shortKey.join('+'), show: showAllHotkey}"
+                                  :to="item.to"
+                                  :nested="!!item.nested">
                         <mu-list-item-action>
                             <mu-icon :value="item.icon"></mu-icon>
                         </mu-list-item-action>
@@ -31,7 +35,9 @@
                                 <mu-icon value="keyboard_arrow_down"></mu-icon>
                             </mu-list-item-action>
                             <mu-list-item button :to="nested.to" slot="nested"
-                                v-for="(nested, nidx) in item.nested" :key="nidx">
+                                          v-if="$can(item.can[0], item.can[1])"
+                                          v-for="(nested, nidx) in item.nested"
+                                          :key="nidx">
                                 <mu-list-item-title>{{nested.title}}</mu-list-item-title>
                             </mu-list-item>
                         </template>
@@ -76,6 +82,8 @@
     import {Component} from 'vue-property-decorator';
     import {mapGetters} from 'vuex';
     import SidebarSettings from "./SidebarSettings.vue";
+    import {Category} from "@/types/Category";
+    import {Provider} from "@/types/Provider";
 
     @Component({
         components: {
@@ -84,6 +92,7 @@
         computed: {
             ...mapGetters([
                 'me',
+                'showAllHotkey',
             ]),
         }
     })
@@ -95,21 +104,29 @@
             {
                 icon: "add_shopping_cart",
                 title: "Bán thuốc",
-                to: '/'
+                to: '/',
+                can: [['read', 'write'], 'HoaDon'],
+                shortKey: ['alt', '1'],
             },
             {
                 icon: "receipt",
                 title: "Lịch sử Hóa đơn",
-                to: '/hoadon'
+                to: '/hoadon',
+                can: [['read'], 'HoaDon'],
+                shortKey: ['alt', '2'],
             },
             {
                 icon: "list",
                 title: "Danh sách thuốc",
-                to: '/thuoc'
+                to: '/thuoc',
+                can: [['read'], 'Thuoc'],
+                shortKey: ['alt', '3'],
             },
             {
                 icon: "archive",
                 title: "Quản lý kho",
+                can: [['manage'], 'Receipt'],
+                shortKey: ['alt', '4'],
                 nested: [
                     {
                         to: '/kho',
@@ -124,21 +141,27 @@
             {
                 icon: "vertical_split",
                 title: "Danh mục",
+                can: ['read', ['Category', 'Provider']],
+                shortKey: ['alt', '5'],
                 nested: [
                     {
                         to: '/provider',
                         title: 'Nhà cung cấp',
+                        can: [['manage'], 'Provider'],
                     },
                     {
                         to: '/category',
                         title: 'Phân loại thuốc',
+                        can: [['manage'], 'Category'],
                     }
                 ]
             },
             {
                 icon: "insert_chart",
                 title: "Thống kê",
-                to: '/report'
+                to: '/report',
+                can: ['read', 'Report'],
+                shortKey: ['alt', '6'],
             },
         ];
 

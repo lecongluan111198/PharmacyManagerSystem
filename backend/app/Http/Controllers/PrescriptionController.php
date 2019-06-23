@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PrescriptionCreateRequest;
+use App\Http\Requests\PrescriptionUpdateRequest;
 use App\Prescription;
 use App\Medicine;
 use App\PrescriptionDetail;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class PrescriptionController extends Controller
 {
@@ -60,51 +62,51 @@ class PrescriptionController extends Controller
         }, 0);
 
         $user = auth()->user();
-        $prescription = Prescription::create([
-            "created_by_id"=>$user->getAuthIdentifier(),
-            "invoiceDate"=>date("Y-m-d", time()),
-            "cost"=>$total,
-        ]);
 
-        foreach ($cthdList as $item) {
-            PrescriptionDetail::create([
-                "idMedicine"=>$item['id'],
-                "idPrescription"=>$prescription->id,
-                "amount"=>$item['amount'],
+        DB::transaction(function () use ($user, $cthdList, $total) {
+            $prescription = Prescription::create([
+                "created_by_id"=>$user->getAuthIdentifier(),
+                "invoiceDate"=>date("Y-m-d", time()),
+                "cost"=>$total,
             ]);
-        }
-        $prescription->load('medicines');
 
-        return new JsonResource($prescription);
+            foreach ($cthdList as $item) {
+                PrescriptionDetail::create([
+                    "idMedicine"=>$item['id'],
+                    "idPrescription"=>$prescription->id,
+                    "amount"=>$item['amount'],
+                ]);
+            }
+
+            $prescription->load('medicines');
+            return new JsonResource($prescription);
+        });
     }
 
-    public function addMedicine($id, $medi_id)
+    public function updateDetail(PrescriptionUpdateRequest $request, $id)
     {
-        // try {
-        //     $prescription = Prescription::findOrFail($id);
-        //     $medicines = $prescription->medicines()->attach($medi_id);
+        $validated = $request->validated();
 
-        //     if ($prescription->save()) {
-        //         $ret = [
-        //             'success' => true,
-        //             'message' => 200,
-        //             'prescription' => $prescription
-        //         ];
-        //     } else {
-        //         $ret = [
-        //             'success' => false,
-        //             'message' => 404,
-        //             'prescription' => null
-        //         ];
-        //     }
-        // } catch (ModelNotFoundException $ex) {
-        //     $ret = [
-        //         'success' => false,
-        //         'message' => $ex->getMessage(),
-        //         'medicine' => null
-        //     ];
-        // }
-        // return response()->json($ret);
+        DB::transaction(function() use ($validated, $id) {
+            $cthd = $validated['cthd'];
+            foreach ($cthd as $item) {
+                $amount = $item['amount'];
+                $detail = PrescriptionDetail::where('idMedicine', '=', $item['id'])
+                    ->where('idPrescription', '=', $prescription->id)
+                    ->first();
+
+                if ($detail) {
+                    if ($amount <= 0) {
+                        $detail->delete();
+                    } else {
+                        $detail->amount = $amount;
+                        $detail->save();
+                    }
+                }
+            }
+        });
+
+        return new JsonResource("Success");
     }
 
     /**

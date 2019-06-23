@@ -24,5 +24,7 @@
     "dependencies": {
         "yarn": "^1.16.0"
     },
-    "cacheDirectories": ["frontend/node_modules"]
+    "cacheDirectories": [
+        "frontend/node_modules"
+    ]
 }

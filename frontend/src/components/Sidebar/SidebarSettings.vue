@@ -4,7 +4,7 @@
             <mu-icon value="settings"></mu-icon>
         </mu-button>
         <mu-list slot="content" style="width: 200px">
-            <template v-if="isAdmin">
+            <template v-if="$can('manage', 'all')">
                 <mu-sub-header>Admin</mu-sub-header>
                 <mu-list-item button to="/admin">
                     <mu-icon value="font_download"></mu-icon>&nbsp;
@@ -44,17 +44,13 @@
         name: "SidebarSettings",
         methods: {
             logout(): void {
+                this.$store.commit('logout');
                 localStorage.removeItem("accessToken");
                 window.location.href = '/login';
             },
         },
         computed: {
             ...mapGetters(['me']),
-
-            isAdmin(): boolean {
-                const self = this as any;
-                return self.me && self.me.role === UserRole.ADMIN;
-            },
         }
     })
 </script>

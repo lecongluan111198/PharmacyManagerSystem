@@ -45,7 +45,7 @@
                     {title: 'ID', name: 'id', width: 100},
                     {title: 'Created At', name: 'created_at', sort: true,
                         formatter(val: number): string {
-                            return moment(val).fromNow();
+                            return moment(val).utc(true).fromNow();
                         },
                     },
                     {title: 'Costs', name: 'cost', sort: true},
