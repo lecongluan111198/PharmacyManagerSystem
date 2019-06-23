@@ -133,7 +133,7 @@
             }
         },
         created(): void {
-            if (!this.isLoaded) {
+            if (!(this as any).isLoaded) {
                 this.$store.dispatch('nhan_vien/reload');
             }
         }
