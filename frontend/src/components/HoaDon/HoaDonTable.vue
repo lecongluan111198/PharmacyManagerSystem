@@ -5,13 +5,14 @@
   -->
 <template>
     <mu-flex direction="column" align-items="stretch" style="height: 100%">
-        <mu-flex justify-content="between">
+        <mu-flex justify-content="between" align-items="center">
             <h1>{{$lang.PRESCRIPTION.HISTORY}}</h1>
-            <div style="width: 500px">
-                <mu-text-field
-                    full-width
-                    type="search"
-                    icon="search" :label="$lang.PRESCRIPTION.SEARCH" label-float=""></mu-text-field>
+            <div>
+                <el-date-picker v-model="daterange"
+                                start-placeholder="Ngày bắt đầu"
+                                end-placeholder="Ngày kết thúc"
+                                @change="refresh"
+                                type="daterange"></el-date-picker>
             </div>
         </mu-flex>
         <div style="flex: 1 1 auto; overflow: auto">
@@ -32,6 +33,9 @@
     import PaginateTable from '@/components/PaginateTable/index.vue';
     import moment from 'moment';
     import {User} from "@/types/User";
+    import {DatePicker} from 'element-ui';
+
+    Vue.use(DatePicker);
 
     export default Vue.extend({
         name: 'hoa-don-table',
@@ -55,7 +59,6 @@
                         }
                     },
                 ],
-
             };
         },
         computed: {
@@ -63,6 +66,7 @@
                 'hoa_don/list',
                 'hoa_don/page',
                 'hoa_don/total',
+                'hoa_don/daterange',
             ]),
 
             page: {
@@ -77,6 +81,17 @@
             total(): number {
                 const _this = this as any;
                 return _this['hoa_don/total'];
+            },
+
+            daterange: {
+                get(): Date[] {
+                    const _this = this as any;
+                    return _this['hoa_don/daterange'];
+                },
+                set(daterange: Date[]) {
+                    const _this = this as any;
+                    _this.$store.commit('hoa_don/daterange', daterange);
+                },
             },
 
             loading(): boolean {
@@ -98,6 +113,9 @@
                     },
                 });
             },
+            refresh() {
+                this.$store.dispatch("hoa_don/fetchList");
+            }
         },
 
         async mounted() {

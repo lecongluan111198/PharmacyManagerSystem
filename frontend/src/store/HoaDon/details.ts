@@ -20,7 +20,6 @@ const HoaDonDetailModule: Module<IHoaDonDetail, any> = {
     namespaced: true,
     state: {
         loadedData: new Map<number, HoaDon>(),
-
         current: null,
         loading: true,
     },
@@ -53,6 +52,27 @@ const HoaDonDetailModule: Module<IHoaDonDetail, any> = {
             }
             commit('loading', false);
         },
+
+        async saveChange({state, commit, dispatch}, hoadonChanged: HoaDon) {
+            commit('loading');
+            try {
+                await API.Prescription.update(hoadonChanged.id, [
+                    ...hoadonChanged.medicines.map((cthd: any)=>{
+                        return {
+                            id: cthd.id,
+                            amount: cthd.amount.amount,
+                        };
+                    }),
+                ]);
+
+                state.loadedData.delete(hoadonChanged.id);
+                await dispatch('load', hoadonChanged.id);
+            } catch (e) {
+                throw e;
+            } finally {
+                commit('loading', false);
+            }
+        }
     }
 };
 

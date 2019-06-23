@@ -22,7 +22,7 @@ class Prescription extends Model
         return $this->belongsToMany('App\Medicine', 'prescription_details', 'idPrescription', 'idMedicine')
             ->withPivot([
                 'amount',
-            ])->as('medicines');
+            ])->as('amount');
     }
 
     public function created_by()

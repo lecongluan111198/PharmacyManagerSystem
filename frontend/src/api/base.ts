@@ -40,7 +40,7 @@ class APIBase {
         let paramsStr: string = Object.keys(params)
             .filter(key=>(!!params[key] || params[key] === 0))
             .map((key: string)=>{
-                return key + "=" + params[key];
+                return key + "=" + params[key].toString();
             }).join("&");
         if (paramsStr)
             paramsStr = "?" + paramsStr;

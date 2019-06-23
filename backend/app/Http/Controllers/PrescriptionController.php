@@ -7,6 +7,7 @@ use App\Http\Requests\PrescriptionUpdateRequest;
 use App\Prescription;
 use App\Medicine;
 use App\PrescriptionDetail;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -25,12 +26,14 @@ class PrescriptionController extends Controller
         $sort_key = $request->get("sort", "created_at");
         $start = $request->get("start", $date = date('Y-m-d', strtotime('01/01/1900')));
         $end = $request->get("end", $date = date('Y-m-d', time()));
+
         $items = Prescription::query()
             ->with('created_by')
             ->with('medicines')
             ->whereDate("created_at", ">=", $start)
-            ->whereDate("created_at", "<=", $end)
-            ->orderBy($sort_key, $sort_direction)
+            ->whereDate("created_at", "<=", $end);
+
+        $items = $items->orderBy($sort_key, $sort_direction)
             ->orderBy("created_by_id", "ASC")
             ->paginate(15);
         return response()->json($items);
@@ -145,42 +148,28 @@ class PrescriptionController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function update(Request $request) 
+    public function update(Request $request, $id)
     {
         try {
-            $prescription = Prescription::findOrFail($request->id);
-            $prescription->name = $request->name;
-            $prescription->cost = $request->cost;
-            $prescription->invoiceDate = $request->invoiceDate;
-            //request nhận đối tượng là [idMedicine, amount]
-            // foreach($prescription->medicines as $item){
-            //     // if($item->idMedicine )
-            // } 
+            $prescription = \App\Prescription::findOrFail($id);
             $prescription->medicines()->detach();
-            $prescription->medicines()->attach($request->medicines);
+            $prescription->medicines()->attach($request->post('cthd'));
             if ($prescription->save()) {
-                $ret = [
-                    'success' => true,
-                    'message' => 200,
-                    'medicine' => $prescription,
-                ];
+                return response()->json(['data'=>$prescription], 200);
             } else {
-                $ret = [
-                    'success' => true,
-                    'message' => 404,
-                    'medicine' => $prescription,
-                ];
+                return response()->json([
+                    'error'=>500,
+                    'message'=>'cannot update'
+                ], 500);
             }
         } catch (ModelNotFoundException $ex) {
-            $ret = [
-                'success' => true,
-                'message' => $ex->getMessage(),
-                'medicine' => null
-            ];
+            return response()->json([
+                'error'=>500,
+                'message'=>'Prescription $id not found : '.$ex->getMessage(),
+            ], 500);
         }
-        return response()->json($ret);
     }
 
     /**

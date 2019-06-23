@@ -10,14 +10,18 @@ import Axios from "@/axios";
 import {HoaDon} from "@/types/HoaDon";
 import {ICTHoaDon} from "@/types/ICTHoaDon";
 
+export interface IPresciptionListRequest {
+    page?: number;
+    limit?: number;
+    start?: Date;
+    end?: Date;
+}
+
 class PrescriptionApi extends APIBase
 {
-    static async list(limit: number = 15, page: number = 1) : Promise<IPaginateResponse>
+    static async list(options: IPresciptionListRequest) : Promise<IPaginateResponse>
     {
-        const res = await Axios.get(APIBase.GET('prescription', {
-            limit,
-            page,
-        }));
+        const res = await Axios.get(APIBase.GET('prescription', options));
         return res.data;
     }
 
@@ -36,6 +40,19 @@ class PrescriptionApi extends APIBase
     static async getById(id: number) : Promise<IBasicResponse<HoaDon>>
     {
         const res = await Axios.get(APIBase.GET('prescription/' + id));
+        return res.data;
+    }
+
+    static async update(id: number, cthd: {id: number, amount: number}[]) : Promise<IBasicResponse<any>>
+    {
+        const res = await Axios.put(`/prescription/${id}`, {
+            cthd: cthd.map(val=>{
+                return {
+                    idMedicine: val.id,
+                    amount: val.amount,
+                };
+            }),
+        });
         return res.data;
     }
 }

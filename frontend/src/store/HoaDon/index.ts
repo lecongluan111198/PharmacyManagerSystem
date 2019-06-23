@@ -4,6 +4,7 @@ import {RootState} from "@/store";
 import API from "@/api";
 import HoaDonAddModule from "@/store/HoaDon/add";
 import HoaDonDetailModule from "@/store/HoaDon/details";
+import moment from "moment";
 
 export interface IListPage<T> {
     [page: number]: T[];
@@ -15,6 +16,7 @@ export interface IHoaDonState {
     page: number;
     total: number;
     loading: boolean;
+    daterange: Date[],
 }
 
 const store: Module<IHoaDonState, RootState> = {
@@ -29,6 +31,7 @@ const store: Module<IHoaDonState, RootState> = {
         list: [],
         page: 1,
         total: 1,
+        daterange: [],
         loading: false,
     },
 
@@ -39,6 +42,7 @@ const store: Module<IHoaDonState, RootState> = {
         page: state => state.page,
         total: state => state.total,
         loading: state => state.loading,
+        daterange: state => state.daterange,
     },
 
     mutations: {
@@ -54,18 +58,25 @@ const store: Module<IHoaDonState, RootState> = {
         loading(state, bool: boolean) {
             state.loading = bool;
         },
+        daterange(state, daterange: Date[]) {
+            state.daterange = daterange;
+        },
     },
 
     actions: {
         async fetchList({commit, state}, payload: any = {})
         {
-            const {
+            let {
                 limit = 15,
                 page = state.page,
+                start = state.daterange[0],
+                end = state.daterange[1],
             } = payload;
+            start = moment(start).format("YYYY-MM-DD");
+            end = moment(end).format("YYYY-MM-DD");
 
             commit('loading', true);
-            const res = await API.Prescription.list(limit, page);
+            const res = await API.Prescription.list({limit, page, start, end});
             commit('loading', false);
 
             commit('list', res.data);

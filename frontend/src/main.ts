@@ -16,6 +16,7 @@ import Shortkey from 'vue-shortkey';
 import '@/assets/v-tooltip.scss';
 import langConfig from '@/lang/';
 import * as moment from 'moment';
+import './plugins/element.js'
 moment.locale('vi');
 
 Vue.use(Muse);
