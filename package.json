@@ -22,7 +22,7 @@
     },
     "homepage": "https://github.com/lecongluan111198/PharmacyManagerSystem#readme",
     "dependencies": {
-        "yarn": "^1.16.0"
+        "yarn": "^1.17.3"
     },
     "cacheDirectories": [
         "frontend/node_modules"
