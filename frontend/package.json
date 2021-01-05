@@ -11,7 +11,7 @@
     "@casl/ability": "^3.0.2",
     "@casl/vue": "^0.5.1",
     "@types/nprogress": "^0.2.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "core-js": "^2.6.5",
     "element-ui": "^2.9.2",
     "lodash": "^4.17.11",
