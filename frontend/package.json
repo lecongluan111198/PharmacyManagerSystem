@@ -14,7 +14,7 @@
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
     "element-ui": "^2.9.2",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.25",
     "muse-ui": "^3.0.2",
